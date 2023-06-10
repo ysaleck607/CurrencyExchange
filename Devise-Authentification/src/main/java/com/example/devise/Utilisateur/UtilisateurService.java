@@ -13,7 +13,11 @@ public class UtilisateurService {
         this.utilisateurRepository = utilisateurRepository;
     }
 
-    public List<Utilisateur> obtenirUtilisateur() {
+    public List<Utilisateur> obtenirListUtilisateurs() {
         return  utilisateurRepository.findAll();
+    }
+
+    public void enregistrerNouvelUtilisateur(Utilisateur utilisateur) {
+        System.out.println(utilisateur);
     }
 }

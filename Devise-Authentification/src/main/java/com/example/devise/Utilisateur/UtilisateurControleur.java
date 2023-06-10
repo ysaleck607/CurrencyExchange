@@ -1,9 +1,7 @@
 package com.example.devise.Utilisateur;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -17,7 +15,11 @@ public class UtilisateurControleur {
     }
 
     @GetMapping
-    public List<Utilisateur> obtenirUtilisateur() {
-        return utilisateurService.obtenirUtilisateur();
+    public List<Utilisateur> obtenirListUtilisateurs() {
+        return utilisateurService.obtenirListUtilisateurs();
+    }
+    @PostMapping
+    public void enregistrerNouvelUtilisateur(@RequestBody Utilisateur utilisateur){
+        utilisateurService.enregistrerNouvelUtilisateur(utilisateur);
     }
 }

@@ -1,53 +1,55 @@
 package com.example.devise.Utilisateur;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.time.LocalDate;
+import java.util.Collection;
+import java.util.List;
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
-@Table
-public class Utilisateur {
+@Table(name = "utilisateur")
+public class Utilisateur implements UserDetails {
     @Id
-    @SequenceGenerator(
-            name = "utilisateur_sequence",
-            sequenceName = "utilisateur_sequence",
-            allocationSize = 1
-    )
+//    @SequenceGenerator(
+//            name = "utilisateur_sequence",
+//            sequenceName = "utilisateur_sequence",
+//            allocationSize = 1
+//    )
     @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "utilisateur_sequence"
+            strategy = GenerationType.IDENTITY
+            //generator = "utilisateur_sequence"
     )
+    @Column(name = "idutilisateur")
     private Long idUtilisateur;
+    @Column(name = "prenom")
     private String prenom;
+    @Column(name = "nom")
     private String nom;
+    @Column(name = "datenaissance")
     private LocalDate dateNaissance;
+    @Column(name = "motdepassehache")
     private String motDePasse;
+    @Column(name = "email")
     private String email;
+    @Column(name = "adresse")
     private String adresse;
+    @Column(name = "datecreation")
     private LocalDate dateCreation;
+    @Column(name = "dernieredatemaj")
     private LocalDate dateMAJ;
-
-    public Utilisateur(Long idUtilisateur,
-                       String prenom,
-                       String nom,
-                       LocalDate dateNaissance,
-                       String motDePasse,
-                       String email,
-                       String adresse,
-                       LocalDate dateCreation,
-                       LocalDate dateMAJ) {
-        this.idUtilisateur = idUtilisateur;
-        this.prenom = prenom;
-        this.nom = nom;
-        this.dateNaissance = dateNaissance;
-        this.motDePasse = motDePasse;
-        this.email = email;
-        this.adresse = adresse;
-        this.dateCreation = dateCreation;
-        this.dateMAJ = dateMAJ;
-    }
-
-    public Utilisateur() {
-    }
+    @Enumerated(EnumType.STRING)
+    @Column(name = "roleutilisateur")
+    private Role role;
 
     public Utilisateur(String prenom,
                        String nom,
@@ -56,7 +58,8 @@ public class Utilisateur {
                        String email,
                        String adresse,
                        LocalDate dateCreation,
-                       LocalDate dateMAJ) {
+                       LocalDate dateMAJ,
+                       Role role) {
         this.prenom = prenom;
         this.nom = nom;
         this.dateNaissance = dateNaissance;
@@ -65,6 +68,7 @@ public class Utilisateur {
         this.adresse = adresse;
         this.dateCreation = dateCreation;
         this.dateMAJ = dateMAJ;
+        this.role = role;
     }
 
     public Long getIdUtilisateur() {
@@ -152,5 +156,40 @@ public class Utilisateur {
                 ", dateCreation=" + dateCreation +
                 ", dateMAJ=" + dateMAJ +
                 '}';
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of(new SimpleGrantedAuthority(role.name()));
+    }
+
+    @Override
+    public String getPassword() {
+        return motDePasse;
+    }
+
+    @Override
+    public String getUsername() {
+        return email;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
     }
 }

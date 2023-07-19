@@ -78,7 +78,7 @@ public class UtilisateurService {
               "L'utilisateur avec l'id " + userId + " n'existe pas"
             );
         }
-        utilisateurRepository.findById(userId);
+        utilisateurRepository.deleteById(userId);
     }
     @Transactional
     public void updateUser(Long userId, String email, String password) {

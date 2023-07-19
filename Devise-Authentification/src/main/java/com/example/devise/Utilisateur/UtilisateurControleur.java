@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:63342")
 @RequestMapping(path = "api/v1/utilisateurs")
 @RequiredArgsConstructor
 public class UtilisateurControleur {

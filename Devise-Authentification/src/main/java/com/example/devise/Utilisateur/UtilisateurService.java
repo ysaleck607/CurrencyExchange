@@ -82,7 +82,7 @@ public class UtilisateurService {
     }
     @Transactional
     public void updateUser(Long userId, String email, String password) {
-        Utilisateur utilisateur = utilisateurRepository.findById(userId)
+         Utilisateur utilisateur = utilisateurRepository.findById(userId)
                 .orElseThrow(() -> new IllegalStateException(
                         "L'utilisateur avec l'id " + userId + " n'existe pas"
                 ));

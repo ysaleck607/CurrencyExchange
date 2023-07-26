@@ -7,7 +7,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Data
@@ -30,7 +29,7 @@ public class Demande {
     @Column(name = "iddemande")
     private Long idDemande;
     @Column(name = "iddemandeur")
-    private Long iddemandeur;
+    private Long idDemandeur;
     @Column(name = "deviseVoulu")
     private String deviseVoulu;
     @Column(name = "montantVoulu")
@@ -41,17 +40,17 @@ public class Demande {
     //private BigDecimal montantOfferte;
     @Column(name = "dateDemande")
     private LocalDateTime dateDemande;
-    @Column(name = "termine")
-    private Boolean termine;
+    @Column(name = "statutdemande")
+    private StatutDemand statutDemande;
 
-    public Demande(Long iddemandeur, String deviseVoulu, BigDecimal montantVoulu, String deviseOfferte,
-                   LocalDateTime dateDemande, Boolean termine) {
-        this.iddemandeur = iddemandeur;
+    public Demande(Long idDemandeur, String deviseVoulu, BigDecimal montantVoulu, String deviseOfferte,
+                   LocalDateTime dateDemande, StatutDemand statutDemande) {
+        this.idDemandeur = idDemandeur;
         this.deviseVoulu = deviseVoulu;
         this.montantVoulu = montantVoulu;
         this.deviseOfferte = deviseOfferte;
         this.dateDemande = dateDemande;
-        this.termine = termine;
+        this.statutDemande = statutDemande;
     }
 
     public Long getIdDemande() {
@@ -105,20 +104,20 @@ public class Demande {
                 '}';
     }
 
-    public Long getIddemandeur() {
-        return iddemandeur;
+    public Long getIdDemandeur() {
+        return idDemandeur;
     }
 
-    public void setIddemandeur(Long iddemandeur) {
-        this.iddemandeur = iddemandeur;
+    public void setIdDemandeur(Long iddemandeur) {
+        this.idDemandeur = iddemandeur;
     }
 
-    public Boolean getTermine() {
-        return termine;
+    public StatutDemand getStatutDemande() {
+        return statutDemande;
     }
 
-    public void setTermine(Boolean termine) {
-        this.termine = termine;
+    public void setStatutDemande(StatutDemand termine) {
+        this.statutDemande = termine;
     }
 //    @Column(name = "motdepassehache")
 //    private String motDePasse;

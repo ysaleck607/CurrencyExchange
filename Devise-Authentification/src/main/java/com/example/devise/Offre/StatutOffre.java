@@ -1,6 +1,10 @@
 package com.example.devise.Offre;
 
 public enum StatutOffre {
-    ACCEPTE,
-    NONACCEPTE
+    ENATTENTE,
+    ACCEPTER,
+    REFUSER,
+    PAYER,
+    ANNULER,
+    TERMINER
 }

@@ -30,8 +30,8 @@ public class Offre {
     @Column(name = "iddemande")
     private Long idDemande;
 
-    @Column(name = "iddofreur")
-    private Long iddOfreur;
+    @Column(name = "idoffreur")
+    private Long idOffreur;
 //    @Column(name = "deviseVoulu")
 //    private String deviseVoulu;
 //    @Column(name = "montantVoulu")
@@ -83,12 +83,12 @@ public class Offre {
         this.statutOffre = statutOffre;
     }
 
-    public Long getIddOfreur() {
-        return iddOfreur;
+    public Long getIdOffreur() {
+        return idOffreur;
     }
 
-    public void setIddOfreur(Long iddOfreur) {
-        this.iddOfreur = iddOfreur;
+    public void setIdOffreur(Long iddOfreur) {
+        this.idOffreur = iddOfreur;
     }
 
 //    @Column(name = "motdepassehache")

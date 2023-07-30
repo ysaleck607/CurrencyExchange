@@ -5,7 +5,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -17,11 +16,11 @@ public class DemandeService {
     public void addDemand(AddDemandRequest request) {
         var demand = Demande.builder()
                 .idDemandeur(request.getIdDemandeur())
-                .deviseVoulu(request.getDeviseVoulu())
+                .deviseVoulu(request.getDeviseVoulue())
                 .montantVoulu(request.getMontantVoulu())
                 .deviseOfferte(request.getDeviseOfferte())
                 .dateDemande(LocalDateTime.now())
-                .statutDemande(StatutDemand.ENATTENTE)
+                .statut(StatutDemand.ENCOURS.name())
                 .build();
         demandeRepository.save(demand);
     }
@@ -58,33 +57,33 @@ public class DemandeService {
         //statuts.add(StatutDemand.ENATTENTE);
         //statuts.add(StatutDemand.ENCOURS);
         //statuts.add(StatutDemand.ACCEPTER);
-        return demandeRepository.findByIdDemandeurAndStatutDemandeIn(idUser, statuts);
+        return demandeRepository.findByIdDemandeurAndStatutIn(idUser, statuts);
         //return null;
     }
 
     public List<Optional<Demande>> getDemandTerminer(Long idUser) {
         List<StatutDemand> statuts = Arrays.asList(StatutDemand.ANNULER, StatutDemand.TERMINER);
-        return demandeRepository.findByIdDemandeurAndStatutDemandeIn(idUser, statuts);
+        return demandeRepository.findByIdDemandeurAndStatutIn(idUser, statuts);
     }
     @Transactional
     public void payerDeamnde(Long idDemande) {
         Demande demande = demandeRepository.findById(idDemande).orElseThrow(() -> new IllegalStateException(
                 "La demande avec l'id " + idDemande + " n'existe pas"
         ));;
-        demande.setStatutDemande(StatutDemand.PAYER);
+        demande.setStatut(StatutDemand.PAYER.name());
     }
 
     public void annulerDeamnde(Long idDemande) {
         Demande demande = demandeRepository.findById(idDemande).orElseThrow(() -> new IllegalStateException(
                 "La demande avec l'id " + idDemande + " n'existe pas"
         ));;
-        demande.setStatutDemande(StatutDemand.ANNULER);
+        demande.setStatut(StatutDemand.ANNULER.name());
     }
 
     public void terminerDeamnde(Long idDemande) {
         Demande demande = demandeRepository.findById(idDemande).orElseThrow(() -> new IllegalStateException(
                 "La demande avec l'id " + idDemande + " n'existe pas"
         ));;
-        demande.setStatutDemande(StatutDemand.TERMINER);
+        demande.setStatut(StatutDemand.TERMINER.name());
     }
 }

@@ -6,9 +6,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
-@RestController
 @CrossOrigin(origins = "http://localhost:63342")
+@RestController
 @RequestMapping(path = "api/v1/utilisateurs")
 @RequiredArgsConstructor
 public class UtilisateurControleur {
@@ -56,7 +55,7 @@ public class UtilisateurControleur {
         response = new ResponseEntity<>("L'tilisateur " + userId + "a ete supprime avec succes",  HttpStatus.OK);
         return response;
     }
-    @PutMapping(path = "{utilisateurId}")
+    @PutMapping(path = "/update/{utilisateurId}")
     public void updateUser(
             @PathVariable("utilisateurId") Long userId,
             @RequestParam(required = false) String email,

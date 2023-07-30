@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "demande")
+@Table(name = "demandedevise")
 public class Demande {
     @Id
 //    @SequenceGenerator(
@@ -30,27 +30,27 @@ public class Demande {
     private Long idDemande;
     @Column(name = "iddemandeur")
     private Long idDemandeur;
-    @Column(name = "deviseVoulu")
+    @Column(name = "devisevoulu")
     private String deviseVoulu;
-    @Column(name = "montantVoulu")
+    @Column(name = "montantvoulu")
     private BigDecimal montantVoulu;
-    @Column(name = "deviseOfferte")
+    @Column(name = "deviseofferte")
     private String deviseOfferte;
     //@Column(name = "montantOfferte")
     //private BigDecimal montantOfferte;
-    @Column(name = "dateDemande")
+    @Column(name = "datedemande")
     private LocalDateTime dateDemande;
-    @Column(name = "statutdemande")
-    private StatutDemand statutDemande;
+    @Column(name = "statut")
+    private String statut;
 
     public Demande(Long idDemandeur, String deviseVoulu, BigDecimal montantVoulu, String deviseOfferte,
-                   LocalDateTime dateDemande, StatutDemand statutDemande) {
+                   LocalDateTime dateDemande, String statut) {
         this.idDemandeur = idDemandeur;
         this.deviseVoulu = deviseVoulu;
         this.montantVoulu = montantVoulu;
         this.deviseOfferte = deviseOfferte;
         this.dateDemande = dateDemande;
-        this.statutDemande = statutDemande;
+        this.statut = statut;
     }
 
     public Long getIdDemande() {
@@ -112,12 +112,12 @@ public class Demande {
         this.idDemandeur = iddemandeur;
     }
 
-    public StatutDemand getStatutDemande() {
-        return statutDemande;
+    public String getStatut() {
+        return statut;
     }
 
-    public void setStatutDemande(StatutDemand termine) {
-        this.statutDemande = termine;
+    public void setStatut(String termine) {
+        this.statut = termine;
     }
 //    @Column(name = "motdepassehache")
 //    private String motDePasse;

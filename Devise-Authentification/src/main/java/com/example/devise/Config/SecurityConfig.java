@@ -22,9 +22,7 @@ public class SecurityConfig {
         http
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("api/v1/utilisateurs/list",
-                                         "api/v1/utilisateurs/register",
-                                         "api/v1/utilisateurs/authenticate").permitAll()
+                        .requestMatchers("api/v1/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
@@ -33,3 +31,9 @@ public class SecurityConfig {
         return http.build();
     }
 }
+
+//.requestMatchers("api/v1/utilisateurs/list",
+//        "api/v1/utilisateurs/register",
+//        "api/v1/utilisateurs/authenticate",
+//        "api/v1/demandes/adddemand").permitAll()
+//        .anyRequest().authenticated()

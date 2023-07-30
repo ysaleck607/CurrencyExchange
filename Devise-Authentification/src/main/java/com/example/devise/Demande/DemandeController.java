@@ -5,7 +5,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 @CrossOrigin(origins =  "http://localhost:63342")
@@ -49,11 +48,11 @@ public class DemandeController {
     }
 
     @GetMapping("/getdemandencours/{idUser}")
-    ResponseEntity<?> getDemandeEnCours(@PathVariable("idUser") Long idUser) {
+    ResponseEntity<?> getDemandeUtilisateurEnCours(@PathVariable("idUser") Long idUser) {
         ResponseEntity<?> response;
         List<Optional<Demande>> demandeEnCours = null;
         try {
-            demandeEnCours = demandeService.getDemandEnCours(idUser);
+            demandeEnCours = demandeService.getDemandUtilisateurEnCours(idUser);
         } catch (Exception e) {
 //            if (e.getMessage().contains("Email deja utilise par un autre utilisateur")) {
 //                response = new ResponseEntity<>("Email deja utilise par un autre utilisateur",  HttpStatus.BAD_REQUEST);
@@ -66,11 +65,11 @@ public class DemandeController {
     }
 
     @GetMapping("/getdemandetermine/{idUser}")
-    ResponseEntity<?> getDemandTermine(@PathVariable("idUser") Long idUser) {
+    ResponseEntity<?> getDemandUtlisateurTermine(@PathVariable("idUser") Long idUser) {
         ResponseEntity<?> response;
         List<Optional<Demande>> demandeTerminer = null;
         try {
-            demandeTerminer = demandeService.getDemandTerminer(idUser);
+            demandeTerminer = demandeService.getDemandUtilisateurTerminer(idUser);
         } catch (Exception e) {
 //            if (e.getMessage().contains("Email deja utilise par un autre utilisateur")) {
 //                response = new ResponseEntity<>("Email deja utilise par un autre utilisateur",  HttpStatus.BAD_REQUEST);
@@ -79,6 +78,23 @@ public class DemandeController {
 
         }
         response = new ResponseEntity<>(demandeTerminer, HttpStatus.OK);
+        return response;
+    }
+
+    @GetMapping("/getdemandeautresutilisateurs/{idUser}")
+    ResponseEntity<?> getDemandAutresUtlisateurs(@PathVariable("idUser") Long idUser) {
+        ResponseEntity<?> response;
+        List<Optional<Demande>> demandeAutresUtilisateurs = null;
+        try {
+            demandeAutresUtilisateurs = demandeService.getDemandAutresUtilisateurs(idUser);
+        } catch (Exception e) {
+//            if (e.getMessage().contains("Email deja utilise par un autre utilisateur")) {
+//                response = new ResponseEntity<>("Email deja utilise par un autre utilisateur",  HttpStatus.BAD_REQUEST);
+//                return response;
+//            }
+
+        }
+        response = new ResponseEntity<>(demandeAutresUtilisateurs, HttpStatus.OK);
         return response;
     }
 

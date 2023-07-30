@@ -50,9 +50,9 @@ public class DemandeService {
         return null;
     }
 
-    public List<Optional<Demande>> getDemandEnCours(Long idUser) {
-        List<StatutDemand> statuts = Arrays.asList(StatutDemand.ENATTENTE, StatutDemand.ACCEPTER, StatutDemand.ENCOURS,
-                StatutDemand.PAYER);
+    public List<Optional<Demande>> getDemandUtilisateurEnCours(Long idUser) {
+        List<String> statuts = Arrays.asList(StatutDemand.ENATTENTE.name(), StatutDemand.ACCEPTER.name(), StatutDemand.ENCOURS.name(),
+                StatutDemand.PAYER.name());
         //List<StatutDemand> statuts = new ArrayList<>();
         //statuts.add(StatutDemand.ENATTENTE);
         //statuts.add(StatutDemand.ENCOURS);
@@ -61,8 +61,8 @@ public class DemandeService {
         //return null;
     }
 
-    public List<Optional<Demande>> getDemandTerminer(Long idUser) {
-        List<StatutDemand> statuts = Arrays.asList(StatutDemand.ANNULER, StatutDemand.TERMINER);
+    public List<Optional<Demande>> getDemandUtilisateurTerminer(Long idUser) {
+        List<String> statuts = Arrays.asList(StatutDemand.ANNULER.name(), StatutDemand.TERMINER.name());
         return demandeRepository.findByIdDemandeurAndStatutIn(idUser, statuts);
     }
     @Transactional
@@ -85,5 +85,10 @@ public class DemandeService {
                 "La demande avec l'id " + idDemande + " n'existe pas"
         ));;
         demande.setStatut(StatutDemand.TERMINER.name());
+    }
+
+    public List<Optional<Demande>> getDemandAutresUtilisateurs(Long idUser) {
+        List<String> statuts = Arrays.asList(StatutDemand.ENATTENTE.name(), StatutDemand.ENCOURS.name());
+        return demandeRepository.findByIdDemandeurNotAndStatutIn(idUser, statuts);
     }
 }

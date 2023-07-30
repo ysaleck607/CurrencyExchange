@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "offre")
+@Table(name = "offredevise")
 public class Offre {
     @Id
 //    @SequenceGenerator(
@@ -25,7 +25,7 @@ public class Offre {
             strategy = GenerationType.IDENTITY
             //generator = "utilisateur_sequence"
     )
-    @Column(name = "idOffre")
+    @Column(name = "idoffre")
     private Long idOffre;
     @Column(name = "iddemande")
     private Long idDemande;
@@ -40,12 +40,12 @@ public class Offre {
 //    private String deviseOfferte;
     //@Column(name = "montantOfferte")
     //private BigDecimal montantOfferte;
-    @Column(name = "dateOffre")
+    @Column(name = "dateoffre")
     private LocalDateTime dateOffre;
-    @Column(name = "statutOffre")
-    private StatutOffre statutOffre;
+    @Column(name = "statut")
+    private String statutOffre;
 
-    public Offre(Long idDemande, LocalDateTime dateOffre, StatutOffre statutOffre) {
+    public Offre(Long idDemande, LocalDateTime dateOffre, String statutOffre) {
         this.idDemande = idDemande;
         this.dateOffre = dateOffre;
         this.statutOffre = statutOffre;
@@ -75,11 +75,11 @@ public class Offre {
         this.dateOffre = dateOffre;
     }
 
-    public StatutOffre getStatutOffre() {
+    public String getStatutOffre() {
         return statutOffre;
     }
 
-    public void setStatutOffre(StatutOffre statutOffre) {
+    public void setStatutOffre(String statutOffre) {
         this.statutOffre = statutOffre;
     }
 

@@ -7,5 +7,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface OffreRepository extends JpaRepository<Offre, Long> {
-    List<Optional<Offre>> findByIdOffreurAndAndStatutOffreIn(Long idOffreur, List<StatutOffre> statutOffres);
+    List<Optional<Offre>> findByIdOffreurAndAndStatutOffreIn(Long idOffreur, List<String> statutOffres);
+    List<Optional<Offre>> findByIdDemande(Long idDemand);
+
 }

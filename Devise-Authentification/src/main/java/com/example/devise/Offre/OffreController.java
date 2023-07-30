@@ -66,6 +66,23 @@ public class OffreController {
         return response;
     }
 
+    @GetMapping("/getoffresdamande/{idDemande}")
+    ResponseEntity<?> getOffresDemade(@PathVariable("idDemande") Long idDemande) {
+        ResponseEntity<?> response;
+        List<Optional<Offre>> offres = null;
+        try {
+            offres = offreService.getOffresDemade(idDemande);
+        } catch (Exception e) {
+//            if (e.getMessage().contains("Email deja utilise par un autre utilisateur")) {
+//                response = new ResponseEntity<>("Email deja utilise par un autre utilisateur",  HttpStatus.BAD_REQUEST);
+//                return response;
+//            }
+
+        }
+        response = new ResponseEntity<>(offres, HttpStatus.OK);
+        return response;
+    }
+
     @GetMapping("/getoffretermine/{idUser}")
     ResponseEntity<?> getOffreTermine(@PathVariable("idUser") Long idUser) {
         ResponseEntity<?> response;

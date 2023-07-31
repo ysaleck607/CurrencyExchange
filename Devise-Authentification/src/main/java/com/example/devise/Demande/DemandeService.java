@@ -91,4 +91,8 @@ public class DemandeService {
         List<String> statuts = Arrays.asList(StatutDemand.ENATTENTE.name(), StatutDemand.ENCOURS.name());
         return demandeRepository.findByIdDemandeurNotAndStatutIn(idUser, statuts);
     }
+
+    public List<Optional<Demande>> getDemandesUtilisateur(Long idUser) {
+        return demandeRepository.findByIdDemandeur(idUser);
+    }
 }

@@ -47,6 +47,23 @@ public class DemandeController {
         return response;
     }
 
+    @GetMapping("/getdemandes/{idUser}")
+    ResponseEntity<?> getDemandesUtilisateur(@PathVariable("idUser") Long idUser) {
+        ResponseEntity<?> response;
+        List<Optional<Demande>> demandes = null;
+        try {
+            demandes = demandeService.getDemandesUtilisateur(idUser);
+        } catch (Exception e) {
+//            if (e.getMessage().contains("Email deja utilise par un autre utilisateur")) {
+//                response = new ResponseEntity<>("Email deja utilise par un autre utilisateur",  HttpStatus.BAD_REQUEST);
+//                return response;
+//            }
+
+        }
+        response = new ResponseEntity<>(demandes, HttpStatus.OK);
+        return response;
+    }
+
     @GetMapping("/getdemandencours/{idUser}")
     ResponseEntity<?> getDemandeUtilisateurEnCours(@PathVariable("idUser") Long idUser) {
         ResponseEntity<?> response;

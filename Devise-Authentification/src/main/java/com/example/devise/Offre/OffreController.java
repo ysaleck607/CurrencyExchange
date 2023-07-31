@@ -1,6 +1,5 @@
 package com.example.devise.Offre;
 
-import com.example.devise.Demande.Demande;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,7 +15,7 @@ public class OffreController {
     private final OffreService offreService;
 
     @PostMapping("/addoffre")
-    ResponseEntity<String> addDemand(@RequestBody AddOffreRequest request) {
+    ResponseEntity<String> addOffre(@RequestBody AddOffreRequest request) {
         ResponseEntity<String> response;
         try {
             offreService.addOffre(request);

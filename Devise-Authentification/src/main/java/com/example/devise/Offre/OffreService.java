@@ -32,7 +32,8 @@ public class OffreService {
                 .build();
         offreRepository.save(offre);
         // Récupérer l'utilisateur de la demande (supposons qu'il a une adresse e-mail dans sa classe Utilisateur)
-        Utilisateur demandeur = utilisateurRepository.getReferenceById(request.getIdDemande());
+        Long idDemandeur = demandeRepository.findByIdDemande(request.getIdDemande()).getIdDemandeur();
+        Utilisateur demandeur = utilisateurRepository.findByIdUtilisateur(idDemandeur);
 
         // Envoyer un courriel à l'utilisateur
         String recipientEmail = demandeur.getEmail();

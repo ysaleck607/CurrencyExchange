@@ -15,6 +15,10 @@ public interface DemandeRepository extends JpaRepository<Demande, Long> {
     //List<Demande> findByIdDemandeurAndStatutDemande(Long idDemandeur, List<StatutDemand> listStatutDemand);
     List<Optional<Demande>> findByIdDemandeurAndStatutIn(Long idDemandeur, List<String> statutDemand);
     List<Optional<Demande>> findByIdDemandeurNotAndStatutIn(Long idDemandeur, List<String> statutDemand);
+
+    List<Optional<Demande>> findByIdDemandeur(Long idUser);
+
+    Demande findByIdDemande (Long idDemande);
 //    @Modifying
 //    @Query("INSERT INTO DemandeDevise (idDemandeur, deviseVoulu, deviseOfferte, montantVoulu, statutDemande, dateDemande) " +
 //            "VALUES (:idDemandeur, :deviseVoulu, :deviseOfferte, :montantVoulu, :statutDemande, :dateDemande)")

@@ -6,6 +6,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
+
 @CrossOrigin(origins = "http://localhost:63342")
 @RestController
 @RequestMapping(path = "api/v1/utilisateurs")
@@ -13,9 +15,14 @@ import java.util.List;
 public class UtilisateurControleur {
     private final  UtilisateurService utilisateurService;
 
-    @GetMapping("/list")
+    @GetMapping("/getlistutilisateurs")
     public List<Utilisateur> obtenirListUtilisateurs() {
         return utilisateurService.obtenirListUtilisateurs();
+    }
+
+    @GetMapping("/getutilisateur")
+    public Optional<Utilisateur> obtenirUtilisateur(@PathVariable("utilisateurId") Long idUser) {
+        return utilisateurService.obtenirUtilisateur(idUser);
     }
     @PostMapping("/register")
     public ResponseEntity<String> register(@RequestBody RegisterRequest request){

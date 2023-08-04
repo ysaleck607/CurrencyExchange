@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping(path = "api/v1/0ffres")
+@RequestMapping(path = "api/v1/Offres")
 @RequiredArgsConstructor
 public class OffreController {
     private final OffreService offreService;
@@ -65,10 +65,27 @@ public class OffreController {
         return response;
     }
 
+    @GetMapping("/getdoffresutilisateur/{idUser}")
+    ResponseEntity<?> getOffreUtilisateur(@PathVariable("idUser") Long idUser) {
+        ResponseEntity<?> response;
+        List<OffreResponse> offreUtilisateur = null;
+        try {
+            offreUtilisateur = offreService.getOffresUtilisateur(idUser);
+        } catch (Exception e) {
+//            if (e.getMessage().contains("Email deja utilise par un autre utilisateur")) {
+//                response = new ResponseEntity<>("Email deja utilise par un autre utilisateur",  HttpStatus.BAD_REQUEST);
+//                return response;
+//            }
+
+        }
+        response = new ResponseEntity<>(offreUtilisateur, HttpStatus.OK);
+        return response;
+    }
+
     @GetMapping("/getoffresdamande/{idDemande}")
     ResponseEntity<?> getOffresDemade(@PathVariable("idDemande") Long idDemande) {
         ResponseEntity<?> response;
-        List<Optional<Offre>> offres = null;
+        List<OffreResponse> offres = null;
         try {
             offres = offreService.getOffresDemade(idDemande);
         } catch (Exception e) {
@@ -99,9 +116,14 @@ public class OffreController {
         return response;
     }
 
-    @PutMapping("/payeroffre/{idOffre}")
-    public void payerDeamnde(@PathVariable("idOffre") Long idOffre) {
-        offreService.payerOffre(idOffre);
+    @PutMapping("/payerOffre/{idOffre}")
+    public ResponseEntity<String> payerDeamnde(@PathVariable("idOffre") Long idOffre) {
+        try {
+            offreService.payerOffre(idOffre);
+            return ResponseEntity.ok("Demande annulée avec succès.");
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
 
     }
 

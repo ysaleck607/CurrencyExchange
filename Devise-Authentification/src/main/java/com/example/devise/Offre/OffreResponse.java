@@ -1,9 +1,6 @@
-package com.example.devise.Demande;
+package com.example.devise.Offre;
 
 import jakarta.persistence.Column;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -11,20 +8,21 @@ import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class DemandeResponse {
-
+public class OffreResponse {
+    private Long idOffre;
     private Long idDemande;
-    private Long idDemandeur;
     private String nomPrenomDemandeur;
+    private String nomPrenomOffreur;
+    private Long idOffreur;
     private String deviseVoulu;
     private BigDecimal montantVoulu;
     private String deviseOfferte;
-    //@Column(name = "montantOfferte")
-    //private BigDecimal montantOfferte;
     private LocalDateTime dateDemande;
-    private String statut;
+    private LocalDateTime dateOffre;
+    private String statutOffre;
 }

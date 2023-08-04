@@ -50,7 +50,7 @@ public class DemandeController {
     @GetMapping("/getdemandes/{idUser}")
     ResponseEntity<?> getDemandesUtilisateur(@PathVariable("idUser") Long idUser) {
         ResponseEntity<?> response;
-        List<Optional<Demande>> demandes = null;
+        List<DemandeResponse> demandes = null;
         try {
             demandes = demandeService.getDemandesUtilisateur(idUser);
         } catch (Exception e) {
@@ -101,7 +101,7 @@ public class DemandeController {
     @GetMapping("/getdemandeautresutilisateurs/{idUser}")
     ResponseEntity<?> getDemandAutresUtlisateurs(@PathVariable("idUser") Long idUser) {
         ResponseEntity<?> response;
-        List<Optional<Demande>> demandeAutresUtilisateurs = null;
+        List<DemandeResponse> demandeAutresUtilisateurs = null;
         try {
             demandeAutresUtilisateurs = demandeService.getDemandAutresUtilisateurs(idUser);
         } catch (Exception e) {
@@ -116,15 +116,46 @@ public class DemandeController {
     }
 
     @PutMapping("/payerdemande/{idDemande}")
-    public void payerDeamnde(@PathVariable("idDemande") Long idDemande) {
+    public ResponseEntity<String> payerDeamnde(@PathVariable("idDemande") Long idDemande) {
         demandeService.payerDeamnde(idDemande);
-
+        try {
+            demandeService.payerDeamnde(idDemande);
+            return ResponseEntity.ok("Demande paye avec succès.");
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
     }
 
     @PutMapping("/annulerdemande/{idDemande}")
-    public void annulerDeamnde(@PathVariable("idDemande") Long idDemande) {
-        demandeService.annulerDeamnde(idDemande);
+    public ResponseEntity<String> annulerDeamnde(@PathVariable("idDemande") Long idDemande) {
+        //demandeService.annulerDeamnde(idDemande);
+        try {
+            demandeService.annulerDeamnde(idDemande);
+            return ResponseEntity.ok("Demande annulée avec succès.");
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
 
+    }
+
+    @PutMapping("/accepterOffre/{offreId}")
+    public ResponseEntity<String> accepterOffre(@PathVariable Long offreId) {
+        try {
+            demandeService.accepterOffre(offreId);
+            return ResponseEntity.ok("Offre acceptée avec succès.");
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
+    }
+
+    @PutMapping("/refuserOffre/{offreId}")
+    public ResponseEntity<String> refuserOffre(@PathVariable Long offreId) {
+        try {
+            demandeService.refuserOffre(offreId);
+            return ResponseEntity.ok("Offre refusée avec succès.");
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
     }
 
     @PutMapping("/terminerdemande/{idDemande}")

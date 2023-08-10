@@ -83,14 +83,9 @@ public class OffreService {
     }
     @Transactional
     public void payerOffre(Long idOffre) {
-//        Offre offre = offreRepository.findById(idOffre).orElseThrow(() -> new IllegalStateException(
-//                "L'offre avec l'id " + idOffre + " n'existe pas"
-//        ));;
-//        offre.setStatutOffre(StatutOffre.PAYER.name());
         Offre offre = offreRepository.findById(idOffre).orElseThrow(() -> new RuntimeException("Offre not found"));
 
 //        // Check if any offre has been accepted for this demande
-//        List<Offre> offres = offreRepository.findByIdDemandeAndStatutOffre(idDemande, StatutOffre.ACCEPTER.name());
 
         if (offre.getStatutOffre().equals(StatutOffre.ACCEPTER.name())) {
 
@@ -109,6 +104,11 @@ public class OffreService {
 
             // Update the statut of the demande to "PAYER"
             offre.setStatutOffre(StatutDemand.PAYER.name());
+
+            if(demande.getStatut() == StatutDemand.PAYER.name()){
+                offre.setStatutOffre(StatutOffre.TERMINER.name());
+                demande.setStatut(StatutDemand.TERMINER.name());
+            }
             //demandeRepository.save(demande);
         } else {
             throw new RuntimeException("Demande can only be paid in ENCOURS status.");

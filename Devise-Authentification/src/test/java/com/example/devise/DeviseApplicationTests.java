@@ -10,4 +10,5 @@ class DeviseApplicationTests {
 	void contextLoads() {
 	}
 
+
 }

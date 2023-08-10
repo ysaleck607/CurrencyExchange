@@ -79,10 +79,6 @@ public class DemandeService {
     }
     @Transactional
     public void payerDeamnde(Long idDemande) {
-//        Demande demande = demandeRepository.findById(idDemande).orElseThrow(() -> new IllegalStateException(
-//                "La demande avec l'id " + idDemande + " n'existe pas"
-//        ));;
-//        demande.setStatut(StatutDemand.PAYER.name());
         Demande demande = demandeRepository.findById(idDemande).orElseThrow(() -> new RuntimeException("Demande not found"));
 
         // Check if any offre has been accepted for this demande
@@ -103,6 +99,10 @@ public class DemandeService {
 
             // Update the statut of the demande to "PAYER"
             demande.setStatut(StatutDemand.PAYER.name());
+            if(offres.get(0).getStatutOffre() == StatutOffre.PAYER.name()){
+                offres.get(0).setStatutOffre(StatutOffre.TERMINER.name());
+                demande.setStatut(StatutDemand.TERMINER.name());
+            }
             //demandeRepository.save(demande);
         } else {
             throw new RuntimeException("Demande can only be paid in ENCOURS status.");

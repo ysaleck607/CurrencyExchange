@@ -101,7 +101,7 @@ public class UtilisateurService {
             if (utilisateurOptional.isPresent()) {
                 throw new IllegalStateException("Email deja utilise par un autre utilisateur");
             }
-            utilisateur.setEmail(email);
+            utilisateur.setMotDePasse(password);
         }
     }
 

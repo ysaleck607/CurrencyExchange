@@ -7,7 +7,6 @@ import com.example.devise.Offre.StatutOffre;
 import com.example.devise.Utilisateur.Utilisateur;
 import com.example.devise.Utilisateur.UtilisateurRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.jdbc.core.JdbcAggregateOperations;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -38,15 +37,6 @@ public class DemandeService {
     }
 
     public void deleteDemand(Long demandId) {
-//        var demand = Demande.builder()
-//                .iddemandeur(request.getIdDemandeur())
-//                .deviseVoulu(request.getDeviseVoulu())
-//                .montantVoulu(request.getMontantVoulu())
-//                .deviseOfferte(request.getDeviseOfferte())
-//                .dateDemande(LocalDateTime.now())
-//                .termine(Boolean.FALSE)
-//                .build();
-        //demandeRepository.save(demand);
         boolean exists = demandeRepository.existsById(demandId);
         if (!exists) {
             throw new IllegalStateException(
@@ -56,21 +46,10 @@ public class DemandeService {
         demandeRepository.deleteById(demandId);
     }
 
-    public List<Demande> getDemandsEnCours(Long idUser) {
-        //List<StatutDemand> statuts = Arrays.asList(StatutDemand.ENATTENTE, StatutDemand.ACCEPTER, StatutDemand.ENCOURS);
-        //return demandeRepository.findByIdDemandeurAndStatutDemande(idUser, statuts);
-        return null;
-    }
-
     public List<Optional<Demande>> getDemandUtilisateurEnCours(Long idUser) {
         List<String> statuts = Arrays.asList(StatutDemand.ENATTENTE.name(), StatutDemand.ACCEPTER.name(), StatutDemand.ENCOURS.name(),
                 StatutDemand.PAYER.name());
-        //List<StatutDemand> statuts = new ArrayList<>();
-        //statuts.add(StatutDemand.ENATTENTE);
-        //statuts.add(StatutDemand.ENCOURS);
-        //statuts.add(StatutDemand.ACCEPTER);
         return demandeRepository.findByIdDemandeurAndStatutIn(idUser, statuts);
-        //return null;
     }
 
     public List<Optional<Demande>> getDemandUtilisateurTerminer(Long idUser) {
@@ -85,9 +64,7 @@ public class DemandeService {
         List<Offre> offres = offreRepository.findByIdDemandeAndStatutOffre(idDemande, StatutOffre.ACCEPTER.name());
 
         if (!offres.isEmpty()) {
-            // Find the accepted user for this demande
-//            Offre acceptedOffre = offreRepository.findByIdDemandeAndStatutOffre(idDemande, StatutOffre.ACCEPTER.name())
-//                    .orElseThrow(() -> new RuntimeException("No accepted offre found for this demande."));
+
             Utilisateur utilisateur = utilisateurRepository.findById(offres.get(0).getIdOffreur())
                     .orElseThrow(() -> new IllegalStateException(
                             "L'utilisateur avec l'id " + offres.get(0).getIdOffreur() + " n'existe pas"
@@ -103,17 +80,12 @@ public class DemandeService {
                 offres.get(0).setStatutOffre(StatutOffre.TERMINER.name());
                 demande.setStatut(StatutDemand.TERMINER.name());
             }
-            //demandeRepository.save(demande);
         } else {
             throw new RuntimeException("Demande can only be paid in ENCOURS status.");
         }
     }
     @Transactional
     public void annulerDeamnde(Long idDemande) {
-//        Demande demande = demandeRepository.findById(idDemande).orElseThrow(() -> new IllegalStateException(
-//                "La demande avec l'id " + idDemande + " n'existe pas"
-//        ));;
-//        demande.setStatut(StatutDemand.ANNULER.name());
         Demande demande = demandeRepository.findById(idDemande).orElseThrow(() -> new RuntimeException("Demande not found"));
 
         // Check if any offre has been accepted for this demande
@@ -131,11 +103,9 @@ public class DemandeService {
                 String message = "Votre offre a ete refuser apres l'annulation de la demande. Veuillez vérifier votre " +
                         "compte afin de trouver une autre demande.";
                 emailService.sendEmail(recipientEmail, subject, message);
-                //offreRepository.save(offre);
             }
 
             demande.setStatut(StatutDemand.ANNULER.name());
-            //demandeRepository.save(demande);
         } else {
             throw new RuntimeException("Cannot annuler demande with accepted offre");
         }
@@ -149,7 +119,6 @@ public class DemandeService {
             if (offre.getStatutOffre().equals(StatutOffre.ENATTENTE.name())) {
                 // Accept the offre
                 offre.setStatutOffre(StatutOffre.ACCEPTER.name());
-                //offreRepository.save(offre);
 
                 Utilisateur utilisateur = utilisateurRepository.findById(offre.getIdOffreur())
                         .orElseThrow(() -> new IllegalStateException(
@@ -162,7 +131,6 @@ public class DemandeService {
 
                 // Set the statut of the demande to "ACCEPTER"
                 demande.setStatut(StatutDemand.ACCEPTER.name());
-                //demandeRepository.save(demande);
             } else {
                 throw new RuntimeException("The selected offre cannot be accepted.");
             }
@@ -174,9 +142,6 @@ public class DemandeService {
     public void refuserOffre(Long offreId) {
         Offre offre = offreRepository.findById(offreId).orElseThrow(() -> new RuntimeException("Offre not found"));
         Demande demande = demandeRepository.findById(offre.getIdDemande()).orElseThrow(() -> new RuntimeException("Demande not found"));
-
-        //if (demande.getStatut().equals(StatutDemand.ENCOURS.name())) {
-
             if (offre.getStatutOffre().equals(StatutOffre.ENATTENTE.name())) {
                 // Refuse the offre
                 offre.setStatutOffre(StatutOffre.REFUSER.name());
@@ -194,11 +159,9 @@ public class DemandeService {
             } else {
                 throw new RuntimeException("The selected offre cannot be refused.");
             }
-       // } else {
-       //     throw new RuntimeException("Demande can only refuse an offre in ENCOURS status.");
-       // }
     }
 
+    @Transactional
     public void terminerDeamnde(Long idDemande) {
         Demande demande = demandeRepository.findById(idDemande).orElseThrow(() -> new IllegalStateException(
                 "La demande avec l'id " + idDemande + " n'existe pas"
@@ -207,8 +170,6 @@ public class DemandeService {
     }
 
     public List<DemandeResponse> getDemandAutresUtilisateurs(Long idUser) {
-//        List<String> statuts = Arrays.asList(StatutDemand.ENATTENTE.name(), StatutDemand.ENCOURS.name());
-//        return demandeRepository.findByIdDemandeurNotAndStatutIn(idUser, statuts);
         List<Object[]> demandes = demandeRepository.getDemandsWithDemandeurNamesExceptUser(idUser);
         List<DemandeResponse> demandesRes = new ArrayList<>();
 
@@ -227,12 +188,6 @@ public class DemandeService {
                     .dateDemande(demande.getDateDemande())
                     .statut(demande.getStatut())
                     .build();
-
-//            DemandeDto demandeDto = new DemandeDto();
-//            demandeDto.setIdDemande(demande.getIdDemande());
-//            demandeDto.setPrenomDemandeur(prenom);
-//            demandeDto.setNomDemandeur(nom);
-            // Add more properties from Demande if needed
             demandesRes.add(demand);
         }
 
@@ -243,28 +198,10 @@ public class DemandeService {
         List<Object[]> demandes = demandeRepository.getDemandesWithNamesByUserId(idUser);
         List<DemandeResponse> demandesRes = new ArrayList<>();
 
-//        for (Object demande:
-//             demandes) {
-//            //var demandeur = utilisateurRepository.findByIdUtilisateur(demande.getIdDemandeur());
-//            //var nomPrenom = demandeur.getNom() + " " + demandeur.getPrenom();
-//            var demand = DemandeResponse.builder()
-//                    .idDemandeur(demande.getIdDemandeur())
-//                    .nomPrenomDemandeur(nomPrenom)
-//                    .deviseVoulu(demande.getDeviseVoulu())
-//                    .montantVoulu(demande.getMontantVoulu())
-//                    .deviseOfferte(demande.getDeviseOfferte())
-//                    .dateDemande(LocalDateTime.now())
-//                    .statut(StatutDemand.ENCOURS.name())
-//                    .build();
-//            demandesRes.add(demand);
-//
-//        }
-
         for (Object[] demandeInfo : demandes) {
             Demande demande = (Demande) demandeInfo[0];
             String nom = (String) demandeInfo[1];
             String prenom = (String) demandeInfo[2];
-
 
             var demand = DemandeResponse.builder()
                     .idDemande(demande.getIdDemande())
@@ -276,15 +213,8 @@ public class DemandeService {
                     .dateDemande(demande.getDateDemande())
                     .statut(demande.getStatut())
                     .build();
-
-//            DemandeDto demandeDto = new DemandeDto();
-//            demandeDto.setIdDemande(demande.getIdDemande());
-//            demandeDto.setPrenomDemandeur(prenom);
-//            demandeDto.setNomDemandeur(nom);
-            // Add more properties from Demande if needed
             demandesRes.add(demand);
         }
-
         return demandesRes;
     }
 }

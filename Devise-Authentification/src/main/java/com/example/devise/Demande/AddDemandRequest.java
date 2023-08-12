@@ -12,10 +12,8 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 @NoArgsConstructor
 public class AddDemandRequest {
-    //private Long idDemande;
     private Long idDemandeur;
     private String deviseVoulue;
     private BigDecimal montantVoulu;
     private String deviseOfferte;
-    //private LocalDate dateDemande;
 }

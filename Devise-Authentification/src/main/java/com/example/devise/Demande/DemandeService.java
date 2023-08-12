@@ -60,8 +60,9 @@ public class DemandeService {
     public void payerDeamnde(Long idDemande) {
         Demande demande = demandeRepository.findById(idDemande).orElseThrow(() -> new RuntimeException("Demande not found"));
 
-        // Check if any offre has been accepted for this demande
-        List<Offre> offres = offreRepository.findByIdDemandeAndStatutOffre(idDemande, StatutOffre.ACCEPTER.name());
+        // Check if any offre has been accepted or paid for this demande
+        List<String> statuts = Arrays.asList(StatutOffre.ACCEPTER.name(), StatutOffre.PAYER.name());
+        List<Offre> offres = offreRepository.findByIdDemandeAndStatutOffreIn(idDemande, statuts);
 
         if (!offres.isEmpty()) {
 
@@ -76,7 +77,7 @@ public class DemandeService {
 
             // Update the statut of the demande to "PAYER"
             demande.setStatut(StatutDemand.PAYER.name());
-            if(offres.get(0).getStatutOffre() == StatutOffre.PAYER.name()){
+            if(offres.get(0).getStatutOffre().equals(StatutOffre.PAYER.name())){
                 offres.get(0).setStatutOffre(StatutOffre.TERMINER.name());
                 demande.setStatut(StatutDemand.TERMINER.name());
             }
@@ -143,11 +144,8 @@ public class DemandeService {
         Offre offre = offreRepository.findById(offreId).orElseThrow(() -> new RuntimeException("Offre not found"));
         Demande demande = demandeRepository.findById(offre.getIdDemande()).orElseThrow(() -> new RuntimeException("Demande not found"));
             if (offre.getStatutOffre().equals(StatutOffre.ENATTENTE.name())) {
-                // Refuse the offre
                 offre.setStatutOffre(StatutOffre.REFUSER.name());
-                //offreRepository.save(offre);
 
-                // Send email to the offreur
                 Utilisateur utilisateur = utilisateurRepository.findById(offre.getIdOffreur())
                         .orElseThrow(() -> new IllegalStateException(
                                 "L'utilisateur avec l'id " + offre.getIdOffreur() + " n'existe pas"

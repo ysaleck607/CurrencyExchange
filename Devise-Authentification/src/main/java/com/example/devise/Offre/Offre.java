@@ -16,14 +16,8 @@ import java.time.LocalDateTime;
 @Table(name = "offredevise")
 public class Offre {
     @Id
-//    @SequenceGenerator(
-//            name = "utilisateur_sequence",
-//            sequenceName = "utilisateur_sequence",
-//            allocationSize = 1
-//    )
     @GeneratedValue(
             strategy = GenerationType.IDENTITY
-            //generator = "utilisateur_sequence"
     )
     @Column(name = "idoffre")
     private Long idOffre;
@@ -32,14 +26,6 @@ public class Offre {
 
     @Column(name = "idoffreur")
     private Long idOffreur;
-//    @Column(name = "deviseVoulu")
-//    private String deviseVoulu;
-//    @Column(name = "montantVoulu")
-//    private BigDecimal montantVoulu;
-//    @Column(name = "deviseOfferte")
-//    private String deviseOfferte;
-    //@Column(name = "montantOfferte")
-    //private BigDecimal montantOfferte;
     @Column(name = "dateoffre")
     private LocalDateTime dateOffre;
     @Column(name = "statut")
@@ -91,16 +77,4 @@ public class Offre {
         this.idOffreur = iddOfreur;
     }
 
-//    @Column(name = "motdepassehache")
-//    private String motDePasse;
-//    @Column(name = "email")
-//    private String email;
-//    @Column(name = "adresse")
-//    private String adresse;
-//    @Column(name = "datecreation")
-//    private LocalDate dateCreation;
-//    @Column(name = "dernieredatemaj")
-//    private LocalDate dateMAJ;
-//    @Enumerated(EnumType.STRING)
-//    @Column(name = "roleutilisateur")
 }

@@ -21,10 +21,6 @@ public class DemandeController {
             demandeService.addDemand(request);
         }
         catch (Exception e) {
-//            if (e.getMessage().contains("Email deja utilise par un autre utilisateur")) {
-//                response = new ResponseEntity<>("Email deja utilise par un autre utilisateur",  HttpStatus.BAD_REQUEST);
-//                return response;
-//            }
 
         }
         response = new ResponseEntity<>("Demande enregistre avec succes",  HttpStatus.OK);
@@ -37,10 +33,6 @@ public class DemandeController {
             demandeService.deleteDemand(demandId);
         }
         catch (Exception e) {
-//            if (e.getMessage().contains("Email deja utilise par un autre utilisateur")) {
-//                response = new ResponseEntity<>("Email deja utilise par un autre utilisateur",  HttpStatus.BAD_REQUEST);
-//                return response;
-//            }
 
         }
         response = new ResponseEntity<>("Demande supprimée avec succes",  HttpStatus.OK);
@@ -54,10 +46,6 @@ public class DemandeController {
         try {
             demandes = demandeService.getDemandesUtilisateur(idUser);
         } catch (Exception e) {
-//            if (e.getMessage().contains("Email deja utilise par un autre utilisateur")) {
-//                response = new ResponseEntity<>("Email deja utilise par un autre utilisateur",  HttpStatus.BAD_REQUEST);
-//                return response;
-//            }
 
         }
         response = new ResponseEntity<>(demandes, HttpStatus.OK);
@@ -71,10 +59,6 @@ public class DemandeController {
         try {
             demandeEnCours = demandeService.getDemandUtilisateurEnCours(idUser);
         } catch (Exception e) {
-//            if (e.getMessage().contains("Email deja utilise par un autre utilisateur")) {
-//                response = new ResponseEntity<>("Email deja utilise par un autre utilisateur",  HttpStatus.BAD_REQUEST);
-//                return response;
-//            }
 
         }
         response = new ResponseEntity<>(demandeEnCours, HttpStatus.OK);
@@ -88,10 +72,6 @@ public class DemandeController {
         try {
             demandeTerminer = demandeService.getDemandUtilisateurTerminer(idUser);
         } catch (Exception e) {
-//            if (e.getMessage().contains("Email deja utilise par un autre utilisateur")) {
-//                response = new ResponseEntity<>("Email deja utilise par un autre utilisateur",  HttpStatus.BAD_REQUEST);
-//                return response;
-//            }
 
         }
         response = new ResponseEntity<>(demandeTerminer, HttpStatus.OK);
@@ -105,10 +85,6 @@ public class DemandeController {
         try {
             demandeAutresUtilisateurs = demandeService.getDemandAutresUtilisateurs(idUser);
         } catch (Exception e) {
-//            if (e.getMessage().contains("Email deja utilise par un autre utilisateur")) {
-//                response = new ResponseEntity<>("Email deja utilise par un autre utilisateur",  HttpStatus.BAD_REQUEST);
-//                return response;
-//            }
 
         }
         response = new ResponseEntity<>(demandeAutresUtilisateurs, HttpStatus.OK);
@@ -117,7 +93,6 @@ public class DemandeController {
 
     @PutMapping("/payerdemande/{idDemande}")
     public ResponseEntity<String> payerDeamnde(@PathVariable("idDemande") Long idDemande) {
-        demandeService.payerDeamnde(idDemande);
         try {
             demandeService.payerDeamnde(idDemande);
             return ResponseEntity.ok("Demande paye avec succès.");
@@ -128,7 +103,6 @@ public class DemandeController {
 
     @PutMapping("/annulerdemande/{idDemande}")
     public ResponseEntity<String> annulerDeamnde(@PathVariable("idDemande") Long idDemande) {
-        //demandeService.annulerDeamnde(idDemande);
         try {
             demandeService.annulerDeamnde(idDemande);
             return ResponseEntity.ok("Demande annulée avec succès.");
@@ -163,4 +137,5 @@ public class DemandeController {
         demandeService.terminerDeamnde(idDemande);
 
     }
+
 }

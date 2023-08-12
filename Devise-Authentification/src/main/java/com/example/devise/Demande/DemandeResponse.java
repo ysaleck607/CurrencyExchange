@@ -23,8 +23,6 @@ public class DemandeResponse {
     private String deviseVoulu;
     private BigDecimal montantVoulu;
     private String deviseOfferte;
-    //@Column(name = "montantOfferte")
-    //private BigDecimal montantOfferte;
     private LocalDateTime dateDemande;
     private String statut;
 }

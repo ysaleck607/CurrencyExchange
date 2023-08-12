@@ -16,15 +16,17 @@ public class CommentaireController {
 
     @PostMapping("/ajouterCommentaire")
     public ResponseEntity<String> ajouterCommentaire(@RequestBody AddCommentaireRequest request) {
-        // Vérifiez l'authentification de l'utilisateur et effectuez d'autres validations si nécessaire
         commentaireService.ajouterCommentaire(request);
         return new ResponseEntity<>("Commentaire ajouté avec succès.", HttpStatus.CREATED);
     }
 
-    @GetMapping("/utilisateur/{idUtilisateur}")
-    public ResponseEntity<List<Commentaire>> getCommentairesByUtilisateur(@PathVariable Long idUtilisateur) {
-        // Recherchez l'utilisateur à partir de l'ID et vérifiez l'authentification si nécessaire
-        List<Commentaire> commentaires = commentaireService.getCommentairesByUtilisateur(idUtilisateur);
-        return new ResponseEntity<>(commentaires, HttpStatus.OK);
+    @GetMapping("/getCommentairesSur/{idUtilisateur}")
+    public ResponseEntity<?> getCommentairesByUtilisateur(@PathVariable Long idUtilisateur) {
+        try {
+            List<CommentaireResponse> commentaireResponses = commentaireService.getCommentairesByUtilisateur(idUtilisateur);
+            return ResponseEntity.ok(commentaireResponses);
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
     }
 }

@@ -1,6 +1,5 @@
 package com.example.devise.Offre;
 
-import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -16,6 +15,7 @@ import java.time.LocalDateTime;
 public class OffreResponse {
     private Long idOffre;
     private Long idDemande;
+    private Long idDemandeur;
     private String nomPrenomDemandeur;
     private String nomPrenomOffreur;
     private Long idOffreur;

@@ -20,11 +20,9 @@ public class Commentaire {
     @Column(name = "idcommentaire")
     private Long idCommentaire;
 
-    //@ManyToOne
     @Column(name = "idutilisateurnoteur")
     private Long idUtilisateur; // L'utilisateur qui a laissé le commentaire
 
-    //@ManyToOne
     @Column(name = "idutilisateurnote")
     private Long idUtilisateurNote; // L'utilisateur qui est noté
 
@@ -40,8 +38,8 @@ public class Commentaire {
     @Column(name = "textecommentaire")
     private String commentaire; // Le texte du commentaire
 
-    @Column(name = "datecommentaire")
-    private LocalDateTime dateCommentaire; // Le texte du commentaire
+    @Column(name = "commentdate")
+    private LocalDateTime dateCommentaire;
 
     public Commentaire(Long idUtilisateur, Long idUtilisateurNote, int note, int idOffre, int idDemande, String commentaire, LocalDateTime dateCommentaire) {
         this.idUtilisateur = idUtilisateur;

@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
-
+@CrossOrigin(origins =  "http://localhost:63342")
 @RestController
 @RequestMapping(path = "api/v1/Offres")
 @RequiredArgsConstructor
@@ -21,11 +21,7 @@ public class OffreController {
             offreService.addOffre(request);
         }
         catch (Exception e) {
-//            if (e.getMessage().contains("Email deja utilise par un autre utilisateur")) {
-//                response = new ResponseEntity<>("Email deja utilise par un autre utilisateur",  HttpStatus.BAD_REQUEST);
-//                return response;
-//            }
-
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
         response = new ResponseEntity<>("Offre enregistre avec succes",  HttpStatus.OK);
         return response;
@@ -38,10 +34,6 @@ public class OffreController {
             offreService.deleteOffer(offerId);
         }
         catch (Exception e) {
-//            if (e.getMessage().contains("Email deja utilise par un autre utilisateur")) {
-//                response = new ResponseEntity<>("Email deja utilise par un autre utilisateur",  HttpStatus.BAD_REQUEST);
-//                return response;
-//            }
 
         }
         response = new ResponseEntity<>("Offre supprimée avec succes",  HttpStatus.OK);
@@ -55,10 +47,6 @@ public class OffreController {
         try {
             offreEnCours = offreService.getOffreEnCours(idUser);
         } catch (Exception e) {
-//            if (e.getMessage().contains("Email deja utilise par un autre utilisateur")) {
-//                response = new ResponseEntity<>("Email deja utilise par un autre utilisateur",  HttpStatus.BAD_REQUEST);
-//                return response;
-//            }
 
         }
         response = new ResponseEntity<>(offreEnCours, HttpStatus.OK);
@@ -72,10 +60,6 @@ public class OffreController {
         try {
             offreUtilisateur = offreService.getOffresUtilisateur(idUser);
         } catch (Exception e) {
-//            if (e.getMessage().contains("Email deja utilise par un autre utilisateur")) {
-//                response = new ResponseEntity<>("Email deja utilise par un autre utilisateur",  HttpStatus.BAD_REQUEST);
-//                return response;
-//            }
 
         }
         response = new ResponseEntity<>(offreUtilisateur, HttpStatus.OK);
@@ -89,10 +73,6 @@ public class OffreController {
         try {
             offres = offreService.getOffresDemade(idDemande);
         } catch (Exception e) {
-//            if (e.getMessage().contains("Email deja utilise par un autre utilisateur")) {
-//                response = new ResponseEntity<>("Email deja utilise par un autre utilisateur",  HttpStatus.BAD_REQUEST);
-//                return response;
-//            }
 
         }
         response = new ResponseEntity<>(offres, HttpStatus.OK);
@@ -106,10 +86,6 @@ public class OffreController {
         try {
             offreTerminer = offreService.getOffreTerminer(idUser);
         } catch (Exception e) {
-//            if (e.getMessage().contains("Email deja utilise par un autre utilisateur")) {
-//                response = new ResponseEntity<>("Email deja utilise par un autre utilisateur",  HttpStatus.BAD_REQUEST);
-//                return response;
-//            }
 
         }
         response = new ResponseEntity<>(offreTerminer, HttpStatus.OK);

@@ -1,0 +1,109 @@
+/* Styles pour l'en-tête */
+header {
+    background-color: #3f51b5;  /* bleu profond */
+    color: #fff;
+    padding: 10px;
+}
+
+h1, h2 {
+    margin: 0;
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin-right: 10px;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+}
+
+/* Styles pour les sections */
+section {
+    margin-bottom: 20px;
+    padding: 20px;
+}
+
+.login-section {
+    background-color: #f2f2f2;  /* gris clair */
+}
+
+.signup-section {
+    background-color: #f0f4c3;  /* vert clair */
+}
+
+form {
+    margin-top: 10px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+    width: 100%;
+    padding: 5px;
+    margin-bottom: 10px;
+    border-radius: 5px;  /* ajout de bordures arrondies */
+}
+
+input[type="submit"] {
+    background-color: #009688;  /* vert foncé */
+    color: #fff;
+    padding: 8px 15px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;  /* ajout de bordures arrondies */
+}
+
+p {
+    margin-bottom: 10px;
+}
+
+/* Styles pour le pied de page */
+footer {
+    background-color: #3f51b5;  /* bleu profond */
+    color: #fff;
+    padding: 10px;
+    text-align: center;
+}
+
+/* Styles pour le nom d'utilisateur cliquable */
+.user-name {
+    color: blue; /* ou une autre couleur de votre choix */
+    cursor: pointer;
+    text-decoration: underline;
+    transition: background-color 0.3s ease;
+}
+
+.user-name:hover {
+    background-color: #f0f0f0; /* ou une autre couleur de votre choix */
+}
+
+.offeror-name {
+    cursor: pointer;
+    color: blue;
+    text-decoration: underline;
+    transition: background-color 0.3s ease;
+}
+
+.offeror-name:hover {
+    background-color: #f0f0f0;
+}
+
+.comment {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin: 10px 0;
+}

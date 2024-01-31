@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Offres pour la demande</title>
+    <link rel="stylesheet" type="text/css" href="../styles.css">
+    <link rel="icon" href="../image.png" type="image/x-icon">
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        .content-wrap {
+            flex: 1;
+        }
+    </style>
+</head>
+<body>
+<div class="content-wrap">
+    <header>
+        <h1>offres concernant la demande</h1>
+        <nav>
+            <ul>
+                <li><a href="Acceuil.html">Accueil</a></li>
+                <li><a href="TableauBord.html">Tableau de bord</a></li>
+                <li><a href="Profile.html">Profil</a></li>
+                <li><button id="logout-btn">Déconnexion</button></li>
+            </ul>
+        </nav>
+    </header>
+<div id="offersTable">
+    <table>
+        <thead>
+        <tr>
+            <th>Demandeur</th>
+            <th>Offreur</th>
+            <th>Montant</th>
+            <th>Devise voulue</th>
+            <th>Statut</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!-- Les offres seront injectées ici par JavaScript -->
+        </tbody>
+    </table>
+</div>
+    <div id="comment-section" style="display: none;">
+        <h2>Ajouter un commentaire et une note</h2>
+        <textarea id="comment-text" rows="4" cols="50" placeholder="Saisissez votre commentaire ici..."></textarea>
+        <select id="rating">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+        </select>
+        <button id="submit-comment">Envoyer</button>
+    </div>
+
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        // Récupérer l'ID de la demande à partir des paramètres d'URL
+        var urlParams = new URLSearchParams(window.location.search);
+        var requestId = urlParams.get('id');
+        $.ajax({
+            url: "http://localhost:8099/api/v1/Offres/getoffresdamande/" + requestId,
+            type: "GET",
+            success: function(offers) {
+                offers.forEach(function(offre) {
+                    $('#offersTable tbody').append(
+                        `<tr>
+                        <td>${offre.nomPrenomDemandeur} </td>
+                        <td class="offeror-name" data-user-id="${offre.idOffreur}" title="Voir commentaires">${offre.nomPrenomOffreur}</td>
+                        <td>${offre.montantVoulu} </td>
+                        <td>${offre.deviseOfferte} </td>
+                        <td>${offre.statutOffre} </td>
+                        <td>
+                            ${offre.statutOffre != 'TERMINER' ? '<button class="accept-offer-button" data-offer-id="' + offre.idOffre + '">Accepter</button><button class="reject-offer-button" data-offer-id="' + offre.idOffre + '">Refuser</button>' : ''}
+                            ${offre.statutOffre == 'TERMINER' ? '<button class="leave-comment-button" data-user-id="' + offre.idOffreur + '">Laisser un commentaire</button>' : ''}
+                            <input type="hidden" id="id2" value="${offre.idDemande}" />
+                            <input type="hidden" id="id" value="${offre.idOffre}" />
+                        </td>
+                    </tr>`
+                    );
+                });
+
+                $('.accept-offer-button').click(function() {
+                    var offerId = $(this).data('offer-id');
+                    $.ajax({
+                        url: "http://localhost:8099/api/v1/demandes/accepterOffre/" + offerId ,
+                        type: "PUT",
+                        success: function(response) {
+                            console.log(response);
+                            alert('Offre acceptée avec succès !');
+                            location.reload();  // Recharger la page pour mettre à jour le statut
+                        },
+                        error: function(jqXHR, textStatus, errorThrown) {
+                            if (jqXHR.status === 401) { // Si le code d'état est 401 Unauthorized
+                                alert('Votre session a expiré. Veuillez vous reconnecter.');
+                                // Redirigez l'utilisateur vers la page de connexion ou rafraîchissez le token si possible
+                                window.location.href = 'Connexion.html';
+                            } else {
+                                // Traitement en cas d'erreur de la requête
+                                alert('Erreur lors de l\'acceptation de l\'offre');
+                                console.log("Une erreur s'est produite :" +  textStatus);
+                            }
+                        }
+                    });
+                });
+
+                $('.reject-offer-button').click(function() {
+                    var offerId = $(this).data('offer-id');
+                    $.ajax({
+                        url: "http://localhost:8099/api/v1/demandes/refuserOffre/" + offerId ,
+                        type: "PUT",
+                        success: function(response) {
+                            console.log(response);
+                            alert('Offre rejetée avec succès !');
+                            location.reload();  // Recharger la page pour mettre à jour le statut
+                        },
+                        error: function(jqXHR, textStatus, errorThrown) {
+                            if (jqXHR.status === 401) { // Si le code d'état est 401 Unauthorized
+                                alert('Votre session a expiré. Veuillez vous reconnecter.');
+                                // Redirigez l'utilisateur vers la page de connexion ou rafraîchissez le token si possible
+                                window.location.href = 'Connexion.html';
+                            } else {
+                                // Traitement en cas d'erreur de la requête
+                                alert('Erreur lors du rejet de l\'offre');
+                                console.log("Une erreur s'est produite :" +  textStatus);
+                            }
+                        }
+                    });
+                });
+                $('.leave-comment-button').click(function() {
+                    $('#comment-section').show();
+                    $('#submit-comment').data('user-id', $(this).data('user-id'));
+                    var userId = $(this).data('user-id');
+                    var uti = localStorage.getItem('userId');
+                    var offerId = $(this).data('offer-id');
+                    var demandId = $(this).data('id2');
+                    console.log(userId);
+                    console.log(uti);
+                    console.log(offerId);
+                    console.log(demandId);
+                });
+
+                $('.offeror-name').click(function() {
+                    var userId = $(this).data('user-id');
+                    window.location.href = 'Commentaire.html?userId=' + userId;
+                });
+            }
+        });
+
+        $('#submit-comment').click(function() {
+
+            var commentText = $('#comment-text').val();
+            var userId = $(this).data('user-id');
+            var rating = $('#rating').val();
+            var uti = localStorage.getItem('userId');
+            var offerId = $('#id').val();
+            var demandId = $('#id2').val();
+            console.log(userId);
+            console.log(uti);
+            console.log(offerId);
+            console.log(demandId);
+            var data ={
+                IdUtilisateur: uti,
+                IdUtilisateurNote: userId,
+                commentaire: commentText,
+                note: rating,
+                idOffre: offerId,
+                idDemande: demandId
+            }
+            $.ajax({
+                url: 'http://localhost:8099/api/v1/commentaires/ajouterCommentaire',
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify(data),
+                success: function(response) {
+                    console.log(response);
+                    console.log('Commentaire envoyé avec succès.');
+                    $('#comment-section').hide();
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    if (jqXHR.status === 401) { // Si le code d'état est 401 Unauthorized
+                        alert('Votre session a expiré. Veuillez vous reconnecter.');
+                        // Redirigez l'utilisateur vers la page de connexion ou rafraîchissez le token si possible
+                        window.location.href = 'Connexion.html';
+                    } else {
+                        // Traitement en cas d'erreur de la requête
+                        alert('Erreur lors de la soumission du commentaire : ');
+                        console.log('Erreur lors de la soumission du commentaire : ' +  textStatus);
+                    }
+                }
+            });
+        });
+    });
+
+</script>
+<script src="../JavaScript/Deconnexion.js"></script>
+<footer>
+    <p>&copy; 2023 Application d'échange de devises</p>
+</footer>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inscription</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="../styles.css">
+  <link rel="icon" href="../image.png" type="image/x-icon">
+
+</head>
+<body>
+<header>
+  <h1>Application d'échange de devises</h1>
+</header>
+
+<section class="signup-section">
+  <h2>Inscription</h2>
+  <form id="inscriptionForm">
+    <label for="nom">Nom :</label>
+    <input type="text" id="nom" required><br>
+
+    <label for="prenom">Prénom :</label>
+    <input type="text" id="prenom" required><br>
+
+    <label for="adresse">Adresse :</label>
+    <input type="text" id="adresse" required><br>
+
+    <label for="email">Courriel :</label>
+    <input type="email" id="email" required><br>
+
+    <label for="password">Mot de passe :</label>
+    <input type="password" id="password" minlength="8" required><br>
+
+    <label for="confirmpassword">Confirmer le mot de passe :</label>
+    <input type="password" id="confirmpassword" required><br>
+
+    <label for="datenaissance">Date de naissance :</label>
+    <input type="date" id="datenaissance" required><br><br>
+
+    <input type="submit" value="S'inscrire">
+  </form>
+  <p>Vous avez déjà un compte ? <a href="Connexion.html">Connectez-vous ici</a></p>
+</section>
+
+
+<footer>
+  <p>&copy; 2023 Application d'échange de devises</p>
+</footer>
+<script src="../JavaScript/Inscription.js"></script>
+</body>
+</html>

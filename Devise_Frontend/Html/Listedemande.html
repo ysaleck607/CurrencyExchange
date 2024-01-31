@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestion des demandes d'échange</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link rel="icon" href="../image.png" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" href="../styles.css">
+    <style>
+        .hidden {
+            display: none;
+        }
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        .content-wrap {
+            flex: 1;
+        }
+    </style>
+</head>
+<body>
+<div class="content-wrap">
+    <header>
+        <h1>Liste de mes demandes</h1>
+        <nav>
+            <ul>
+                <li><a href="Acceuil.html">Accueil</a></li>
+                <li><a href="TableauBord.html">Tableau de bord</a></li>
+                <li><a href="Profile.html">Profil</a></li>
+                <li><button id="logout-btn">Déconnexion</button></li>
+            </ul>
+        </nav>
+    </header>
+    <table id="exchangeRequestsTable">
+        <thead>
+        <tr>
+            <th>Demandeur</th>
+            <th>Devise souhaitée</th>
+            <th>Devise offerte</th>
+            <th>Montant</th>
+            <th>Statut</th>
+            <th>Actions</th>
+            <th class="hidden">ID de la demande</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!-- Les lignes du tableau seront ajoutées ici par le script JavaScript -->
+        </tbody>
+    </table>
+</div>
+<footer>
+    <p>&copy; 2023 Application d'échange de devises</p>
+</footer>
+<script src="../JavaScript/Listedemande.js"></script>
+<script src="../JavaScript/Deconnexion.js"></script>
+</body>
+</html>

@@ -48,7 +48,58 @@ label {
     margin-bottom: 5px;
     font-weight: bold;
 }
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap; /* Ajout d'un wrapping pour assurer une meilleure mise en page sur les petits écrans */
+}
 
+.left-section {
+    display: flex;
+    align-items: center;
+}
+
+.left-section img {
+    width: 50px; /* Ajustez la taille du logo selon vos besoins */
+    margin-right: 10px; /* Ajout d'un espace entre le logo et le texte */
+}
+.middle-section ul,
+.right-section ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.middle-section a,
+.right-section a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.right-section {
+    text-align: right;
+}
+
+.right-section ul li {
+    margin-bottom: 5px;
+}
+
+.right-section p {
+    margin-bottom: 5px;
+}
+
+.right-section ul li:last-child {
+    margin-bottom: 0;
+}
+
+/* Style pour le texte de copyright */
+.copyright {
+    margin-top: 10px;
+}
+.underline {
+    text-decoration: underline;
+}
 input[type="text"],
 input[type="email"],
 input[type="password"] {

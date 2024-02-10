@@ -5,10 +5,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Connexion</title>
+    <title>Offre d'échange</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <link rel="icon" href="../image.png" type="image/x-icon">
     <link rel="stylesheet" type="text/css" href="../styles.css">
+    <link rel="icon" href="../image.png" type="image/x-icon">
     <style>
         body {
             display: flex;
@@ -21,16 +21,35 @@
         header {
             background-color: #3498db;
             color: #fff;
-            padding: 20px;
+            padding: 10px;
             text-align: center;
         }
 
-        .login-section {
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        nav ul li {
+            margin: 0 10px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: #fff;
+            font-weight: bold;
+        }
+
+        .content-wrap {
+            flex: 1;
+        }
+
+        .exchange-request {
             padding: 20px;
             text-align: center;
-            max-width: 400px;
-            margin-left: auto;
-            margin-right: auto;
         }
 
         form {
@@ -39,15 +58,14 @@
 
         label {
             display: block;
-            margin-bottom: 10px;
+            margin-bottom: 5px;
             font-weight: bold;
-            color: #333;
         }
 
-        input {
+        select {
             width: 100%;
-            padding: 10px;
-            margin-bottom: 15px;
+            padding: 8px;
+            margin-bottom: 10px;
             box-sizing: border-box;
         }
 
@@ -58,12 +76,6 @@
             border: none;
             cursor: pointer;
             font-size: 16px;
-        }
-
-        a {
-            color: #3498db;
-            text-decoration: none;
-            font-weight: bold;
         }
 
         footer {
@@ -100,24 +112,41 @@
 </head>
 
 <body>
-<header>
-    <h1>Application d'échange de devises</h1>
-</header>
+<div class="content-wrap">
+    <header>
+        <h1>Offre d'échange</h1>
+        <nav>
+            <ul>
+                <li><a href="Acceuil.html">Accueil</a></li>
+                <li><a href="TableauBord.html">Tableau de bord</a></li>
+                <li><a href="Profile.html">Profil</a></li>
+                <li><button id="logout-btn">Déconnexion</button></li>
+            </ul>
+        </nav>
+    </header>
+    <section class="exchange-request">
+        <h2>Quelle échange voulez-vous faire ?</h2>
+        <form id="exchangeForm">
 
-<section class="login-section">
-    <h2>Connexion</h2>
-    <form id="loginForm">
-        <label for="email">Adresse e-mail:</label>
-        <input type="email" id="email" name="email" required>
+            <div>
+                <label for="source-currency">Devise possédée :</label>
+                <select id="source-currency" name="source-currency" required></select>
+            </div>
 
-        <label for="password">Mot de passe:</label>
-        <input type="password" id="password" name="password" required>
+            <div>
+                <label for="target-currency">Devise voulue :</label>
+                <select id="target-currency" name="target-currency" required></select>
+            </div>
 
-        <input type="submit" value="Se connecter">
-    </form>
-    <p>Vous n'avez pas de compte ? <a href="Inscription.html">Inscrivez-vous ici</a></p>
-</section>
+            <!-- Bouton de recherche -->
+            <div>
+                <input type="submit" value="Rechercher">
+            </div>
 
+        </form>
+    </section>
+
+</div>
 <footer>
     <div class="footer-content">
         <div class="left-section">
@@ -143,7 +172,8 @@
         <p>&copy; 2024 Application d'échange de devises. Tout droit réservé</p>
     </div>
 </footer>
-<script src="../JavaScript/Connexion.js"></script>
+<script src="../JavaScript/Demande.js"></script>
+<script src="../JavaScript/Deconnexion.js"></script>
 </body>
 
 </html>

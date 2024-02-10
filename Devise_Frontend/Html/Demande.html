@@ -34,17 +34,33 @@
         </nav>
     </header>
     <section class="exchange-request">
-        <h2>Publier une demande d'échange</h2>
-        <form id="exchangeForm">
-            <label for="amount">Montant souhaité:</label>
-            <input type="number" id="amount" name="amount" required>
-            <label for="source-currency">Devise offerte:</label>
-            <select id="source-currency" name="source-currency" required>
-            </select>
-            <label for="target-currency">Devise souhaitée:</label>
-            <select id="target-currency" name="target-currency" required>
-            </select>
-            <input type="submit" value="Publier">
+        <h2 style="text-align: center;">Entammez un échange</h2>
+        <form id="exchangeForm" style="text-align: center;">
+            <div style="margin-bottom: 10px;">
+                <label for="amount">Montant souhaité:</label>
+                <input type="number" id="amount" name="amount" required>
+            </div>
+
+            <div style="margin-bottom: 10px;">
+                <label for="source-currency">Devise offerte:</label>
+                <select id="source-currency" name="source-currency" required>
+                </select>
+            </div>
+
+            <div style="margin-bottom: 10px;">
+                <label for="target-currency">Devise souhaitée:</label>
+                <select id="target-currency" name="target-currency" required>
+                </select>
+            </div>
+
+            <div style="margin-bottom: 10px; text-align: center;">
+                <label for="secure-exchange">Voulez-vous choisir l'option d'échange sécurisé?</label>
+                <input type="checkbox" id="secure-exchange" name="secure-exchange">
+            </div>
+
+            <div>
+                <input type="submit" value="Soumettre la demande">
+            </div>
         </form>
     </section>
 

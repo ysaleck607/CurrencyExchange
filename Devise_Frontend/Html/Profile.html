@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -13,13 +14,107 @@
       display: flex;
       flex-direction: column;
       min-height: 100vh;
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    header {
+      background-color: #3498db;
+      color: #fff;
+      padding: 10px;
+      text-align: center;
+    }
+
+    nav ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+    }
+
+    nav ul li {
+      margin: 0 10px;
+    }
+
+    nav ul li a {
+      text-decoration: none;
+      color: #fff;
+      font-weight: bold;
     }
 
     .content-wrap {
       flex: 1;
     }
+
+    .profile {
+      padding: 20px;
+      text-align: center;
+    }
+
+    form {
+      margin-top: 20px;
+      max-width: 400px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 10px;
+      font-weight: bold;
+      color: #333;
+    }
+
+    input {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 15px;
+      box-sizing: border-box;
+    }
+
+    input[type="submit"] {
+      background-color: #3498db;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    footer {
+      background-color: #2c3e50;
+      color: #fff;
+      text-align: center;
+      padding: 20px 0;
+    }
+
+    .footer-content {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .footer-content img {
+      width: 50px;
+      height: 50px;
+    }
+
+    .underline {
+      text-decoration: underline;
+    }
+
+    .left-section,
+    .middle-section,
+    .right-section {
+      flex: 1;
+    }
+
+    .copyright {
+      margin-top: 10px;
+    }
   </style>
 </head>
+
 <body>
 <div class="content-wrap">
   <header>
@@ -36,13 +131,13 @@
     <h2>Modifier votre profil</h2>
     <form id="profileForm">
       <label for="address">Adresse :</label>
-      <input type="text" id="address" name="address"><br>
+      <input type="text" id="address" name="address">
 
       <label for="email">Courriel :</label>
-      <input type="email" id="email" name="email"><br>
+      <input type="email" id="email" name="email">
 
       <label for="password">Mot de passe :</label>
-      <input type="password" id="password" name="password"><br>
+      <input type="password" id="password" name="password">
 
       <input type="submit" value="Enregistrer les modifications">
     </form>
@@ -77,4 +172,5 @@
 <script src="../JavaScript/Profile.js"></script>
 <script src="../JavaScript/Deconnexion.js"></script>
 </body>
+
 </html>

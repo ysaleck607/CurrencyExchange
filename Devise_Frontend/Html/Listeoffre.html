@@ -14,9 +14,107 @@
             display: flex;
             flex-direction: column;
             min-height: 100vh;
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4; /* Ajout d'une couleur de fond */
         }
         .content-wrap {
             flex: 1;
+        }
+        header {
+            background-color: #3498db; /* Couleur de fond de l'en-tête */
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+        }
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            background-color: #2980b9; /* Couleur de fond du menu de navigation */
+            border-radius: 5px; /* Coins arrondis */
+        }
+        nav ul li {
+            margin: 0 10px;
+        }
+        nav ul li a {
+            text-decoration: none;
+            color: #fff;
+            font-weight: bold;
+            padding: 10px; /* Ajout de rembourrage pour un look plus attrayant */
+        }
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            margin: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ajout d'une ombre pour la profondeur */
+        }
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        .table th, .table td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+        .comment-section {
+            background-color: #ecf0f1; /* Couleur de fond de la section des commentaires */
+            padding: 20px;
+            margin-top: 20px;
+            border-radius: 8px;
+        }
+        #comment-text, #rating, #submit-comment {
+            margin-bottom: 10px;
+        }
+        #comment-text, #rating {
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+        #submit-comment {
+            background-color: #3498db;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 4px;
+            transition: background-color 0.3s ease-in-out;
+        }
+        #submit-comment:hover {
+            background-color: #2980b9;
+        }
+        footer {
+            background-color: #2c3e50;
+            color: #fff;
+            text-align: center;
+            padding: 20px 0;
+            border-radius: 0 0 8px 8px;
+            margin-top: 20px;
+        }
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            padding: 0 20px;
+        }
+        .footer-content img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+        }
+        .underline {
+            text-decoration: underline;
+        }
+        .left-section, .middle-section, .right-section {
+            flex: 1;
+        }
+        .copyright {
+            margin-top: 10px;
         }
     </style>
 </head>
@@ -47,10 +145,11 @@
             </tr>
             </thead>
             <tbody>
+            <!-- Les lignes de la table seront ajoutées ici dynamiquement -->
             </tbody>
         </table>
 
-        <div id="comment-section" style="display: none;">
+        <div class="comment-section" id="comment-section">
             <h2>Ajouter un commentaire et une note</h2>
             <textarea id="comment-text" rows="4" cols="50" placeholder="Saisissez votre commentaire ici..."></textarea>
             <select id="rating">
@@ -62,8 +161,6 @@
             </select>
             <button id="submit-comment">Envoyer</button>
         </div>
-
-
     </div>
 </div>
 <footer>
@@ -91,7 +188,3 @@
         <p>&copy; 2024 Application d'échange de devises. Tout droit réservé</p>
     </div>
 </footer>
-<script src="../JavaScript/Listeoffre.js"></script>
-<script src="../JavaScript/Deconnexion.js"></script>
-</body>
-</html>

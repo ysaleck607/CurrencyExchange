@@ -16,10 +16,89 @@
             background-repeat: no-repeat;
             background-attachment: fixed;
             background-size: cover;
+            margin: 0;
+            font-family: 'Arial', sans-serif;
         }
 
         .content-wrap {
             flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #fff;
+            padding: 20px;
+        }
+
+        header {
+            margin-bottom: 20px;
+        }
+
+        .hero {
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        .hero h2 {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            margin-bottom: 10px;
+            line-height: 1.5;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 10px 20px;
+            margin-top: 20px;
+            background-color: #3498db;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        .cta-button:hover {
+            background-color: #2980b9;
+        }
+
+        footer {
+            background-color: rgba(0, 0, 0, 0.8);
+            color: #fff;
+            text-align: center;
+            padding: 20px 0;
+            border-radius: 0 0 8px 8px;
+            margin-top: 20px;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            padding: 0 20px;
+        }
+
+        .footer-content img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+        }
+
+        .underline {
+            text-decoration: underline;
+        }
+
+        .left-section,
+        .middle-section,
+        .right-section {
+            flex: 1;
+        }
+
+        .copyright {
+            margin-top: 10px;
         }
     </style>
 </head>
@@ -30,11 +109,11 @@
     </header>
     <section class="hero">
         <h2>Échangez facilement des devises internationales à des taux avantageux, prenez le contrôle concernant vos échanges de devises</h2>
-        <p>Notre application vous permet de trouver des offres d'échange de devises en quelques clics:</p>
-        <p>-Meilleurs taux d'échange<p>
-        <p>-Pas de frais cachés<p>
-        <p>-24/7 fonctionnelle<p>
-        <a href="Connexion.html" class="cta-button">Désirez-vous commencer maintenant, connectez ou inscrivez vous </a>
+        <p>Notre application vous permet de trouver des offres d'échange de devises en quelques clics :</p>
+        <p>- Meilleurs taux d'échange</p>
+        <p>- Pas de frais cachés</p>
+        <p>- Disponible 24/7</p>
+        <a href="Connexion.html" class="cta-button">Désirez-vous commencer maintenant, connectez-vous ou inscrivez-vous</a>
     </section>
 </div>
 

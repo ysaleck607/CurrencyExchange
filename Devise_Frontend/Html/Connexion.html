@@ -8,97 +8,10 @@
     <title>Connexion</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <link rel="icon" href="../image.png" type="image/x-icon">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" type="text/css" href="../styles.css">
-    <style>
-        body {
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-            margin: 0;
-            font-family: Arial, sans-serif;
-        }
-
-        header {
-            background-color: #3498db;
-            color: #fff;
-            padding: 20px;
-            text-align: center;
-        }
-
-        .login-section {
-            padding: 20px;
-            text-align: center;
-            max-width: 400px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        form {
-            margin-top: 20px;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 10px;
-            font-weight: bold;
-            color: #333;
-        }
-
-        input {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 15px;
-            box-sizing: border-box;
-        }
-
-        input[type="submit"] {
-            background-color: #3498db;
-            color: #fff;
-            padding: 10px 20px;
-            border: none;
-            cursor: pointer;
-            font-size: 16px;
-        }
-
-        a {
-            color: #3498db;
-            text-decoration: none;
-            font-weight: bold;
-        }
-
-        footer {
-            background-color: #2c3e50;
-            color: #fff;
-            text-align: center;
-            padding: 20px 0;
-        }
-
-        .footer-content {
-            display: flex;
-            justify-content: space-between;
-        }
-
-        .footer-content img {
-            width: 50px;
-            height: 50px;
-        }
-
-        .underline {
-            text-decoration: underline;
-        }
-
-        .left-section,
-        .middle-section,
-        .right-section {
-            flex: 1;
-        }
-
-        .copyright {
-            margin-top: 10px;
-        }
-    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
+
 <body>
 <header>
     <h1>Application d'échange de devises</h1>
@@ -113,9 +26,15 @@
         <label for="password">Mot de passe:</label>
         <input type="password" id="password" name="password" required>
 
+        <label for="remember">
+            <input type="checkbox" id="remember" name="remember"> Se souvenir de moi
+        </label>
+
         <input type="submit" value="Se connecter">
     </form>
     <p>Vous n'avez pas de compte ? <a href="Inscription.html">Inscrivez-vous ici</a></p>
+
+    <p>Mot de passe oublié ? <a href="MotDePasseOublie.html">Réinitialiser le mot de passe</a></p>
 </section>
 
 <footer>
@@ -126,8 +45,8 @@
         <div class="middle-section">
             <p><span class="underline"><i class="fas fa-life-ring"></i>Support :</span></p>
             <ul>
-                <li><a href="#"><i class="fas fa-question"></i>FAQ's</a></li>
-                <li><a href="#"><i class="fas fa-file-alt"></i> Termes et conditions</a></li>
+                <li><a href="faq.html"><i class="fas fa-question"></i>FAQ's</a></li>
+                <li><a href="termes%20et%20conditions.html"><i class="fas fa-file-alt"></i> Termes et conditions</a></li>
             </ul>
         </div>
         <div class="right-section">
@@ -145,4 +64,5 @@
 </footer>
 <script src="../JavaScript/Connexion.js"></script>
 </body>
+
 </html>

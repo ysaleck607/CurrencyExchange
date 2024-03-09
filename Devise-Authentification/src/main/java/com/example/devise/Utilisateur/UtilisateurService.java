@@ -1,6 +1,8 @@
 package com.example.devise.Utilisateur;
 
 import com.example.devise.Config.JwtService;
+import com.example.devise.Utilisateur.Status;
+import com.example.devise.Utilisateur.Utilisateur;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -63,6 +65,8 @@ public class UtilisateurService {
         var user = utilisateurRepository.findByEmail(request.getEmail())
                 .orElseThrow();
         var jwtToken = jwtService.generateToken(user);
+        user.setStatus(com.example.devise.Utilisateur.Status.ONLINE);
+        utilisateurRepository.save(user);
         return AuthenticationResponse.builder()
                 .token(jwtToken)
                 .idUser(user.getIdUtilisateur())
@@ -108,4 +112,23 @@ public class UtilisateurService {
     public Optional<Utilisateur> obtenirUtilisateur(Long idUser) {
         return utilisateurRepository.findById(idUser);
     }
+
+    public Utilisateur connetToChat(String email) {
+        Optional<Utilisateur> utilisateurOptional = utilisateurRepository
+                .findByEmail(email);
+        return utilisateurOptional.get();
+    }
+
+//    public void disconnect(User user) {
+//        var storedUser = repository.findById(user.getNickName()).orElse(null);
+//        if (storedUser != null) {
+//            storedUser.setStatus(com.example.devise.User.Status.OFFLINE);
+//            repository.save(storedUser);
+//        }
+//    }
+
+//    public List<User> findConnectedUsers() {
+//        return repository.findAllByStatus(Status.ONLINE);
+//    }
+
 }

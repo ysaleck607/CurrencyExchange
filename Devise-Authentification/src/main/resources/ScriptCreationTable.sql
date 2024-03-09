@@ -1,5 +1,5 @@
 -- Création de la table Utilisateurs
-CREATE DOMAIN RoleDomain AS VARCHAR(255) CHECK (VALUE IN ('USER', 'ADMIN'));
+--CREATE DOMAIN RoleDomain AS VARCHAR(255) CHECK (VALUE IN ('USER', 'ADMIN'));
 CREATE TABLE IF NOT EXISTS Utilisateur (
                              IdUtilisateur SERIAL PRIMARY KEY,
                              Nom VARCHAR(255),
@@ -8,9 +8,10 @@ CREATE TABLE IF NOT EXISTS Utilisateur (
                              MotDePasseHache VARCHAR(255),
                              Email VARCHAR(255),
                              Adresse TEXT,
-                             roleutilisateur RoleDomain,
+                             roleutilisateur VARCHAR(10) CHECK (VALUE IN ('USER', 'ADMIN'),
                              DateCreation TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                             DerniereDateMAJ TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+                             DerniereDateMAJ TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                             Status VARCHAR(10) CHECK (VALUE IN ('ONLINE', 'OFFLINE')
 );
 
 -- Création de la table Devise
@@ -229,3 +230,21 @@ INSERT INTO Devise (CodeDevise, NomDevise) VALUES
                                                ('ZAR',	'Rand d’Afrique du Sud'),
                                                ('ZMW',	'Zambie Kwacha'),
                                                ('ZWD',	'Zimbabwe Dollar');
+
+-- Création de la table Devise
+CREATE TABLE IF NOT EXISTS ChatRoom (
+    ChatRoomId SERIAL PRIMARY KEY,
+    SenderId INTEGER,
+    ChatId INTEGER,
+    RecepientId INTEGER
+    );
+
+-- Création de la table Devise
+CREATE TABLE IF NOT EXISTS ChatMessage (
+    Id SERIAL PRIMARY KEY,
+    ChatId INTEGER,
+    SenderId INTEGER,
+    RecepientId INTEGER,
+    Content VARCHAR(255),
+    DateCreation TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    );

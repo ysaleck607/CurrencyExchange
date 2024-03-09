@@ -1,24 +1,22 @@
-package com.example.devise.Chat;
+package com.example.devise.ChatRoom;
 
 import jakarta.persistence.*;
 import lombok.*;
-
-import java.util.Date;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 @Entity
-@Table(name = "Chatmessage")
+@Table(name = "chatroom")
 @Getter
 @Setter
-public class ChatMessage {
+public class ChatRoom {
     @Id
     @GeneratedValue(
             strategy = GenerationType.IDENTITY
     )
-    @Column(name = "id")
+    @Column(name = "chatroomid")
     private Long id;
     @Column(name = "chatid")
     private Long chatId;
@@ -26,8 +24,5 @@ public class ChatMessage {
     private Long senderId;
     @Column(name = "recepientid")
     private Long recipientId;
-    @Column(name = "content")
-    private String content;
-    @Column(name = "datecreation")
-    private Date timestamp;
 }
+

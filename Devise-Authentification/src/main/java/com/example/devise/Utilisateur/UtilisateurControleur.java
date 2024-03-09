@@ -1,14 +1,18 @@
 package com.example.devise.Utilisateur;
 
+import com.example.devise.Utilisateur.Utilisateur;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.messaging.handler.annotation.Payload;
+import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
 
-@CrossOrigin(origins = "http://localhost:63343")
+@CrossOrigin(origins = "**")
 @RestController
 @RequestMapping(path = "api/v1/utilisateurs")
 @RequiredArgsConstructor
@@ -69,4 +73,27 @@ public class UtilisateurControleur {
             @RequestParam(required = false) String password) {
         utilisateurService.updateUser(userId, email, password);
     }
+
+    @MessageMapping("/user.addUser")
+    @SendTo("/user/public")
+    public Utilisateur addUser(
+            @Payload String email
+    ) {
+        return utilisateurService.connetToChat(email);
+
+    }
+
+//    @MessageMapping("/user.disconnectUser")
+//    @SendTo("/user/public")
+//    public User disconnectUser(
+//            @Payload User user
+//    ) {
+//        userService.disconnect(user);
+//        return user;
+//    }
+
+//    @GetMapping("/users")
+//    public ResponseEntity<List<User>> findConnectedUsers() {
+//        return ResponseEntity.ok(userService.findConnectedUsers());
+//    }
 }

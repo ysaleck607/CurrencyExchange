@@ -22,7 +22,7 @@ public class ChatMessageService {
         return chatMessage;
     }
 
-    public List<ChatMessage> findChatMessages(String senderId, String recipientId) {
+    public List<ChatMessage> findChatMessages(Long senderId, Long recipientId) {
         var chatId = chatRoomService.getChatRoomId(senderId, recipientId, false);
         return chatId.map(repository::findByChatId).orElse(new ArrayList<>());
     }

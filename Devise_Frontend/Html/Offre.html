@@ -85,12 +85,37 @@
 
                 $('.accept-offer-button').click(function() {
                     var offerId = $(this).data('offer-id');
+                    var offerorUserId = $(this).closest('tr').find('.offeror-name').data('user-id'); // Récupérer l'ID de l'offreur
+                    var demanderUserId = localStorage.getItem('userId'); // Récupérer l'ID du demandeur
+                    var tableRow = $(this).closest('tr'); // Référence à la ligne du tableau actuelle
+
                     $.ajax({
                         url: "http://localhost:8099/api/v1/demandes/accepterOffre/" + offerId ,
                         type: "PUT",
                         success: function(response) {
                             console.log(response);
                             alert('Offre acceptée avec succès !');
+
+                            // Ajouter le bouton de chat si l'offre est acceptée
+                            var chatButton = $('<button class="chat-button" data-offeror-id="' + offerorUserId + '">Chat</button>');
+                            tableRow.find('.actions').html(chatButton);
+
+                            chatButton.click(function() {
+                                // Faire une requête AJAX pour récupérer les données du chat
+                                $.ajax({
+                                    url: "http://localhost:8099/api/v1/messages/" + demanderUserId + "/" + offerorUserId,
+                                    type: "GET",
+                                    success: function(chatData) {
+                                        // Traiter les données de chat et les afficher dans une fenêtre de chat ou une section dédiée sur la page actuelle
+                                        console.log("Données de chat récupérées avec succès :", chatData);
+                                        // Par exemple, ouvrir une fenêtre de chat avec les données récupérées
+                                    },
+                                    error: function(jqXHR, textStatus, errorThrown) {
+                                        console.error("Erreur lors de la récupération des données de chat :", errorThrown);
+                                    }
+                                });
+                            });
+
                             location.reload();  // Recharger la page pour mettre à jour le statut
                         },
                         error: function(jqXHR, textStatus, errorThrown) {

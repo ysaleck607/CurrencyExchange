@@ -6,6 +6,11 @@ $(document).ready(function() {
         success: function(data) {
             // Boucle sur chaque offre et ajoute une ligne à la table
             $.each(data, function(index, offre) {
+                var chatButton = '';
+                // Vérifier si le statut de l'offre est "ENATTENTE" pour afficher le bouton de chat
+                if (offre.statutOffre === 'ENATTENTE') {
+                    chatButton = '<button class="chat-button" data-offeror-id="' + offre.idDemandeur + '">Chat</button>';
+                }
                 $('#offersTable tbody').append(`
                     <tr>
                         <td class="offeror-name" data-user-id="${offre.idDemandeur} " title="Voir commentaires">${offre.nomPrenomDemandeur}</td>
@@ -14,8 +19,8 @@ $(document).ready(function() {
                         <td>${offre.deviseOfferte}</td>
                         <td>${offre.montantVoulu}</td>
                         <td>${offre.statutOffre}</td>
-                        <td>
-                   
+                        <td class="actions">
+                            ${chatButton}
                              ${offre.statutOffre != 'PAYER' && offre.statutOffre != 'TERMINER' ? '<button class="pay-button" data-id="' + offre.idOffre + '">Payer</button>' : ''}
                              ${offre.statutOffre == 'TERMINER' ? '<button class="leave-comment-button" data-user-id="' + offre.idDemandeur + '">Laisser un commentaire</button>' : ''}
                             <input type="hidden" id="id" value="${offre.idOffre}" />
@@ -60,6 +65,24 @@ $(document).ready(function() {
             $('.offeror-name').click(function() {
                 var userId = $(this).data('user-id');
                 window.location.href = 'Commentaire.html?userId=' + userId;
+            });
+
+            // Ajout de l'événement click pour le bouton de chat
+            $('.chat-button').click(function() {
+                var offerorUserId = localStorage.getItem('userId');
+                var demanderUserId = $(this).closest('tr').find('.offeror-name').data('user-id');
+                // Faire une requête AJAX pour initialiser le chat
+                $.ajax({
+                    url: "http://localhost:8099/api/v1/messages/" + offerorUserId + "/" + demanderUserId,
+                    type: "POST",
+                    success: function(chatData) {
+                        console.log("Chat initialisé avec succès :", chatData);
+                        // Afficher le chat dans une fenêtre modale ou une section dédiée sur la page actuelle
+                    },
+                    error: function(jqXHR, textStatus, errorThrown) {
+                        console.error("Erreur lors de l'initialisation du chat :", errorThrown);
+                    }
+                });
             });
         },
         error: function(jqXHR, textStatus, errorThrown) {

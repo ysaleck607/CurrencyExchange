@@ -51,6 +51,9 @@ public class Utilisateur implements UserDetails {
     @Column(name = "roleutilisateur")
     private Role role;
 
+    @Column(name = "status")
+    private Status status;
+
     public Utilisateur(String prenom,
                        String nom,
                        LocalDate dateNaissance,

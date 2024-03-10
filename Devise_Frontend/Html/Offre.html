@@ -7,16 +7,8 @@
     <title>Offres pour la demande</title>
     <link rel="stylesheet" type="text/css" href="../styles.css">
     <link rel="icon" href="../image.png" type="image/x-icon">
-    <style>
-        body {
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-        }
-        .content-wrap {
-            flex: 1;
-        }
-    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
 </head>
 <body>
 <div class="content-wrap">
@@ -31,23 +23,23 @@
             </ul>
         </nav>
     </header>
-<div id="offersTable">
-    <table>
-        <thead>
-        <tr>
-            <th>Demandeur</th>
-            <th>Offreur</th>
-            <th>Montant</th>
-            <th>Devise voulue</th>
-            <th>Statut</th>
-            <th>Actions</th>
-        </tr>
-        </thead>
-        <tbody>
-        <!-- Les offres seront injectées ici par JavaScript -->
-        </tbody>
-    </table>
-</div>
+    <div id="offersTable">
+        <table>
+            <thead>
+            <tr>
+                <th>Demandeur</th>
+                <th>Offreur</th>
+                <th>Montant</th>
+                <th>Devise voulue</th>
+                <th>Statut</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <!-- Les offres seront injectées ici par JavaScript -->
+            </tbody>
+        </table>
+    </div>
     <div id="comment-section" style="display: none;">
         <h2>Ajouter un commentaire et une note</h2>
         <textarea id="comment-text" rows="4" cols="50" placeholder="Saisissez votre commentaire ici..."></textarea>
@@ -206,7 +198,29 @@
 </script>
 <script src="../JavaScript/Deconnexion.js"></script>
 <footer>
-    <p>&copy; 2023 Application d'échange de devises</p>
+    <div class="footer-content">
+        <div class="left-section">
+            <img src="../money2.png" alt="Logo de l'application">
+        </div>
+        <div class="middle-section">
+            <p><span class="underline"><i class="fas fa-life-ring"></i>Support :</span></p>
+            <ul>
+                <li><a href="faq.html"><i class="fas fa-question"></i>FAQ's</a></li>
+                <li><a href="termes%20et%20conditions.html"><i class="fas fa-file-alt"></i> Termes et conditions</a></li>
+            </ul>
+        </div>
+        <div class="right-section">
+            <p><span class="underline"><i class="fas fa-map-marker-alt"></i>Adresse :</span></p>
+            <ul>
+                <li><i class="fas fa-map-marker-alt"></i> Location </li>
+                <li><i class="fas fa-envelope"></i>Email</li>
+                <li><i class="fas fa-phone"></i>Téléphone</li>
+            </ul>
+        </div>
+    </div>
+    <div class="copyright">
+        <p>&copy; 2024 Application d'échange de devises. Tout droit réservé</p>
+    </div>
 </footer>
 </body>
 </html>

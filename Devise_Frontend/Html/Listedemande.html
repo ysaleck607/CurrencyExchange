@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,27 +9,16 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <link rel="icon" href="../image.png" type="image/x-icon">
     <link rel="stylesheet" type="text/css" href="../styles.css">
-    <style>
-        .hidden {
-            display: none;
-        }
-        body {
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-        }
-        .content-wrap {
-            flex: 1;
-        }
-    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
 </head>
+
 <body>
 <div class="content-wrap">
     <header>
         <h1>Liste de mes demandes</h1>
         <nav>
             <ul>
-                <li><a href="Acceuil.html">Accueil</a></li>
                 <li><a href="TableauBord.html">Tableau de bord</a></li>
                 <li><a href="Profile.html">Profil</a></li>
                 <li><button id="logout-btn">Déconnexion</button></li>
@@ -53,9 +43,32 @@
     </table>
 </div>
 <footer>
-    <p>&copy; 2023 Application d'échange de devises</p>
+    <div class="footer-content">
+        <div class="left-section">
+            <img src="../money2.png" alt="Logo de l'application">
+        </div>
+        <div class="middle-section">
+            <p><span class="underline"><i class="fas fa-life-ring"></i>Support :</span></p>
+            <ul>
+                <li><a href="faq.html"><i class="fas fa-question"></i>FAQ's</a></li>
+                <li><a href="termes%20et%20conditions.html"><i class="fas fa-file-alt"></i> Termes et conditions</a></li>
+            </ul>
+        </div>
+        <div class="right-section">
+            <p><span class="underline"><i class="fas fa-map-marker-alt"></i>Adresse :</span></p>
+            <ul>
+                <li><i class="fas fa-map-marker-alt"></i> Location </li>
+                <li><i class="fas fa-envelope"></i>Email</li>
+                <li><i class="fas fa-phone"></i>Téléphone</li>
+            </ul>
+        </div>
+    </div>
+    <div class="copyright">
+        <p>&copy; 2024 Application d'échange de devises. Tout droit réservé</p>
+    </div>
 </footer>
 <script src="../JavaScript/Listedemande.js"></script>
 <script src="../JavaScript/Deconnexion.js"></script>
 </body>
+
 </html>

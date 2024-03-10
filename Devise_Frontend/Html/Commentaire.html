@@ -1,34 +1,24 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>commentaires des utilisateurs</title>
+    <title>Commentaires des utilisateurs</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <link rel="stylesheet" type="text/css" href="../styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="icon" href="../image.png" type="image/x-icon">
-    <style>
-        .hidden {
-            display: none;
-        }
-        body {
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-        }
-        .content-wrap {
-            flex: 1;
-        }
-    </style>
 </head>
+
 <body>
 <div class="content-wrap">
+
     <header>
         <h1>Commentaires</h1>
         <nav>
             <ul>
-                <li><a href="Acceuil.html">Accueil</a></li>
                 <li><a href="TableauBord.html">Tableau de bord</a></li>
                 <li><a href="Profile.html">Profil</a></li>
                 <li><button id="logout-btn">Déconnexion</button></li>
@@ -39,14 +29,36 @@
         <h2>Commentaires et Notations</h2>
         <div id="comment-list"></div>
     </div>
-
 </div>
+
 <footer>
-    <p>&copy; 2023 Application d'échange de devises</p>
+    <div class="footer-content">
+        <div class="left-section">
+            <img src="../money2.png" alt="Logo de l'application">
+        </div>
+        <div class="middle-section">
+            <p><span class="underline"><i class="fas fa-life-ring"></i>Support :</span></p>
+            <ul>
+                <li><a href="faq.html"><i class="fas fa-question"></i>FAQ's</a></li>
+                <li><a href="termes%20et%20conditions.html"><i class="fas fa-file-alt"></i> Termes et conditions</a></li>
+            </ul>
+        </div>
+        <div class="right-section">
+            <p><span class="underline"><i class="fas fa-map-marker-alt"></i>Adresse :</span></p>
+            <ul>
+                <li><i class="fas fa-map-marker-alt"></i> Location </li>
+                <li><i class="fas fa-envelope"></i>Email</li>
+                <li><i class="fas fa-phone"></i>Téléphone</li>
+            </ul>
+        </div>
+    </div>
+    <div class="copyright">
+        <p>&copy; 2024 Application d'échange de devises. Tout droit réservé</p>
+    </div>
 </footer>
-<script src="../JavaScript/Deconnexion.js"></script>
+
 <script>
-    $(document).ready(function() {
+    $(document).ready(function () {
         // Récupérer l'ID de l'utilisateur à partir des paramètres d'URL
         var urlParams = new URLSearchParams(window.location.search);
         var userId = urlParams.get('userId');
@@ -55,7 +67,7 @@
         $.ajax({
             url: 'http://localhost:8099/api/v1/commentaires/getCommentairesSur/' + userId,
             type: 'GET',
-            success: function(comments) {
+            success: function (comments) {
                 // Traiter et afficher les commentaires
                 var commentList = $('#comment-list');
                 commentList.empty();
@@ -63,31 +75,35 @@
                 if (comments.length === 0) {
                     commentList.append('<p>Aucun commentaire pour cet utilisateur.</p>');
                 } else {
-                    comments.forEach(function(comment) {
-                        var commentDiv = $('<div>').addClass('comment');
-
-                        // Affichage de l'auteur du commentaire
-                        $('<h3>').text(comment.author).appendTo(commentDiv);
-
-                        // Affichage du texte du commentaire
-                        $('<p>').text(comment.commentaire).appendTo(commentDiv);
-
-                        // Affichage de la note (si elle est présente dans l'objet comment)
-                        if (comment.note) {
-                            $('<p>').text('Note: ' + comment.note + '/5').appendTo(commentDiv);
+                    comments.forEach(function (comment) {
+                        var commentDiv = $('<div class="comment-container">');
+                        commentDiv.append('<img src="profile-image.jpg" alt="Profile picture" class="profile-image">');
+                        var commentContent = $('<div class="comment-content">');
+                        commentContent.append('<h3>' + comment.auteur + '</h3>');
+                        commentContent.append('<p>' + comment.contenu + '</p>');
+                        var ratingDiv = $('<div class="rating">');
+                        for (var i = 0; i < 5; i++) {
+                            if (i < comment.note) {
+                                ratingDiv.append('<i class="fas fa-star"></i>');
+                            } else {
+                                ratingDiv.append('<i class="far fa-star"></i>');
+                            }
                         }
+                        commentContent.append(ratingDiv);
+                        commentDiv.append(commentContent);
 
-                        commentDiv.appendTo(commentList);
+                        // Ajouter l'élément de commentaire à la liste
+                        commentList.append(commentDiv);
                     });
                 }
             },
-            error: function(error) {
-                console.log('Erreur lors du chargement des commentaires : ', error);
-                $('#comment-list').append('<p>Erreur lors du chargement des commentaires.</p>');
+            error: function (error) {
+                console.log('Erreur lors de la récupération des commentaires :', error);
             }
         });
     });
 </script>
-
 </body>
+
 </html>
+``

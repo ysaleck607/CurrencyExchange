@@ -1,31 +1,23 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tableau de bord de l'utilisateur</title>
   <link rel="stylesheet" type="text/css" href="../styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
   <link rel="icon" href="../image.png" type="image/x-icon">
-  <style>
-    body {
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
-    }
 
-    .content-wrap {
-      flex: 1;
-    }
-  </style>
 </head>
+
 <body>
 <div class="content-wrap">
   <header>
     <h1>Bienvenue dans votre tableau de bord</h1>
     <nav>
       <ul>
-        <li><a href="Acceuil.html">Accueil</a></li>
         <li><a href="Profile.html">Profil</a></li>
         <li><a href="Demande.html"> Publier une demande</a></li>
         <li><a href="Listedemande.html">Mes demandes</a></li>
@@ -37,11 +29,33 @@
   </header>
   <section class="user-info">
     <h2>Bonjour, bienvenue dans votre espace d'échanges de devises!</h2>
-<!--    <p>Votre solde actuel est de [Montant du solde] [Devise].</p>-->
+    <!--    <p>Votre solde actuel est de [Montant du solde] [Devise].</p>-->
   </section>
 </div>
 <footer>
-  <p>&copy; 2023 Application d'échange de devises</p>
+  <div class="footer-content">
+    <div class="left-section">
+      <img src="../money2.png" alt="Logo de l'application">
+    </div>
+    <div class="middle-section">
+      <p><span class="underline"><i class="fas fa-life-ring"></i>Support :</span></p>
+      <ul>
+        <li><a href="faq.html"><i class="fas fa-question"></i>FAQ's</a></li>
+        <li><a href="termes%20et%20conditions.html"><i class="fas fa-file-alt"></i> Termes et conditions</a></li>
+      </ul>
+    </div>
+    <div class="right-section">
+      <p><span class="underline"><i class="fas fa-map-marker-alt"></i>Adresse :</span></p>
+      <ul>
+        <li><i class="fas fa-map-marker-alt"></i> Location </li>
+        <li><i class="fas fa-envelope"></i>Email</li>
+        <li><i class="fas fa-phone"></i>Téléphone</li>
+      </ul>
+    </div>
+  </div>
+  <div class="copyright">
+    <p>&copy; 2024 Application d'échange de devises. Tout droit réservé</p>
+  </div>
 </footer>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="../JavaScript/Deconnexion.js"></script>

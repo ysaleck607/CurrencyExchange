@@ -1,0 +1,261 @@
+/* Styles généraux pour l'en-tête, les sections, le formulaire, etc. */
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    background-image: url('../img/image3.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-color: #f8f9fa;
+    color: #333;
+}
+
+.content-wrap {
+    flex: 1;
+    padding: 20px;
+    text-align: center;
+}
+
+header {
+    background-color: #3498db;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ajout d'une ombre */
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+}
+
+nav ul li {
+    margin: 0 10px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #fff;
+    font-weight: bold;
+    transition: color 0.3s ease-in-out;
+}
+
+nav ul li a:hover {
+    color: #ffd700;
+}
+
+#requests-table,
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+#requests-table th,
+#requests-table td,
+.table th,
+.table td {
+    border: 1px solid #dee2e6;
+    padding: 15px;
+    text-align: center;
+}
+
+#requests-table th,
+.table th {
+    background-color: #3498db;
+    color: #fff;
+}
+
+#requests-table tbody tr:nth-child(even),
+.table tbody tr:nth-child(even) {
+    background-color: #f8f9fa;
+}
+
+#requests-table tbody tr:hover,
+.table tbody tr:hover {
+    background-color: #e9ecef;
+}
+
+footer {
+    background-color: #2c3e50;
+    color: #fff;
+    text-align: center;
+    padding: 20px 0;
+    border-radius: 0 0 8px 8px;
+    margin-top: 20px;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 20px;
+}
+
+.footer-content img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+.underline {
+    text-decoration: underline;
+}
+
+.left-section,
+.middle-section,
+.right-section {
+    flex: 1;
+}
+
+.copyright {
+    margin-top: 10px;
+}
+
+/* Styles spécifiques pour la gestion des demandes d'échange */
+.exchange-request,
+.comment-section {
+    padding: 20px;
+    text-align: center;
+}
+
+.exchange-request label,
+.comment-section label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.exchange-request select,
+.comment-section select {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+}
+
+.exchange-request input[type="submit"],
+.comment-section input[type="submit"] {
+    background-color: #3498db;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 5px;
+}
+
+/* Styles spécifiques pour la page de gestion du profil */
+.profile {
+    padding: 20px;
+    text-align: center;
+}
+
+form {
+    margin-top: 20px;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+    color: #333;
+}
+
+input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 15px;
+    box-sizing: border-box;
+}
+
+input[type="submit"] {
+    background-color: #3498db;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+/* Styles spécifiques pour la page du tableau de bord de l'utilisateur */
+.user-info {
+    padding: 20px;
+    text-align: center;
+}
+
+.user-info h2 {
+    margin-top: 10px;
+}
+
+
+
+/* Styles spécifiques pour la page Liste d'offres */
+.container {
+    background-color: #fff;
+    padding: 20px;
+    margin: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#offersTable {
+    width: 100%;
+    margin-top: 20px;
+}
+
+#offersTable table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+#offersTable th,
+#offersTable td {
+    border: 1px solid #ddd;
+    padding: 15px;
+    text-align: left;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#comment-section {
+    background-color: #ecf;
+    padding: 20px;
+    margin-top: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ajout d'une ombre */
+}
+
+#comment-text,
+#rating,
+#submit-comment {
+    margin-bottom: 10px;
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+#submit-comment {
+    background-color: #3498db;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 4px;
+    transition: background-color 0.3s ease-in-out;
+}
+
+#submit-comment:hover {
+    background-color: #2980b9;
+}
+
+

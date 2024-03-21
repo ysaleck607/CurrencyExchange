@@ -1,60 +1,79 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/main.css">
-    <title>Chat Application</title>
+    <title>Application d'échange de devises</title>
+    <link rel="stylesheet" type="text/css" href="js/styles.css">
+    <link rel="icon" href="img/image.png" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
-
-<h2>One to One Chat | Spring boot & Websocket </h2>
-
-<div class="user-form" id="username-page">
-    <h2>Enter Chatroom</h2>
-    <form id="usernameForm">
-        <label for="nickname">Nickname:</label>
-        <input type="text" id="nickname" name="nickname" required>
-        <label for="id1">IdUser1:</label>
-        <input type="text" id="id1" name="id1" required>
-
-        <label for="fullname">Real Name:</label>
-        <input type="text" id="fullname" name="realname" required>
-        <label for="id2">IdUser2:</label>
-        <input type="text" id="id2" name="id2" required>
-
-        <button type="submit">Enter Chatroom</button>
-    </form>
+<div class="content-wrap">
+    <header>
+        <h1>Bienvenue dans notre espace d'échange de devises</h1>
+    </header>
+    <section class="hero">
+        <h2>Échangez facilement des devises internationales à des taux avantageux, prenez le contrôle concernant vos échanges de devises</h2>
+        <p>Notre application vous permet de trouver des offres d'échange de devises en quelques clics :</p>
+        <p>- Meilleurs taux d'échange</p>
+        <p>- Pas de frais cachés</p>
+        <p>- Disponible 24/7</p>
+        <a href="Html/Connexion.html" class="cta-button">Désirez-vous commencer maintenant, connectez-vous ou inscrivez-vous</a>
+    </section>
 </div>
 
-<div class="chat-container hidden" id="chat-page">
-    <div class="users-list">
-        <div class="users-list-container">
-            <h2>Online Users</h2>
-            <ul id="connectedUsers">
+<section class="features">
+    <h2>Nos Caractéristiques</h2>
+    <div class="feature">
+        <i class="fas fa-chart-line"></i>
+        <p>Taux de change compétitifs</p>
+    </div>
+    <div class="feature">
+        <i class="fas fa-shield-alt"></i>
+        <p>Sécurité des transactions</p>
+    </div>
+    <div class="feature">
+        <i class="fas fa-globe"></i>
+        <p>Disponible partout dans le monde</p>
+    </div>
+</section>
+<section class="testimonials">
+    <h2>Témoignages de nos clients satisfaits</h2>
+    <div class="testimonial">
+        <p>"J'ai utilisé cette application pour échanger des devises lors de mon voyage à l'étranger et j'ai été très satisfait de leurs taux de change compétitifs et de la facilité d'utilisation de l'application." - John Doe</p>
+        <p><i class="fas fa-quote-left"></i></p>
+    </div>
+    <div class="testimonial">
+        <p>"J'ai senti que mes transactions étaient sécurisées et que l'assistance était disponible 24h/24 et 7j/7. Je recommande vivement cette application pour tous vos besoins d'échange de devises." - Jane Smith</p>
+        <p><i class="fas fa-quote-left"></i></p>
+    </div>
+</section>
+<footer>
+    <div class="footer-content">
+        <div class="left-section">
+            <img src="img/money2.png" alt="Logo de l'application">
+        </div>
+        <div class="middle-section">
+            <p><span class="underline"><i class="fas fa-life-ring"></i>Support :</span></p>
+            <ul>
+                <li><a href="Html/faq.html"><i class="fas fa-question"></i>FAQ's</a></li>
+                <li><a href="Html/termes%20et%20conditions.html"><i class="fas fa-file-alt"></i> Termes et conditions</a></li>
             </ul>
         </div>
-        <div>
-            <p id="connected-user-fullname"></p>
-            <a class="logout" href="javascript:void(0)" id="logout">Logout</a>
+        <div class="right-section">
+            <p><span class="underline"><i class="fas fa-map-marker-alt"></i>Adresse :</span></p>
+            <ul>
+                <li><i class="fas fa-map-marker-alt"></i> Location </li>
+                <li><i class="fas fa-envelope"></i>Email</li>
+                <li><i class="fas fa-phone"></i>Téléphone</li>
+            </ul>
         </div>
     </div>
-
-    <div class="chat-area">
-        <div class="chat-area" id="chat-messages">
-        </div>
-
-        <form id="messageForm" name="messageForm" class="hidden">
-            <div class="message-input">
-                <input autocomplete="off" type="text" id="message" placeholder="Type your message...">
-                <button>Send</button>
-            </div>
-        </form>
+    <div class="copyright">
+        <p>&copy; 2024 Application d'échange de devises. Tout droit réservé</p>
     </div>
-</div>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.4/sockjs.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
-<script src="/js/main.js"></script>
+</footer>
 </body>
 </html>

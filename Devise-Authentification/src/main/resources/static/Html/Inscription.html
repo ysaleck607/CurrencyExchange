@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inscription</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="../js/styles.css">
+  <link rel="icon" href="../img/image.png" type="image/x-icon">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+
+<body>
+<header>
+  <h1>Application d'échange de devises</h1>
+</header>
+
+<section class="signup-section">
+  <h2>Inscription</h2>
+  <form id="inscriptionForm">
+    <div>
+      <label for="nom">Nom :</label>
+      <input type="text" id="nom" required>
+    </div>
+
+    <div>
+      <label for="prenom">Prénom :</label>
+      <input type="text" id="prenom" required>
+    </div>
+
+    <div>
+      <label for="adresse">Adresse :</label>
+      <input type="text" id="adresse" required>
+    </div>
+
+    <div>
+      <label for="email">Courriel :</label>
+      <input type="email" id="email" required>
+    </div>
+
+    <div>
+      <label for="password">Mot de passe :</label>
+      <input type="password" id="password" minlength="8" required>
+    </div>
+
+    <div>
+      <label for="confirmpassword">Confirmer le mot de passe :</label>
+      <input type="password" id="confirmpassword" required>
+    </div>
+
+    <div>
+      <label for="datenaissance">Date de naissance :</label>
+      <input type="date" id="datenaissance" required>
+    </div>
+
+    <div>
+      <input type="submit" value="S'inscrire">
+    </div>
+  </form>
+  <p>Vous avez déjà un compte ? <a href="Connexion.html">Connectez-vous ici</a></p>
+</section>
+
+<footer>
+  <div class="footer-content">
+    <div class="left-section">
+      <img src="../img/money2.png" alt="Logo de l'application">
+    </div>
+    <div class="middle-section">
+      <p><span class="underline"><i class="fas fa-life-ring"></i>Support :</span></p>
+      <ul>
+        <li><a href="faq.html"><i class="fas fa-question"></i>FAQ's</a></li>
+        <li><a href="termes%20et%20conditions.html"><i class="fas fa-file-alt"></i> Termes et conditions</a></li>
+      </ul>
+    </div>
+    <div class="right-section">
+      <p><span class="underline"><i class="fas fa-map-marker-alt"></i>Adresse :</span></p>
+      <ul>
+        <li><i class="fas fa-map-marker-alt"></i> Location </li>
+        <li><i class="fas fa-envelope"></i>Email</li>
+        <li><i class="fas fa-phone"></i>Téléphone</li>
+      </ul>
+    </div>
+  </div>
+  <div class="copyright">
+    <p>&copy; 2024 Application d'échange de devises. Tout droit réservé</p>
+  </div>
+</footer>
+<script src="../JavaScript/Inscription.js"></script>
+</body>
+
+</html>

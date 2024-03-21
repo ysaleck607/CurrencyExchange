@@ -5,8 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Offres pour la demande</title>
-    <link rel="stylesheet" type="text/css" href="../styles.css">
-    <link rel="icon" href="../image.png" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" href="../js/styles.css">
+    <link rel="icon" href="../img/image.png" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
 </head>
@@ -16,7 +16,7 @@
         <h1>offres concernant la demande</h1>
         <nav>
             <ul>
-                <li><a href="Acceuil.html">Accueil</a></li>
+                <li><a href="../index.html">Accueil</a></li>
                 <li><a href="TableauBord.html">Tableau de bord</a></li>
                 <li><a href="Profile.html">Profil</a></li>
                 <li><button id="logout-btn">Déconnexion</button></li>
@@ -73,7 +73,8 @@
                         <td>${offre.montantVoulu} </td>
                         <td>${offre.deviseOfferte} </td>
                         <td>${offre.statutOffre} </td>
-                        <td>
+                        <td class="actions">
+                            ${offre.statutOffre  != 'ENATTENTE' ? '<button class="chat-button" data-user-id="' + offre.idOffreur + '">Chat</button>' : ''}
                             ${offre.statutOffre != 'TERMINER' ? '<button class="accept-offer-button" data-offer-id="' + offre.idOffre + '">Accepter</button><button class="reject-offer-button" data-offer-id="' + offre.idOffre + '">Refuser</button>' : ''}
                             ${offre.statutOffre == 'TERMINER' ? '<button class="leave-comment-button" data-user-id="' + offre.idOffreur + '">Laisser un commentaire</button>' : ''}
                             <input type="hidden" id="id2" value="${offre.idDemande}" />
@@ -85,38 +86,12 @@
 
                 $('.accept-offer-button').click(function() {
                     var offerId = $(this).data('offer-id');
-                    var offerorUserId = $(this).data('user-id');
-                    //$(this).closest('tr').find('.offeror-name').data('user-id'); Récupérer l'ID de l'offreur
-                    var demanderUserId = localStorage.getItem('userId'); // Récupérer l'ID du demandeur
-                    var tableRow = $(this).closest('tr'); // Référence à la ligne du tableau actuelle
-
                     $.ajax({
                         url: "http://localhost:8099/api/v1/demandes/accepterOffre/" + offerId ,
                         type: "PUT",
                         success: function(response) {
                             console.log(response);
                             alert('Offre acceptée avec succès !');
-
-                            // Ajouter le bouton de chat si l'offre est acceptée
-                            var chatButton = $('<button class="chat-button" data-offeror-id="' + offerorUserId + '">Chat</button>');
-                            tableRow.find('.actions').html(chatButton)
-
-                            chatButton.click(function() {
-                                // Faire une requête AJAX pour récupérer les données du chat
-                                $.ajax({
-                                    url: "http://localhost:8099/api/v1/messages/" + demanderUserId + "/" + offerorUserId,
-                                    type: "GET",
-                                    success: function(chatData) {
-                                        // Traiter les données de chat et les afficher dans une fenêtre de chat ou une section dédiée sur la page actuelle
-                                        console.log("Données de chat récupérées avec succès :", chatData);
-                                        // Par exemple, ouvrir une fenêtre de chat avec les données récupérées
-                                    },
-                                    error: function(jqXHR, textStatus, errorThrown) {
-                                        console.error("Erreur lors de la récupération des données de chat :", errorThrown);
-                                    }
-                                });
-                            });
-
                             location.reload();  // Recharger la page pour mettre à jour le statut
                         },
                         error: function(jqXHR, textStatus, errorThrown) {
@@ -131,6 +106,22 @@
                             }
                         }
                     });
+                });
+                // Ajout de l'événement click pour le bouton de chat
+                $('.chat-button').click(function() {
+                    var offerorUserId = $(this).data('user-id');
+                    //$(this).closest('tr').find('.offeror-name').data('user-id'); Récupérer l'ID de l'offreur
+                    var demanderUserId = localStorage.getItem('userId'); // Récupérer l'ID du demandeur
+                    var noEncodedOffreurNomPrenom = $(this).closest('tr').find('.offeror-name').text().trim();
+                    var noEncodedDemandeurNomPrenom = $(this).closest('tr').find('td:nth-child(1)').text().trim();
+
+                    //var noEncodedDemandeurNomPrenom =  $(this).closest('tr').find('td:eq(0)').text().trim();
+                    console.log(offerorUserId);
+                    console.log(demanderUserId);
+                    var demandeurNomPrenom = encodeURIComponent(noEncodedDemandeurNomPrenom);
+                    var offreurNomPrenom = encodeURIComponent(noEncodedOffreurNomPrenom);
+                    window.location.href = 'chat.html?offerorUserId=' + offerorUserId + '&offreurName=' + offreurNomPrenom
+                        + '&demandeurUserId=' + demanderUserId + '&demandeurName=' + demandeurNomPrenom;    
                 });
 
                 $('.reject-offer-button').click(function() {
@@ -226,7 +217,7 @@
 <footer>
     <div class="footer-content">
         <div class="left-section">
-            <img src="../money2.png" alt="Logo de l'application">
+            <img src="../img/money2.png" alt="Logo de l'application">
         </div>
         <div class="middle-section">
             <p><span class="underline"><i class="fas fa-life-ring"></i>Support :</span></p>

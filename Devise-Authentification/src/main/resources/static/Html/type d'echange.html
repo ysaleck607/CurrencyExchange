@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Offre d'échange</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="../js/styles.css">
+    <link rel="icon" href="../img/image.png" type="image/x-icon">
+
+</head>
+
+<body>
+<div class="content-wrap">
+    <header>
+        <h1>Offre d'échange</h1>
+        <nav>
+            <ul>
+                <li><a href="../index.html">Accueil</a></li>
+                <li><a href="TableauBord.html">Tableau de bord</a></li>
+                <li><a href="Profile.html">Profil</a></li>
+                <li><button id="logout-btn">Déconnexion</button></li>
+            </ul>
+        </nav>
+    </header>
+    <section class="exchange-request">
+        <h2>Quelle échange voulez-vous faire ?</h2>
+        <form id="exchangeForm">
+
+            <div>
+                <label for="source-currency">Devise possédée :</label>
+                <select id="source-currency" name="source-currency" required></select>
+            </div>
+
+            <div>
+                <label for="target-currency">Devise voulue :</label>
+                <select id="target-currency" name="target-currency" required></select>
+            </div>
+
+            <!-- Bouton de recherche -->
+            <div>
+                <input type="submit" value="Rechercher">
+            </div>
+
+        </form>
+    </section>
+
+</div>
+<footer>
+    <div class="footer-content">
+        <div class="left-section">
+            <img src="../img/money.png" alt="Logo de l'application">
+        </div>
+        <div class="middle-section">
+            <p><span class="underline">Support :</span></p>
+            <ul>
+                <li><a href="#">FAQ's</a></li>
+                <li><a href="#">Termes et conditions</a></li>
+            </ul>
+        </div>
+        <div class="right-section">
+            <p><span class="underline">Adresse :</span></p>
+            <ul>
+                <li>Location </li>
+                <li>Email</li>
+                <li>Téléphone</li>
+            </ul>
+        </div>
+    </div>
+    <div class="copyright">
+        <p>&copy; 2024 Application d'échange de devises. Tout droit réservé</p>
+    </div>
+</footer>
+<script src="../JavaScript/Demande.js"></script>
+<script src="../JavaScript/Deconnexion.js"></script>
+</body>
+
+</html>

@@ -21,7 +21,7 @@ $(document).ready(function() {
                         <td>${offre.montantVoulu}</td>
                         <td>${offre.statutOffre}</td>
                         <td class="actions">
-                             ${offre.statutOffre  != 'EN_ATTENTE' ? '<button class="chat-button" data-user-id="' + offre.idDemandeur + '">Chat</button>' : ''}
+                             ${offre.statutOffre  != 'ENATTENTE' ? '<button class="chat-button" data-user-id="' + offre.idDemandeur + '">Chat</button>' : ''}
                              ${offre.statutOffre != 'PAYER' && offre.statutOffre != 'TERMINER' ? '<button class="pay-button" data-id="' + offre.idOffre + '">Payer</button>' : ''}
                              ${offre.statutOffre == 'TERMINER' ? '<button class="leave-comment-button" data-user-id="' + offre.idDemandeur + '">Laisser un commentaire</button>' : ''}
                             <input type="hidden" id="id" value="${offre.idOffre}" />
@@ -71,20 +71,17 @@ $(document).ready(function() {
             // Ajout de l'événement click pour le bouton de chat
             $('.chat-button').click(function() {
                 var offerorUserId = localStorage.getItem('userId');
-                var demanderUserId = $(this).data('user-id');
-                    //$(this).closest('tr').find('.offeror-name').data('user-id');
-                // Faire une requête AJAX pour initialiser le chat
-                $.ajax({
-                    url: "http://localhost:8099/api/v1/messages/" + offerorUserId + "/" + demanderUserId,
-                    type: "POST",
-                    success: function(chatData) {
-                        console.log("Chat initialisé avec succès :", chatData);
-                        // Afficher le chat dans une fenêtre modale ou une section dédiée sur la page actuelle
-                    },
-                    error: function(jqXHR, textStatus, errorThrown) {
-                        console.error("Erreur lors de l'initialisation du chat :", errorThrown);
-                    }
-                });
+                var demanderUserId = //$(this).data('user-id');
+                    $(this).closest('tr').find('.offeror-name').data('user-id');
+                var noEncodedDemandeurNomPrenom = $(this).closest('tr').find('.offeror-name').text().trim();
+                var noEncodedOffreurNomPrenom = $(this).closest('tr').find('td:eq(1)').text().trim();
+                console.log(offerorUserId);
+                console.log(demanderUserId);
+                var demandeurNomPrenom = encodeURIComponent(noEncodedDemandeurNomPrenom);
+                var offreurNomPrenom = encodeURIComponent(noEncodedOffreurNomPrenom);
+                // Redirection vers la page de chat avec les paramètres nécessaires
+                window.location.href = 'chat.html?offerorUserId=' + offerorUserId + '&offreurName=' + offreurNomPrenom
+                    + '&demandeurUserId=' + demanderUserId + '&demandeurName=' + demandeurNomPrenom;
             });
         },
         error: function(jqXHR, textStatus, errorThrown) {

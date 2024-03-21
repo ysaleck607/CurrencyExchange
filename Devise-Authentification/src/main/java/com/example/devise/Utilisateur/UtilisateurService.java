@@ -47,6 +47,7 @@ public class UtilisateurService {
                 .dateCreation(LocalDate.now())
                 .dateMAJ(LocalDate.now())
                 .role(Role.USER)
+                .status(Status.OFFLINE)
                 .build();
         utilisateurRepository.save(user);
         var jwtToken = jwtService.generateToken(user);

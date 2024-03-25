@@ -6,58 +6,142 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tableau de bord de l'utilisateur</title>
-  <link rel="stylesheet" type="text/css" href="../js/styles.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <link rel="icon" href="../img/image.png" type="image/x-icon">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      margin: 0;
+      background-color: #f8f9fa;
+      color: #333;
+    }
 
+    .container-flex-grow {
+      flex-grow: 1;
+    }
+
+    header {
+      background-color: #007bff;
+      color: #fff;
+      padding: 20px;
+      text-align: center;
+    }
+
+    header nav ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    header nav ul li {
+      display: inline;
+      margin-right: 10px;
+    }
+
+    header nav ul li a {
+      color: #fff;
+      text-decoration: none;
+    }
+
+    section.user-info {
+      padding: 20px;
+      text-align: center;
+    }
+
+    footer {
+      background-color: #343a40;
+      color: #fff;
+      text-align: center;
+      padding: 20px 0;
+      margin-top: auto; /* Pour ancrer le footer en bas */
+    }
+
+    .footer-content {
+      display: flex;
+      justify-content: space-between;
+      padding: 0 20px;
+    }
+
+    .footer-content img {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+    }
+
+    .underline {
+      text-decoration: underline;
+    }
+  </style>
 </head>
 
 <body>
-<div class="content-wrap">
-  <header>
-    <h1>Bienvenue dans votre tableau de bord</h1>
-    <nav>
-      <ul>
-        <li><a href="Profile.html">Profil</a></li>
-        <li><a href="Demande.html"> Publier une demande</a></li>
-        <li><a href="Listedemande.html">Mes demandes</a></li>
-        <li><a href="Listeoffre.html">Mes offres</a></li>
-        <li><a href="AutreDemandes.html">Autres demandes</a></li>
-        <li><button id="logout-btn">Déconnexion</button></li>
-      </ul>
-    </nav>
+<div class="container-flex-grow">
+  <header class="bg-primary text-white py-4">
+    <div class="container">
+      <h1 class="text-center mb-0">Bienvenue dans votre tableau de bord</h1>
+      <nav>
+        <ul class="nav justify-content-center">
+          <li class="nav-item">
+            <a class="nav-link text-white" href="Profile.html">Profil</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white" href="Demande.html">Publier une demande</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white" href="Listedemande.html">Mes demandes</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white" href="Listeoffre.html">Mes offres</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white" href="AutreDemandes.html">Autres demandes</a>
+          </li>
+          <li class="nav-item">
+            <button id="logout-btn" class="btn btn-danger">Déconnexion</button>
+          </li>
+        </ul>
+      </nav>
+    </div>
   </header>
-  <section class="user-info">
-    <h2>Bonjour, bienvenue dans votre espace d'échanges de devises!</h2>
-    <!--    <p>Votre solde actuel est de [Montant du solde] [Devise].</p>-->
+  <section class="user-info mt-4">
+    <div class="container">
+      <h2 class="text-center">Bonjour, bienvenue dans votre espace d'échanges de devises!</h2>
+      <!--    <p>Votre solde actuel est de [Montant du solde] [Devise].</p>-->
+    </div>
   </section>
 </div>
-<footer>
-  <div class="footer-content">
-    <div class="left-section">
-      <img src="../img/money2.png" alt="Logo de l'application">
-    </div>
-    <div class="middle-section">
-      <p><span class="underline"><i class="fas fa-life-ring"></i>Support :</span></p>
-      <ul>
-        <li><a href="faq.html"><i class="fas fa-question"></i>FAQ's</a></li>
-        <li><a href="termes%20et%20conditions.html"><i class="fas fa-file-alt"></i> Termes et conditions</a></li>
-      </ul>
-    </div>
-    <div class="right-section">
-      <p><span class="underline"><i class="fas fa-map-marker-alt"></i>Adresse :</span></p>
-      <ul>
-        <li><i class="fas fa-map-marker-alt"></i> Location </li>
-        <li><i class="fas fa-envelope"></i>Email</li>
-        <li><i class="fas fa-phone"></i>Téléphone</li>
-      </ul>
+<footer class="bg-dark text-white py-4">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4 text-center">
+        <img src="../img/money2.png" alt="Logo de l'application" class="img-fluid" style="max-width: 80px;">
+      </div>
+      <div class="col-md-4 text-center">
+        <p class="underline"><i class="fas fa-life-ring"></i>Support :</p>
+        <ul class="list-unstyled">
+          <li><a href="faq.html"><i class="fas fa-question"></i>FAQ's</a></li>
+          <li><a href="termes%20et%20conditions.html"><i class="fas fa-file-alt"></i> Termes et conditions</a></li>
+        </ul>
+      </div>
+      <div class="col-md-4 text-center">
+        <p class="underline"><i class="fas fa-map-marker-alt"></i>Adresse :</p>
+        <ul class="list-unstyled">
+          <li><i class="fas fa-map-marker-alt"></i> Location </li>
+          <li><i class="fas fa-envelope"></i>Email</li>
+          <li><i class="fas fa-phone"></i>Téléphone</li>
+        </ul>
+      </div>
     </div>
   </div>
-  <div class="copyright">
+  <div class="container text-center mt-3">
     <p>&copy; 2024 Application d'échange de devises. Tout droit réservé</p>
   </div>
 </footer>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="../JavaScript/Deconnexion.js"></script>
 </body>
+
 </html>

@@ -16,7 +16,7 @@ $(document).ready(function() {
                             ${(demande.statut != 'PAYER' && demande.statut != 'ANNULER' && demande.statut != 'TERMINER') ? '<button class="cancel-button" data-id="' + demande.idDemande + '">Annuler</button>' : ''}
                             <a href="offre.html?id=${demande.idDemande}" class="view-offers-button">Voir Offres</a>
                         </td>
-                        <td class="hidden">${demande.idDemande}</td>
+                        <td class="d-none">${demande.idDemande}</td>
                     </tr>`
                 );
             });

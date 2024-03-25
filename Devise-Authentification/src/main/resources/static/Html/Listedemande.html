@@ -7,88 +7,58 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestion des demandes d'échange</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <link rel="icon" href="../img/image.png" type="image/x-icon">
-    <link rel="stylesheet" type="text/css" href="../js/styles.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
-        .hidden {
-            display: none;
-        }
-
         body {
             display: flex;
             flex-direction: column;
             min-height: 100vh;
             margin: 0;
-            font-family: 'Arial', sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
         }
 
-        .content-wrap {
-            flex: 1;
+        .container-flex-grow {
+            flex-grow: 1;
         }
 
         header {
-            background-color: #3498db;
+            background-color: #007bff;
             color: #fff;
-            padding: 10px;
+            padding: 20px;
             text-align: center;
         }
 
-        nav ul {
+        header nav ul {
             list-style: none;
             padding: 0;
             margin: 0;
-            display: flex;
-            justify-content: center;
-            background-color: #2980b9;
-            border-radius: 5px;
         }
 
-        nav ul li {
-            margin: 0 10px;
+        header nav ul li {
+            display: inline;
+            margin-right: 10px;
         }
 
-        nav ul li a {
+        header nav ul li a {
+            color: #fff;
             text-decoration: none;
-            color: #fff;
-            font-weight: bold;
-            padding: 10px;
         }
 
-        #exchangeRequestsTable {
-            margin: 20px auto;
-            border-collapse: collapse;
-            width: 100%;
-        }
-
-        #exchangeRequestsTable th,
-        #exchangeRequestsTable td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: left;
-        }
-
-        #exchangeRequestsTable th {
-            background-color: #3498db;
-            color: #fff;
-        }
-
-        #exchangeRequestsTable tbody tr:hover {
-            background-color: #f5f5f5;
-        }
-
-        #exchangeRequestsTable tbody td:last-child,
-        #exchangeRequestsTable thead th:last-child {
-            display: none;
+        section.user-info {
+            padding: 20px;
+            text-align: center;
         }
 
         footer {
-            background-color: #2c3e50;
+            background-color: #343a40;
             color: #fff;
             text-align: center;
             padding: 20px 0;
-            border-radius: 0 0 8px 8px;
-            margin-top: 20px;
+            margin-top: auto; /* Pour ancrer le footer en bas */
         }
 
         .footer-content {
@@ -106,41 +76,39 @@
         .underline {
             text-decoration: underline;
         }
-
-        .left-section,
-        .middle-section,
-        .right-section {
-            flex: 1;
-        }
-
-        .copyright {
-            margin-top: 10px;
-        }
     </style>
 </head>
 
 <body>
-<div class="content-wrap">
-    <header>
-        <h1>Liste de mes demandes</h1>
+<header class="bg-primary text-white py-4">
+    <div class="container">
+        <h1 class="text-center mb-0">Liste de mes demandes</h1>
         <nav>
-            <ul>
-                <li><a href="TableauBord.html">Tableau de bord</a></li>
-                <li><a href="Profile.html">Profil</a></li>
-                <li><button id="logout-btn">Déconnexion</button></li>
+            <ul class="nav justify-content-center">
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="TableauBord.html">Tableau de bord</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="Profile.html">Profil</a>
+                </li>
+                <li class="nav-item">
+                    <button class="btn btn-danger" id="logout-btn">Déconnexion</button>
+                </li>
             </ul>
         </nav>
-    </header>
-    <table id="exchangeRequestsTable">
-        <thead>
+    </div>
+</header>
+<div class="container mt-4">
+    <table class="table" id="exchangeRequestsTable">
+        <thead class="thead-dark">
         <tr>
-            <th>Demandeur</th>
-            <th>Devise souhaitée</th>
-            <th>Devise offerte</th>
-            <th>Montant</th>
-            <th>Statut</th>
-            <th>Actions</th>
-            <th class="hidden">ID de la demande</th>
+            <th scope="col">Demandeur</th>
+            <th scope="col">Devise souhaitée</th>
+            <th scope="col">Devise offerte</th>
+            <th scope="col">Montant</th>
+            <th scope="col">Statut</th>
+            <th scope="col">Actions</th>
+            <th class="d-none">ID de la demande</th>
         </tr>
         </thead>
         <tbody>
@@ -148,33 +116,40 @@
         </tbody>
     </table>
 </div>
-<footer>
-    <div class="footer-content">
-        <div class="left-section">
-            <img src="../img/money2.png" alt="Logo de l'application">
-        </div>
-        <div class="middle-section">
-            <p><span class="underline"><i class="fas fa-life-ring"></i>Support :</span></p>
-            <ul>
-                <li><a href="#"><i class="fas fa-question"></i>FAQ's</a></li>
-                <li><a href="#"><i class="fas fa-file-alt"></i> Termes et conditions</a></li>
-            </ul>
-        </div>
-        <div class="right-section">
-            <p><span class="underline"><i class="fas fa-map-marker-alt"></i>Adresse :</span></p>
-            <ul>
-                <li><i class="fas fa-map-marker-alt"></i> Location </li>
-                <li><i class="fas fa-envelope"></i>Email</li>
-                <li><i class="fas fa-phone"></i>Téléphone</li>
-            </ul>
+
+<footer class="bg-dark text-white py-4">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-4 text-center">
+                <img src="../img/money2.png" alt="Logo de l'application" class="img-fluid" style="max-width: 80px;">
+            </div>
+            <div class="col-md-4 text-center">
+                <p class="underline"><i class="fas fa-life-ring"></i>Support :</p>
+                <ul class="list-unstyled">
+                    <li><a href="#"><i class="fas fa-question"></i>FAQ's</a></li>
+                    <li><a href="#"><i class="fas fa-file-alt"></i> Termes et conditions</a></li>
+                </ul>
+            </div>
+            <div class="col-md-4 text-center">
+                <p class="underline"><i class="fas fa-map-marker-alt"></i>Adresse :</p>
+                <ul class="list-unstyled">
+                    <li><i class="fas fa-map-marker-alt"></i> Location </li>
+                    <li><i class="fas fa-envelope"></i>Email</li>
+                    <li><i class="fas fa-phone"></i>Téléphone</li>
+                </ul>
+            </div>
         </div>
     </div>
-    <div class="copyright">
+    <div class="container text-center mt-3">
         <p>&copy; 2024 Application d'échange de devises. Tout droit réservé</p>
     </div>
 </footer>
+
 <script src="../JavaScript/Listedemande.js"></script>
 <script src="../JavaScript/Deconnexion.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 
 </html>

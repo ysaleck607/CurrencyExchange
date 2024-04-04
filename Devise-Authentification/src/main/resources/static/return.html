@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Status</title>
+</head>
+<body>
+<h1>Payment Status</h1>
+<div id="payment-status"></div>
+
+<script>
+    // Récupérer le paramètre de la session depuis l'URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const sessionId = urlParams.get('session_id');
+
+    // Requête pour obtenir le statut de la session
+    fetch(`/session-status?sessionId=${sessionId}`)
+        .then(response => response.json())
+        .then(data => {
+            // Afficher le statut de la session et l'email du client
+            const status = data.status;
+            const customerEmail = data.customer_email;
+            const statusElement = document.getElementById('payment-status');
+
+            // Afficher un message en fonction du statut de la session
+            if (status === 'open') {
+                statusElement.textContent = `Le paiement est en cours pour l'email ${customerEmail}. Veuillez patienter.`;
+            } else if (status === 'complete') {
+                statusElement.textContent = `Le paiement pour l'email ${customerEmail} a été effectué avec succès. Merci !`;
+            } else {
+                statusElement.textContent = `Le paiement pour l'email ${customerEmail} a échoué. Veuillez réessayer.`;
+            }
+        })
+        .catch(error => {
+            console.error('Erreur lors de la récupération du statut de la session :', error);
+            // Afficher un message d'erreur
+            const statusElement = document.getElementById('payment-status');
+            statusElement.textContent = `Une erreur s'est produite lors du traitement du paiement. Veuillez réessayer.`;
+        });
+</script>
+</body>
+</html>

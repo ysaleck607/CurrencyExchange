@@ -3,8 +3,7 @@ const stripe = Stripe('pk_test_51Ozj7i00KXfzHYtMS0anKahBQMVdRQRiwWDREAiJTb5ZePEb
 
 initialize();
 const RequestToPay = {
-    //phoneNumber,
-    //amount
+    amount:"200"
 }
 
 // Fetch Checkout Session and retrieve the client secret

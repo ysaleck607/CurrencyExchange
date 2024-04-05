@@ -171,7 +171,7 @@ public class MobilePaiementService {
         return null;
     }
 
-    public void requestToPay(String tokenObject){
+    public void requestToPay(String tokenObject, RequestToPay request){
         try {
             String urlString = "https://sandbox.momodeveloper.mtn.com/collection/v1_0/requesttopay";
             URL url = new URL(urlString);
@@ -204,14 +204,24 @@ public class MobilePaiementService {
             connection.setRequestMethod("POST");
 
             // Request body
+            // Définissez les valeurs de vos variables
+            String amount = request.getAmount().toString();
+            String currency = "EUR";
+            String externalId = "3467";
+            String partyIdType = "MSISDN";
+            String partyId = request.getPhoneNumber();
+            String payerMessage = "Hi";
+            String payeeNote = "Thanks";
+
+            // Construction de la chaîne JSON en utilisant les variables
+            String jsonPayload = String.format("{ \"amount\": \"%s\", \"currency\": \"%s\", \"externalId\": \"%s\"," +
+                            " \"payer\": { \"partyIdType\": \"%s\", \"partyId\": \"%s\" }," +
+                            " \"payerMessage\": \"%s\", \"payeeNote\": \"%s\" }",
+                    amount, currency, externalId, partyIdType, partyId, payerMessage, payeeNote);
+
+            // Écrire la chaîne JSON dans le flux de sortie
             connection.setDoOutput(true);
-            connection
-                    .getOutputStream()
-                    .write(
-                            ("{ \"amount\": \"600\", \"currency\": \"EUR\", \"externalId\": \"3467\"," +
-                                    " \"payer\": {     \"partyIdType\": \"MSISDN\",     \"partyId\": \"0022966053684\" }," +
-                                    " \"payerMessage\": \"Hi\", \"payeeNote\": \"Thanks\" }").getBytes()
-                    );
+            connection.getOutputStream().write(jsonPayload.getBytes());
 
             int status = connection.getResponseCode();
             System.out.println(status);

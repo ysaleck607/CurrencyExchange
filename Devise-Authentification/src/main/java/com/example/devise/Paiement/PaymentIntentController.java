@@ -20,7 +20,7 @@ public class PaymentIntentController {
     private MobilePaiementService mobilePaiementService;
 
     @PostMapping("/create-checkout-session")
-    public Map<String, String> createPaymentIntent(@RequestBody Long amount)
+    public Map<String, String> createPaymentIntent(@RequestBody RequestToPay request)
             throws StripeException {
         SessionCreateParams params =
                 SessionCreateParams.builder()
@@ -33,7 +33,7 @@ public class PaymentIntentController {
                                         .setPriceData(
                                                 SessionCreateParams.LineItem.PriceData.builder()
                                                         .setCurrency("usd")
-                                                        .setUnitAmount(amount)
+                                                        .setUnitAmount(request.getAmount())
                                                         .setProductData(
                                                                 SessionCreateParams.LineItem.PriceData.ProductData.builder()
                                                                         .setName("Exchange")
@@ -65,7 +65,7 @@ public class PaymentIntentController {
         var id = mobilePaiementService.sandBoxUserProvisionning();
         var key = mobilePaiementService.createApiKey(id);
         var token = mobilePaiementService.generateToken(id, key);
-        mobilePaiementService.requestToPay(token);
+        mobilePaiementService.requestToPay(token, requestToPay);
     }
 
 }

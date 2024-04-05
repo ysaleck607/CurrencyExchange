@@ -34,28 +34,38 @@ $(document).ready(function() {
             // Ajoute un écouteur d'événements click pour chaque bouton de paiement
             $('.pay-button').on('click', function() {
                 var offerId = $(this).data('id');
-                // Appel à l'API pour effectuer le paiement
-                $.ajax({
-                    url: "http://localhost:8099/api/v1/Offres/payerOffre/" + offerId,
-                    type: 'PUT',
-                    success: function(data) {
-                        console.log(data);
-                        alert('Paiement réussi !');
-                        location.reload();
+                var deviseVoulue = $(this).closest('tr').find('td:nth-child(3)').text().trim();
 
-                    },
-                    error: function(jqXHR, textStatus, errorThrown) {
-                        if (jqXHR.status === 401) { // Si le code d'état est 401 Unauthorized
-                            alert('Votre session a expiré. Veuillez vous reconnecter.');
-                            // Redirigez l'utilisateur vers la page de connexion ou rafraîchissez le token si possible
-                            window.location.href = 'Connexion.html';
-                        } else {
-                            // Traitement en cas d'erreur de la requête
-                            alert('Erreur lors du paiement  ');
-                            console.log('Erreur lors du paiement : ' +  textStatus);
+                if (deviseVoulue === 'CFA') {
+                    // Redirection vers la page pour le paiement via Mobile Money
+                    window.location.href = 'paiement_mobilemoney.html?id=' + idDemande;
+                }
+                else
+                {
+                    // Effectuer la requête AJAX pour payer la demande
+                    $.ajax({
+                        url: "http://localhost:8099/api/v1/Offres/payerOffre/" + offerId,
+                        type: 'PUT',
+                        success: function(data) {
+                            console.log(data);
+                            alert('Paiement réussi !');
+                            location.reload();
+
+                        },
+                        error: function(jqXHR, textStatus, errorThrown) {
+                            if (jqXHR.status === 401) { // Si le code d'état est 401 Unauthorized
+                                alert('Votre session a expiré. Veuillez vous reconnecter.');
+                                // Redirigez l'utilisateur vers la page de connexion ou rafraîchissez le token si possible
+                                window.location.href = 'Connexion.html';
+                            } else {
+                                // Traitement en cas d'erreur de la requête
+                                alert('Erreur lors du paiement  ');
+                                console.log('Erreur lors du paiement : ' +  textStatus);
+                            }
                         }
-                    }
-                });
+                    });
+                }
+
             });
 
             $('.leave-comment-button').click(function() {

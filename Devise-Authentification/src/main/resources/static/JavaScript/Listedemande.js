@@ -24,19 +24,28 @@ $(document).ready(function() {
             $('.pay-button').click(function() {
                 var idDemande = $(this).data('id');
                 console.log(idDemande);
-                $.ajax({
-                    url: "http://localhost:8099/api/v1/demandes/payerdemande/" + idDemande ,
-                    type: "PUT",
-                    success: function(response) {
-                        console.log(response);
-                        alert('Demande payée avec succès !');
-                        location.reload();  // Recharger la page pour mettre à jour le statut
-                    },
-                    error: function(error) {
-                        console.error("Une erreur s'est produite :", error);
-                        alert('Erreur lors du paiement ');
-                    }
-                });
+                var deviseOfferte = $(this).closest('tr').find('td:nth-child(3)').text().trim();
+                if (deviseOfferte === 'XOF') {
+                    // Redirection vers la page pour le paiement via Mobile Money
+                    window.location.href = 'paiement_mobilemoney.html?id=' + idDemande;
+                }
+                else
+                {
+                    // Effectuer la requête AJAX pour payer la demande
+                    $.ajax({
+                        url: "http://localhost:8099/api/v1/demandes/payerdemande/" + idDemande,
+                        type: "PUT",
+                        success: function(response) {
+                            console.log(response);
+                            alert('Demande payée avec succès !');
+                            location.reload(); // Recharger la page pour mettre à jour le statut
+                        },
+                        error: function(error) {
+                            console.error("Une erreur s'est produite :", error);
+                            alert('Erreur lors du paiement ');
+                        }
+                    });
+                }
             });
 
 

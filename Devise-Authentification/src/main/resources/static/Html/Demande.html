@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Publication d'une demande d'échange</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link rel="icon" href="../img/image.png" type="image/x-icon">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+
+<body>
+<header class="bg-primary text-white py-4">
+    <div class="container">
+        <h1 class="text-center mb-0">Publication d'une demande d'échange</h1>
+        <nav>
+            <ul class="nav justify-content-center">
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="TableauBord.html">Tableau de bord</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="Profile.html">Profil</a>
+                </li>
+                <li class="nav-item">
+                    <button class="btn btn-danger" id="logout-btn">Déconnexion</button>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</header>
+<section class="exchange-request mt-4">
+    <div class="container">
+        <h2 class="text-center">Entammez un échange</h2>
+        <form id="exchangeForm">
+            <div class="form-group">
+                <label for="amount">Montant souhaité:</label>
+                <input type="number" class="form-control" id="amount" name="amount" required>
+            </div>
+
+            <div class="form-group">
+                <label for="source-currency">Devise offerte:</label>
+                <select class="form-control" id="source-currency" name="source-currency" required>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="target-currency">Devise souhaitée:</label>
+                <select class="form-control" id="target-currency" name="target-currency" required>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="secure-exchange" name="secure-exchange">
+                    <label class="form-check-label" for="secure-exchange">Voulez-vous choisir l'option d'échange sécurisé?</label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" class="btn btn-primary" value="Soumettre la demande">
+            </div>
+        </form>
+    </div>
+</section>
+
+<footer class="bg-dark text-white py-4">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 text-center">
+                <img src="../img/money2.png" alt="Logo de l'application" class="img-fluid" style="max-width: 80px;">
+            </div>
+            <div class="col-md-4 text-center">
+                <p class="underline"><i class="fas fa-life-ring"></i>Support :</p>
+                <ul class="list-unstyled">
+                    <li><a href="faq.html"><i class="fas fa-question"></i>FAQ's</a></li>
+                    <li><a href="termes%20et%20conditions.html"><i class="fas fa-file-alt"></i> Termes et conditions</a></li>
+                </ul>
+            </div>
+            <div class="col-md-4 text-center">
+                <p class="underline"><i class="fas fa-map-marker-alt"></i>Adresse :</p>
+                <ul class="list-unstyled">
+                    <li><i class="fas fa-map-marker-alt"></i> Location </li>
+                    <li><i class="fas fa-envelope"></i>Email</li>
+                    <li><i class="fas fa-phone"></i>Téléphone</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container text-center mt-3">
+        <p>&copy; 2024 Application d'échange de devises. Tout droit réservé</p>
+    </div>
+</footer>
+
+<script src="../JavaScript/Demande.js"></script>
+<script src="../JavaScript/Deconnexion.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>

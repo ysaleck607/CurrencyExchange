@@ -50,7 +50,7 @@ public class Utilisateur implements UserDetails {
     @Enumerated(EnumType.STRING)
     @Column(name = "roleutilisateur")
     private Role role;
-
+    @Enumerated(EnumType.STRING)
     @Column(name = "status")
     private Status status;
 
@@ -62,7 +62,8 @@ public class Utilisateur implements UserDetails {
                        String adresse,
                        LocalDate dateCreation,
                        LocalDate dateMAJ,
-                       Role role) {
+                       Role role,
+                       Status status) {
         this.prenom = prenom;
         this.nom = nom;
         this.dateNaissance = dateNaissance;
@@ -72,6 +73,7 @@ public class Utilisateur implements UserDetails {
         this.dateCreation = dateCreation;
         this.dateMAJ = dateMAJ;
         this.role = role;
+        this.status= status;
     }
 
     public Long getIdUtilisateur() {

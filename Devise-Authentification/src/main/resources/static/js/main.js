@@ -16,32 +16,46 @@ let selectedUserId = null;
 let User1 = null;
 let User2 = null;
 
-function connect(event) {
-    firstemail = document.querySelector('#nickname').value.trim();
-    secondemail = document.querySelector('#fullname').value.trim();
+function connect(event, offerorUserId, demandeurUserId, offreurName, demandeurName) {
+    // Définition des variables à partir des paramètres
+    let user1Id, user2Id;
 
-    User1={
-        email : firstemail,
-        id: document.querySelector('#id1').value.trim()
+    // Vérifier quelle adresse e-mail correspond à l'utilisateur actuel
+    if (offerorUserId === localStorage.getItem('userId')) {
+        firstemail = offreurName;
+        user1Id = offerorUserId;
+        secondemail = demandeurName;
+        user2Id = demandeurUserId;
+    } else {
+        firstemail = demandeurName;
+        user1Id = demandeurUserId;
+        secondemail = offreurName;
+        user2Id = offerorUserId;
     }
 
-    User2={
-        email : secondemail,
-        id: document.querySelector('#id2').value.trim()
+    User1 = {
+        email: firstemail,
+        id: user1Id
+    };
+
+    User2 = {
+        email: secondemail,
+        id: user2Id
+    };
+
+    // Cacher le formulaire de saisie du nom d'utilisateur et afficher la page de chat
+    usernamePage.classList.add('hidden');
+    chatPage.classList.remove('hidden');
+
+    // Connexion au serveur WebSocket
+    const socket = new SockJS('/ws');
+    stompClient = Stomp.over(socket);
+
+    stompClient.connect({}, onConnected, onError);
+    if (event) {
+        event.preventDefault();
     }
-
-    if (firstemail && secondemail) {
-        usernamePage.classList.add('hidden');
-        chatPage.classList.remove('hidden');
-
-        const socket = new SockJS('/ws');
-        stompClient = Stomp.over(socket);
-
-        stompClient.connect({}, onConnected, onError);
-    }
-    event.preventDefault();
 }
-
 
 function onConnected() {
     stompClient.subscribe(`/user/${firstemail}/queue/messages`, onMessageReceived);
@@ -103,7 +117,6 @@ function userItemClick(event) {
     const nbrMsg = clickedUser.querySelector('.nbr-msg');
     nbrMsg.classList.add('hidden');
     nbrMsg.textContent = '0';
-
 }
 
 function displayMessage(senderId, content) {
@@ -130,12 +143,10 @@ async function fetchAndDisplayUserChat() {
     chatArea.scrollTop = chatArea.scrollHeight;
 }
 
-
 function onError() {
     connectingElement.textContent = 'Could not connect to WebSocket server. Please refresh this page to try again!';
     connectingElement.style.color = 'red';
 }
-
 
 function sendMessage(event) {
     const messageContent = messageInput.value.trim();
@@ -153,7 +164,6 @@ function sendMessage(event) {
     chatArea.scrollTop = chatArea.scrollHeight;
     event.preventDefault();
 }
-
 
 async function onMessageReceived(payload) {
     await findAndDisplayConnectedUsers();
@@ -180,6 +190,23 @@ async function onMessageReceived(payload) {
 
 function onLogout() {
     window.location.reload();
+    window.location.href = 'TableauBord.html';
+}
+
+// Vérifie si les paramètres nécessaires sont présents dans l'URL pour une connexion directe au chat
+const urlParams = new URLSearchParams(window.location.search);
+const offerorUserId = urlParams.get('offerorUserId');
+const demandeurUserId = urlParams.get('demandeurUserId');
+const offreurName = urlParams.get(decodeURIComponent('offreurName'));
+const demandeurName = urlParams.get(decodeURIComponent('demandeurName'));
+
+if (offerorUserId && demandeurUserId && offreurName && demandeurName) {
+    // Appel de la fonction connect avec les paramètres nécessaires
+    connect(null, offerorUserId, demandeurUserId, offreurName, demandeurName);
+} else {
+    // Afficher le formulaire de saisie du nom d'utilisateur si les paramètres ne sont pas présents
+    usernamePage.classList.remove('hidden');
+    chatPage.classList.add('hidden');
 }
 
 usernameForm.addEventListener('submit', connect, true); // step 1

@@ -1,9 +1,12 @@
 // Initialize Stripe.js
 const stripe = Stripe('pk_test_51Ozj7i00KXfzHYtMS0anKahBQMVdRQRiwWDREAiJTb5ZePEbsarELB237wrQWKo9ztPimulSElNeZtksJpdOOdeq006lbef5y0');
 
+// Vérifie si les paramètres nécessaires sont présents dans l'URL pour une connexion directe au chat
+const urlParams = new URLSearchParams(window.location.search);
+const montant = urlParams.get('montant');
 initialize();
 const RequestToPay = {
-    amount:"200"
+    amount:montant
 }
 
 // Fetch Checkout Session and retrieve the client secret
@@ -24,5 +27,5 @@ async function initialize() {
     });
 
     // Mount Checkout
-    checkout.mount('#checkout');
+    checkout.amount('#checkout');
 }

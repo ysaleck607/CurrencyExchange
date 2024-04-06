@@ -25,16 +25,12 @@ $(document).ready(function() {
                 var idDemande = $(this).data('id');
                 console.log(idDemande);
                 var deviseOfferte = $(this).closest('tr').find('td:nth-child(3)').text().trim();
+                var montant = $(this).closest('tr').find('td:nth-child(4)').text().trim();
                 if (deviseOfferte === 'XOF') {
                     // Redirection vers la page pour le paiement via Mobile Money
-                    window.location.href = 'paiement_mobilemoney.html?id=' + idDemande;
-                }
-                else
-                {
-                    // Effectuer la requête AJAX pour payer la demande
                     $.ajax({
-                        url: "http://localhost:8099/api/v1/demandes/payerdemande/" + idDemande,
-                        type: "PUT",
+                        url: "http://localhost:8099/paiement/pay-by-mobilemoney" ,
+                        type: "POST",
                         success: function(response) {
                             console.log(response);
                             alert('Demande payée avec succès !');
@@ -45,6 +41,11 @@ $(document).ready(function() {
                             alert('Erreur lors du paiement ');
                         }
                     });
+                }
+                else
+                {
+                    // Diriger vers stripe pour payer la demande
+                    window.location.href = 'stripePay.html?amount=' + montant;
                 }
             });
 

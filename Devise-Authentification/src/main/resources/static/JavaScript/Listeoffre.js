@@ -7,12 +7,7 @@ $(document).ready(function() {
             // Boucle sur chaque offre et ajoute une ligne à la table
             $.each(data, function(index, offre) {
                 var chatButton = '';
-                // Vérifier si le statut de l'offre est "ENATTENTE" pour afficher le bouton de chat
-               /* if (offre.statutOffre === 'ENATTENTE') {
-                    chatButton = '<button class="chat-button" data-offeror-id="' + offre.idDemandeur + '">Chat</button>';
-                }*/
-                //${(offre.statutOffre === 'EN_ATTENTE') ? '<button class="chat-button" data-offer-id="' + offre.idOffre + '">Chat</button>' : ''}
-                $('#offersTable tbody').append(`
+                 $('#offersTable tbody').append(`
                     <tr>
                         <td class="offeror-name" data-user-id="${offre.idDemandeur} " title="Voir commentaires">${offre.nomPrenomDemandeur}</td>
                         <td>${offre.nomPrenomOffreur}</td> 
@@ -35,37 +30,29 @@ $(document).ready(function() {
             $('.pay-button').on('click', function() {
                 var offerId = $(this).data('id');
                 var deviseVoulue = $(this).closest('tr').find('td:nth-child(3)').text().trim();
-
+                var montant = $(this).closest('tr').find('td:nth-child(5)').text().trim();
                 if (deviseVoulue === 'CFA') {
                     // Redirection vers la page pour le paiement via Mobile Money
-                    window.location.href = 'paiement_mobilemoney.html?id=' + idDemande;
-                }
-                else
-                {
-                    // Effectuer la requête AJAX pour payer la demande
                     $.ajax({
-                        url: "http://localhost:8099/api/v1/Offres/payerOffre/" + offerId,
-                        type: 'PUT',
-                        success: function(data) {
-                            console.log(data);
-                            alert('Paiement réussi !');
-                            location.reload();
-
+                        url: "http://localhost:8099/paiement/pay-by-mobilemoney" ,
+                        type: "POST",
+                        success: function(response) {
+                            console.log(response);
+                            alert('Offre payée avec succès !');
+                            location.reload(); // Recharger la page pour mettre à jour le statut
                         },
-                        error: function(jqXHR, textStatus, errorThrown) {
-                            if (jqXHR.status === 401) { // Si le code d'état est 401 Unauthorized
-                                alert('Votre session a expiré. Veuillez vous reconnecter.');
-                                // Redirigez l'utilisateur vers la page de connexion ou rafraîchissez le token si possible
-                                window.location.href = 'Connexion.html';
-                            } else {
-                                // Traitement en cas d'erreur de la requête
-                                alert('Erreur lors du paiement  ');
-                                console.log('Erreur lors du paiement : ' +  textStatus);
-                            }
+                        error: function(error) {
+                            console.error("Une erreur s'est produite :", error);
+                            alert('Erreur lors du paiement ');
                         }
                     });
                 }
+                else
+                {
+                    // Diriger vers stripe pour payer la demande
+                    window.location.href = 'stripePay.html?amount=' + montant;
 
+                }
             });
 
             $('.leave-comment-button').click(function() {

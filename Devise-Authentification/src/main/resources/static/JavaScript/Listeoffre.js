@@ -31,15 +31,15 @@ $(document).ready(function() {
                 var offerId = $(this).data('id');
                 var deviseVoulue = $(this).closest('tr').find('td:nth-child(3)').text().trim();
                 var montant = $(this).closest('tr').find('td:nth-child(5)').text().trim();
-                if (deviseVoulue === 'CFA') {
+                if (deviseVoulue === 'XOF') {
                     // Redirection vers la page pour le paiement via Mobile Money
                     $.ajax({
-                        url: "http://localhost:8099/paiement/pay-by-mobilemoney" ,
-                        type: "POST",
+                        url: "http://localhost:8099/api/v1/Offres/payerOffre/" + offerId,
+                        type: "PUT",
                         success: function(response) {
                             console.log(response);
-                            alert('Offre payée avec succès !');
-                            location.reload(); // Recharger la page pour mettre à jour le statut
+                            // Redirection vers la page pour le paiement via Mobile Money
+                            window.location.href = 'MobilePayment.html?montant=' + montant;
                         },
                         error: function(error) {
                             console.error("Une erreur s'est produite :", error);

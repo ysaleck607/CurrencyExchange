@@ -30,7 +30,7 @@ public class PaymentIntentController {
                                         .setQuantity(1L)
                                         .setPriceData(
                                                 SessionCreateParams.LineItem.PriceData.builder()
-                                                        .setCurrency("usd")
+                                                        .setCurrency("cad")
                                                         .setUnitAmount(request.getAmount())
                                                         .setProductData(
                                                                 SessionCreateParams.LineItem.PriceData.ProductData.builder()

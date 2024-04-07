@@ -40,7 +40,7 @@
         </div>
         <div class="form-group">
             <label for="amount">Montant :</label>
-            <input type="text" id="amount" name="amount" class="form-control" readonly>
+            <input type="text" id="amount" name="amount" class="form-control" required>
         </div>
         <button type="submit" class="btn btn-primary">Payer</button>
     </form>
@@ -74,13 +74,9 @@
 </footer>
 <script>
     $(document).ready(function() {
-        // Récupérer le montant de l'URL
-        var urlParams = new URLSearchParams(window.location.search);
-        var montant = urlParams.get('montant');
-        // Mettre à jour la valeur du champ de montant
-        var amount = montant;
         $('#paymentForm').submit(function(event) {
             event.preventDefault(); // Empêcher le formulaire de soumettre normalement
+            var amount = $('#amount').val();
             var phoneNumber = $('#phoneNumber').val();
             // Effectuer la requête AJAX pour le paiement via Mobile Money
             $.ajax({
@@ -102,7 +98,7 @@
                 }
             });
         });
-        $('#amount').val(montant);
+
     });
 </script>
 <script src="../JavaScript/Deconnexion.js"></script>

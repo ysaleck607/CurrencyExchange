@@ -23,12 +23,23 @@ $(document).ready(function() {
 
             $('.pay-button').click(function() {
                 var idDemande = $(this).data('id');
-                console.log(idDemande);
+                //console.log(idDemande);
                 var deviseOfferte = $(this).closest('tr').find('td:nth-child(3)').text().trim();
                 var montant = $(this).closest('tr').find('td:nth-child(4)').text().trim();
                 if (deviseOfferte === 'XOF') {
-                    // Redirection vers la page pour le paiement via Mobile Money
-                    window.location.href = 'MobilePayment.html?montant=' + montant;
+                    $.ajax({
+                        url: "http://localhost:8099/api/v1/demandes/payerdemande/" + idDemande ,
+                        type: "PUT",
+                        success: function(response) {
+                            console.log(response);
+                            // Redirection vers la page pour le paiement via Mobile Money
+                            window.location.href = 'MobilePaymentDemande.html';
+                        },
+                        error: function(error) {
+                            console.error("Une erreur s'est produite :", error);
+                            alert('Erreur lors du paiement ');
+                        }
+                    });
                 }
                 else
                 {// Diriger vers stripe pour payer la demande

@@ -3,10 +3,10 @@ const stripe = Stripe('pk_test_51Ozj7i00KXfzHYtMS0anKahBQMVdRQRiwWDREAiJTb5ZePEb
 
 // Vérifie si les paramètres nécessaires sont présents dans l'URL pour une connexion directe au chat
 const urlParams = new URLSearchParams(window.location.search);
-const montant = urlParams.get('montant');
+const amount = urlParams.get('montant');
 initialize();
 const RequestToPay = {
-    amount:montant
+    amount: amount
 }
 
 // Fetch Checkout Session and retrieve the client secret

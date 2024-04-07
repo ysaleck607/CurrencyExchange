@@ -28,27 +28,13 @@ $(document).ready(function() {
                 var montant = $(this).closest('tr').find('td:nth-child(4)').text().trim();
                 if (deviseOfferte === 'XOF') {
                     // Redirection vers la page pour le paiement via Mobile Money
-                    $.ajax({
-                        url: "http://localhost:8099/paiement/pay-by-mobilemoney" ,
-                        type: "POST",
-                        success: function(response) {
-                            console.log(response);
-                            alert('Demande payée avec succès !');
-                            location.reload(); // Recharger la page pour mettre à jour le statut
-                        },
-                        error: function(error) {
-                            console.error("Une erreur s'est produite :", error);
-                            alert('Erreur lors du paiement ');
-                        }
-                    });
+                    window.location.href = 'MobilePayment.html?montant=' + montant;
                 }
                 else
-                {
-                    // Diriger vers stripe pour payer la demande
+                {// Diriger vers stripe pour payer la demande
                     window.location.href = 'stripePay.html?amount=' + montant;
                 }
             });
-
 
             $('.cancel-button').click(function() {
                 var idDemande = $(this).data('id');

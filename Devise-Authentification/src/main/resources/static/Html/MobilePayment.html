@@ -40,7 +40,7 @@
         </div>
         <div class="form-group">
             <label for="amount">Montant :</label>
-            <input type="text" id="amount" name="amount" class="form-control" value="<?php echo $_GET['montant']; ?>" readonly>
+            <input type="text" id="amount" name="amount" class="form-control" readonly>
         </div>
         <button type="submit" class="btn btn-primary">Payer</button>
     </form>
@@ -74,20 +74,24 @@
 </footer>
 <script>
     $(document).ready(function() {
+        // Récupérer le montant de l'URL
+        var urlParams = new URLSearchParams(window.location.search);
+        var montant = urlParams.get('montant');
+        // Mettre à jour la valeur du champ de montant
+        var amount = montant;
         $('#paymentForm').submit(function(event) {
             event.preventDefault(); // Empêcher le formulaire de soumettre normalement
 
             var phoneNumber = $('#phoneNumber').val();
-            var amount = $('#amount').val();
-
             // Effectuer la requête AJAX pour le paiement via Mobile Money
             $.ajax({
                 url: 'http://localhost:8099/pay-by-mobilemoney',
                 type: 'POST',
-                data: {
+                data:JSON.stringify( {
                     phoneNumber: phoneNumber,
                     amount: amount
-                },
+                }),
+                contentType: 'application/json',
                 success: function(response) {
                     console.log(response);
                     alert('Demande payée avec succès !');
@@ -101,6 +105,7 @@
                 }
             });
         });
+        $('#amount').val(montant);
     });
 </script>
 <script src="../JavaScript/Deconnexion.js"></script>

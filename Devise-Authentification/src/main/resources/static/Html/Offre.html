@@ -104,7 +104,7 @@
                     <th>Demandeur</th>
                     <th>Offreur</th>
                     <th>Montant offert</th>
-                    <th>Devise voulue</th>
+                    <th>Devise Offert</th>
                     <th>Statut</th>
                     <th>Actions</th>
                 </tr>
@@ -149,7 +149,7 @@
                         <td>${offre.nomPrenomDemandeur} </td>
                         <td class="offeror-name" data-user-id="${offre.idOffreur}" title="Voir commentaires">${offre.nomPrenomOffreur}</td>
                         <td>${offre.montantVoulu} </td>
-                        <td>${offre.deviseOfferte} </td>
+                        <td>${offre.deviseVoulu} </td>
                         <td>${offre.statutOffre} </td>
                         <td class="actions">
                             ${offre.statutOffre  != 'ENATTENTE' ? '<button class="chat-button" data-user-id="' + offre.idOffreur + '">Chat</button>' : ''}

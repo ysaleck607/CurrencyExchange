@@ -4,14 +4,23 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Enter Amount</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-<h1>Entrer le monant que vous souhaitez envoyer</h1>
-<form id="amountForm">
-  <label for="amountInput">Entrer montant:</label>
-  <input type="text" id="amountInput" name="amountInput">
-  <button type="submit">Submit</button>
-</form>
+<div class="container mt-5">
+  <h1 class="mb-4">Entrer le montant que vous souhaitez envoyer</h1>
+  <form id="amountForm">
+    <div class="mb-3">
+      <label for="amountInput" class="form-label">Montant:</label>
+      <input type="text" class="form-control" id="amountInput" name="amountInput">
+    </div>
+    <button type="submit" class="btn btn-primary">Envoyer</button>
+  </form>
+</div>
+
+<!-- Bootstrap JS (optionnel si vous n'en avez pas besoin pour d'autres fonctionnalités) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 
 <script>
   document.getElementById('amountForm').addEventListener('submit', function(event) {

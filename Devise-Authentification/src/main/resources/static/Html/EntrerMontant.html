@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Enter Amount</title>
+</head>
+<body>
+<h1>Entrer le monant que vous souhaitez envoyer</h1>
+<form id="amountForm">
+  <label for="amountInput">Entrer montant:</label>
+  <input type="text" id="amountInput" name="amountInput">
+  <button type="submit">Submit</button>
+</form>
+
+<script>
+  document.getElementById('amountForm').addEventListener('submit', function(event) {
+    event.preventDefault(); // Prevent form submission
+
+    // Get the amount entered by the user
+    var amount = document.getElementById('amountInput').value;
+
+    // Construct the URL with the specified amount
+    var idDemande = new URLSearchParams(window.location.search).get('id');
+    var redirectURL = 'stripePay.html?amount=' + encodeURIComponent(amount) + '&id=' + encodeURIComponent(idDemande);
+
+    // Redirect the user to stripePay.html with the specified amount
+    window.location.href = redirectURL;
+  });
+</script>
+</body>
+</html>

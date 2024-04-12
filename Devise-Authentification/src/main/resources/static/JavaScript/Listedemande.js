@@ -43,7 +43,7 @@ $(document).ready(function() {
                 }
                 else
                 {// Diriger vers stripe pour payer la demande
-                    window.location.href = 'stripePay.html?amount=' + montant;
+                    window.location.href = 'EntrerMontant.html?id=' + idDemande;
                 }
             });
 

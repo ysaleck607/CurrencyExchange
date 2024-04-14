@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 public class CommentaireResponse {
     private Long idCommentaire;
 
-    private Long idUtilisateur; // L'utilisateur qui a laissé le commentaire
+    private Long idUtilisateurNoteur; // L'utilisateur qui a laissé le commentaire
 
     private String nomPrenomNoteur;
 

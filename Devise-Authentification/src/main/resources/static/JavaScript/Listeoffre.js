@@ -134,8 +134,8 @@ $(document).ready(function() {
         console.log(offerId);
         console.log(demandId);
         var data ={
-            IdUtilisateur: userId,
-            IdUtilisateurNote: uti,
+            idUtilisateurNoteur: uti,
+            idUtilisateurNote: userId,
             commentaire: commentText,
             note: rating,
             idOffre: offerId,

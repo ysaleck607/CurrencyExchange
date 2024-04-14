@@ -20,8 +20,8 @@ public class CommentaireService {
 
     public void ajouterCommentaire(AddCommentaireRequest request) {
         var nouveauCommentaire = Commentaire.builder()
-                .idUtilisateur(request.getIdUtilisateur())
-                .idUtilisateurNote(request.getUtilisateurNote())
+                .idUtilisateurNoteur(request.getIdUtilisateurNoteur())
+                .idUtilisateurNote(request.getIdUtilisateurNote())
                 .note(request.getNote())
                 .commentaire(request.getCommentaire())
                 .idOffre(request.getIdOffre())
@@ -47,7 +47,7 @@ public class CommentaireService {
 
             CommentaireResponse commentaireResponse = CommentaireResponse.builder()
                     .idCommentaire(commentaire.getIdCommentaire())
-                    .idUtilisateur(commentaire.getIdUtilisateur())
+                    .idUtilisateurNoteur(commentaire.getIdUtilisateurNoteur())
                     .nomPrenomNoteur(nom + " " + prenom)
                     .idUtilisateurNote(commentaire.getIdUtilisateurNote())
                     .note(commentaire.getNote())

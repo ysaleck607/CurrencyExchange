@@ -11,9 +11,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class AddCommentaireRequest {
 
-    private Long idUtilisateur;
+    private Long idUtilisateurNoteur;
 
-    private Long utilisateurNote;
+    private Long idUtilisateurNote;
 
     private int note;
 

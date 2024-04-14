@@ -21,7 +21,7 @@ public class Commentaire {
     private Long idCommentaire;
 
     @Column(name = "idutilisateurnoteur")
-    private Long idUtilisateur; // L'utilisateur qui a laissé le commentaire
+    private Long idUtilisateurNoteur; // L'utilisateur qui a laissé le commentaire
 
     @Column(name = "idutilisateurnote")
     private Long idUtilisateurNote; // L'utilisateur qui est noté
@@ -41,8 +41,8 @@ public class Commentaire {
     @Column(name = "commentdate")
     private LocalDateTime dateCommentaire;
 
-    public Commentaire(Long idUtilisateur, Long idUtilisateurNote, int note, int idOffre, int idDemande, String commentaire, LocalDateTime dateCommentaire) {
-        this.idUtilisateur = idUtilisateur;
+    public Commentaire(Long idUtilisateurNoteur, Long idUtilisateurNote, int note, int idOffre, int idDemande, String commentaire, LocalDateTime dateCommentaire) {
+        this.idUtilisateurNoteur = idUtilisateurNoteur;
         this.idUtilisateurNote = idUtilisateurNote;
         this.note = note;
         this.idOffre = idOffre;
@@ -52,12 +52,12 @@ public class Commentaire {
     }
 
 
-    public Long getIdUtilisateur() {
-        return idUtilisateur;
+    public Long getIdUtilisateurNoteur() {
+        return idUtilisateurNoteur;
     }
 
-    public void setIdUtilisateur(Long idUtilisateur) {
-        this.idUtilisateur = idUtilisateur;
+    public void setIdUtilisateur(Long idUtilisateurNoteur) {
+        this.idUtilisateurNoteur = idUtilisateurNoteur;
     }
 
     public Long getIdUtilisateurNote() {

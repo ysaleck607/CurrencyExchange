@@ -18,7 +18,7 @@ public interface OffreRepository extends JpaRepository<Offre, Long> {
             "WHERE o.idDemande = :idDemand")
     List<Object[]> findByIdDemande(@Param("idDemand") Long idDemand);
 
-    @Query("SELECT o, du.nom, du.prenom, ou.nom, ou.prenom, d.deviseOfferte, d.deviseVoulu, d.montantVoulu, d.dateDemande, d.idDemandeur " +
+    @Query("SELECT o, du.nom, du.prenom, ou.nom, ou.prenom, d.deviseOfferte, d.deviseVoulu, d.montantVoulu, d.dateDemande, d.idDemandeur, d.montantOffert " +
             "FROM Offre o " +
             "LEFT JOIN Demande d ON o.idDemande = d.idDemande " +
             "LEFT JOIN Utilisateur du ON d.idDemandeur = du.idUtilisateur " +
@@ -26,7 +26,7 @@ public interface OffreRepository extends JpaRepository<Offre, Long> {
             "WHERE o.idOffreur = :utilisateurId")
     List<Object[]> getOffresWithNamesByUtilisateurId(@Param("utilisateurId") Long utilisateurId);
 
-    @Query("SELECT o, du.nom, du.prenom, ou.nom, ou.prenom, d.deviseOfferte, d.deviseVoulu, d.montantVoulu, d.dateDemande " +
+    @Query("SELECT o, du.nom, du.prenom, ou.nom, ou.prenom, d.deviseOfferte, d.deviseVoulu, d.montantVoulu, d.dateDemande, d.montantOffert " +
             "FROM Offre o " +
             "LEFT JOIN Demande d ON o.idDemande = d.idDemande " +
             "LEFT JOIN Utilisateur du ON d.idDemandeur = du.idUtilisateur " +

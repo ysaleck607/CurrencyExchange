@@ -16,9 +16,10 @@ $(document).ready(function() {
                     .text(demande.nomPrenomDemandeur)
                     .appendTo(row);
 
-                $('<td>').text(demande.deviseVoulu).appendTo(row);
+                $('<td>').text(demande.montantOffert).appendTo(row);
                 $('<td>').text(demande.deviseOfferte).appendTo(row);
                 $('<td>').text(demande.montantVoulu).appendTo(row);
+                $('<td>').text(demande.deviseVoulu).appendTo(row);
                 $('<td>').append($('<button>')
                     .text('Faire une offre')
                     .click(function() {

@@ -149,6 +149,7 @@ public class OffreService {
             BigDecimal montantVoulu = (BigDecimal) offreInfo[7];
             String deviseOfferte = (String) offreInfo[5];
             LocalDateTime dateDemande = (LocalDateTime) offreInfo[8];
+            BigDecimal montantOffert = (BigDecimal) offreInfo[9];
 
             var offer = OffreResponse.builder()
                     .idOffre(offre.getIdOffre())
@@ -158,6 +159,7 @@ public class OffreService {
                     .nomPrenomOffreur(nomOffreur + " " + prenomOffreur)
                     .deviseVoulu(deviseVoulu)
                     .montantVoulu(montantVoulu)
+                    .montantOffert(montantOffert)
                     .deviseOfferte(deviseOfferte)
                     .dateDemande(dateDemande)
                     .dateOffre(offre.getDateOffre())
@@ -184,6 +186,7 @@ public class OffreService {
             String deviseOfferte = (String) offreInfo[5];
             LocalDateTime dateDemande = (LocalDateTime) offreInfo[8];
             Long idDemandeur = (Long) offreInfo[9];
+            BigDecimal montantOffert = (BigDecimal) offreInfo[10];
 
             var offer = OffreResponse.builder()
                     .idOffre(offre.getIdOffre())
@@ -193,6 +196,7 @@ public class OffreService {
                     .nomPrenomOffreur(nomOffreur + " " + prenomOffreur)
                     .deviseVoulu(deviseVoulu)
                     .montantVoulu(montantVoulu)
+                    .montantOffert(montantOffert)
                     .deviseOfferte(deviseOfferte)
                     .dateDemande(dateDemande)
                     .dateOffre(offre.getDateOffre())

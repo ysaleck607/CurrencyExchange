@@ -7,9 +7,10 @@ $(document).ready(function() {
                 $('#exchangeRequestsTable tbody').append(
                     `<tr>
                         <td>${demande.nomPrenomDemandeur}</td>
-                        <td>${demande.deviseVoulu}</td>
+                        <td>${demande.montantOffert}</td>
                         <td>${demande.deviseOfferte}</td>
                         <td>${demande.montantVoulu}</td>
+                        <td>${demande.deviseVoulu}</td>
                         <td>${demande.statut}</td>
                         <td>
                             ${(demande.statut != 'PAYER' && demande.statut != 'ANNULER' && demande.statut != 'TERMINER') ? '<button class="pay-button" data-id="' + demande.idDemande + '">Payer</button>' : ''} 
@@ -25,7 +26,7 @@ $(document).ready(function() {
                 var idDemande = $(this).data('id');
                 //console.log(idDemande);
                 var deviseOfferte = $(this).closest('tr').find('td:nth-child(3)').text().trim();
-                var montant = $(this).closest('tr').find('td:nth-child(4)').text().trim();
+                var montant = $(this).closest('tr').find('td:nth-child(2)').text().trim();
                 if (deviseOfferte === 'XOF') {
                     $.ajax({
                         url: "http://localhost:8099/api/v1/demandes/payerdemande/" + idDemande ,
@@ -33,7 +34,7 @@ $(document).ready(function() {
                         success: function(response) {
                             console.log(response);
                             // Redirection vers la page pour le paiement via Mobile Money
-                            window.location.href = 'MobilePaymentDemande.html';
+                            window.location.href = 'MobilePayment.html?montant=' + montant;
                         },
                         error: function(error) {
                             console.error("Une erreur s'est produite :", error);
@@ -48,7 +49,7 @@ $(document).ready(function() {
                         success: function(response) {
                             console.log(response);
                             // Redirection vers la page pour le paiement via Mobile Money
-                            window.location.href = 'EntrerMontant.html?id=' + idDemande
+                            window.location.href = 'stripePay.html?amount=' + montant;
                         },
                         error: function(error) {
                             console.error("Une erreur s'est produite :", error);

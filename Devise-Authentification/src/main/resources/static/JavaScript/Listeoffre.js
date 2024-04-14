@@ -11,9 +11,10 @@ $(document).ready(function() {
                     <tr>
                         <td class="offeror-name" data-user-id="${offre.idDemandeur} " title="Voir commentaires">${offre.nomPrenomDemandeur}</td>
                         <td>${offre.nomPrenomOffreur}</td> 
-                        <td>${offre.deviseVoulu}</td>
+                        <td>${offre.montantOffert}</td>
                         <td>${offre.deviseOfferte}</td>
                         <td>${offre.montantVoulu}</td>
+                        <td>${offre.deviseVoulu}</td>
                         <td>${offre.statutOffre}</td>
                         <td class="actions">
                              ${offre.statutOffre  != 'ENATTENTE' ? '<button class="chat-button" data-user-id="' + offre.idDemandeur + '">Chat</button>' : ''}
@@ -29,7 +30,7 @@ $(document).ready(function() {
             // Ajoute un écouteur d'événements click pour chaque bouton de paiement
             $('.pay-button').on('click', function() {
                 var offerId = $(this).data('id');
-                var deviseVoulue = $(this).closest('tr').find('td:nth-child(3)').text().trim();
+                var deviseVoulue = $(this).closest('tr').find('td:nth-child(6)').text().trim();
                 var montant = $(this).closest('tr').find('td:nth-child(5)').text().trim();
                 if (deviseVoulue === 'XOF') {
                     // Redirection vers la page pour le paiement via Mobile Money

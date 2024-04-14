@@ -6,6 +6,7 @@ $(document).ready(function() {
         event.preventDefault();
 
         // Récupération des valeurs du formulaire
+        var baseAmount =$('#baseAmount').val();
         var amount = $('#targetAmount').val();
         var sourceCurrency = $('#baseCurrency').val();
         var targetCurrency = $('#targetCurrency').val();
@@ -20,6 +21,7 @@ $(document).ready(function() {
         var data = {
             idDemandeur: localStorage.getItem('userId'),
             montantVoulu: amount,
+            montantOffert: baseAmount,
             deviseOfferte: sourceCurrency,
             deviseVoulue: targetCurrency
         };

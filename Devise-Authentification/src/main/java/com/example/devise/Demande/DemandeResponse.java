@@ -22,6 +22,7 @@ public class DemandeResponse {
     private String nomPrenomDemandeur;
     private String deviseVoulu;
     private BigDecimal montantVoulu;
+    private BigDecimal montantOffert;
     private String deviseOfferte;
     private LocalDateTime dateDemande;
     private String statut;

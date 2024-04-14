@@ -30,18 +30,19 @@ public class Demande {
     private BigDecimal montantVoulu;
     @Column(name = "deviseofferte")
     private String deviseOfferte;
-    //@Column(name = "montantOfferte")
-    //private BigDecimal montantOfferte;
+    @Column(name = "montantoffert")
+    private BigDecimal montantOffert;
     @Column(name = "datedemande")
     private LocalDateTime dateDemande;
     @Column(name = "statut")
     private String statut;
 
-    public Demande(Long idDemandeur, String deviseVoulu, BigDecimal montantVoulu, String deviseOfferte,
+    public Demande(Long idDemandeur, String deviseVoulu, BigDecimal montantVoulu,BigDecimal montantOffert, String deviseOfferte,
                    LocalDateTime dateDemande, String statut) {
         this.idDemandeur = idDemandeur;
         this.deviseVoulu = deviseVoulu;
         this.montantVoulu = montantVoulu;
+        this.montantOffert = montantOffert;
         this.deviseOfferte = deviseOfferte;
         this.dateDemande = dateDemande;
         this.statut = statut;
@@ -66,6 +67,15 @@ public class Demande {
     public BigDecimal getMontantVoulu() {
         return montantVoulu;
     }
+
+    public BigDecimal getMontantOffert() {
+        return montantOffert;
+    }
+
+    public void setMontantOffert(BigDecimal montantOffert) {
+        this.montantOffert = montantOffert;
+    }
+
 
     public void setMontantVoulu(BigDecimal montantVoulu) {
         this.montantVoulu = montantVoulu;
@@ -93,6 +103,7 @@ public class Demande {
                 "idDemade=" + idDemande +
                 ", deviseVoulu='" + deviseVoulu + '\'' +
                 ", montantVoulu=" + montantVoulu +
+                ", montantOffert=" + montantOffert +
                 ", deviseOfferte='" + deviseOfferte + '\'' +
                 ", dateDemande=" + dateDemande +
                 '}';

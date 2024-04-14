@@ -15,5 +15,6 @@ public class AddDemandRequest {
     private Long idDemandeur;
     private String deviseVoulue;
     private BigDecimal montantVoulu;
+    private BigDecimal montantOffert;
     private String deviseOfferte;
 }

@@ -21,6 +21,7 @@ public class OffreResponse {
     private Long idOffreur;
     private String deviseVoulu;
     private BigDecimal montantVoulu;
+    private BigDecimal montantOffert;
     private String deviseOfferte;
     private LocalDateTime dateDemande;
     private LocalDateTime dateOffre;

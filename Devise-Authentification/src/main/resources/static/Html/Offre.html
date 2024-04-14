@@ -7,6 +7,7 @@
     <title>Offres pour la demande</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <link rel="icon" href="../img/image.png" type="image/x-icon">
+    <link rel="stylesheet" href="/js/styles.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
@@ -144,13 +145,39 @@
             type: "GET",
             success: function(offers) {
                 offers.forEach(function(offre) {
+                    var statutClass = '';
+                    switch(offre.statutOffre) {
+                        case 'TERMINER':
+                            statutClass = 'statut-terminer';
+                            break;
+                        case 'ANNULER':
+                            statutClass = 'statut-annuler';
+                            break;
+                        case 'ENATTENTE':
+                            statutClass = 'statut-enattente';
+                            break;
+                        case 'PAYER':
+                            statutClass = 'statut-payer';
+                            break;
+                        case 'ENCOURS':
+                            statutClass = 'statut-encours';
+                            break;
+                        case 'ACCEPTER':
+                            statutClass = 'statut-accepter';
+                            break;
+                        case 'REFUSER':
+                            statutClass = 'statut-refuser';
+                            break;
+                        default:
+                            statutClass = '';
+                    }
                     $('#offersTable tbody').append(
                         `<tr>
                         <td>${offre.nomPrenomDemandeur} </td>
                         <td class="offeror-name" data-user-id="${offre.idOffreur}" title="Voir commentaires">${offre.nomPrenomOffreur}</td>
                         <td>${offre.montantVoulu} </td>
                         <td>${offre.deviseVoulu} </td>
-                        <td>${offre.statutOffre} </td>
+                        <td class="${statutClass}">${offre.statutOffre} </td>
                         <td class="actions">
                             ${offre.statutOffre  != 'ENATTENTE' ? '<button class="chat-button" data-user-id="' + offre.idOffreur + '">Chat</button>' : ''}
                             ${offre.statutOffre != 'TERMINER' ? '<button class="accept-offer-button" data-offer-id="' + offre.idOffre + '">Accepter</button><button class="reject-offer-button" data-offer-id="' + offre.idOffre + '">Refuser</button>' : ''}

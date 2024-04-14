@@ -4,6 +4,29 @@ $(document).ready(function() {
         type: "GET",
         success: function(data) {
             data.forEach(function(demande) {
+                var statutClass = '';
+                switch(demande.statut) {
+                    case 'TERMINER':
+                        statutClass = 'statut-terminer';
+                        break;
+                    case 'ANNULER':
+                        statutClass = 'statut-annuler';
+                        break;
+                    case 'ENATTENTE':
+                        statutClass = 'statut-enattente';
+                        break;
+                    case 'PAYER':
+                        statutClass = 'statut-payer';
+                        break;
+                    case 'ENCOURS':
+                        statutClass = 'statut-encours';
+                        break;
+                    case 'ACCEPTER':
+                        statutClass = 'statut-accepter';
+                        break;
+                    default:
+                        statutClass = '';
+                }
                 $('#exchangeRequestsTable tbody').append(
                     `<tr>
                         <td>${demande.nomPrenomDemandeur}</td>
@@ -11,7 +34,7 @@ $(document).ready(function() {
                         <td>${demande.deviseOfferte}</td>
                         <td>${demande.montantVoulu}</td>
                         <td>${demande.deviseVoulu}</td>
-                        <td>${demande.statut}</td>
+                        <td class="${statutClass}">${demande.statut}</td> 
                         <td>
                             ${(demande.statut != 'PAYER' && demande.statut != 'ANNULER' && demande.statut != 'TERMINER') ? '<button class="pay-button" data-id="' + demande.idDemande + '">Payer</button>' : ''} 
                             ${(demande.statut != 'PAYER' && demande.statut != 'ANNULER' && demande.statut != 'TERMINER') ? '<button class="cancel-button" data-id="' + demande.idDemande + '">Annuler</button>' : ''}

@@ -6,7 +6,32 @@ $(document).ready(function() {
         success: function(data) {
             // Boucle sur chaque offre et ajoute une ligne à la table
             $.each(data, function(index, offre) {
-                var chatButton = '';
+                var statutClass = '';
+                switch(offre.statutOffre) {
+                    case 'TERMINER':
+                        statutClass = 'statut-terminer';
+                        break;
+                    case 'ANNULER':
+                        statutClass = 'statut-annuler';
+                        break;
+                    case 'ENATTENTE':
+                        statutClass = 'statut-enattente';
+                        break;
+                    case 'PAYER':
+                        statutClass = 'statut-payer';
+                        break;
+                    case 'ENCOURS':
+                        statutClass = 'statut-encours';
+                        break;
+                    case 'ACCEPTER':
+                        statutClass = 'statut-accepter';
+                        break;
+                    case 'REFUSER':
+                        statutClass = 'statut-refuser';
+                        break;
+                    default:
+                        statutClass = '';
+                }
                  $('#offersTable tbody').append(`
                     <tr>
                         <td class="offeror-name" data-user-id="${offre.idDemandeur} " title="Voir commentaires">${offre.nomPrenomDemandeur}</td>
@@ -15,7 +40,7 @@ $(document).ready(function() {
                         <td>${offre.deviseOfferte}</td>
                         <td>${offre.montantVoulu}</td>
                         <td>${offre.deviseVoulu}</td>
-                        <td>${offre.statutOffre}</td>
+                        <td class="${statutClass}">${offre.statutOffre}</td>
                         <td class="actions">
                              ${offre.statutOffre  != 'ENATTENTE' ? '<button class="chat-button" data-user-id="' + offre.idDemandeur + '">Chat</button>' : ''}
                              ${offre.statutOffre != 'PAYER' && offre.statutOffre != 'TERMINER' ? '<button class="pay-button" data-id="' + offre.idOffre + '">Payer</button>' : ''}

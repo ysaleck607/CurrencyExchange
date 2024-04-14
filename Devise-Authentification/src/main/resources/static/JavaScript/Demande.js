@@ -1,20 +1,4 @@
 $(document).ready(function() {
-    // Faire une requête à l'API pour obtenir la liste des devises
-    $.ajax({
-        url: 'https://api.exchangerate-api.com/v4/latest/CAD',
-        method: 'GET',
-        success: function(data) {
-            var currencies = Object.keys(data.rates);
-            // Ajouter chaque devise aux menus déroulants
-            for(var i = 0; i < currencies.length; i++) {
-                $('#source-currency').append(new Option(currencies[i], currencies[i]));
-                $('#target-currency').append(new Option(currencies[i], currencies[i]));
-            }
-        },
-        error: function(jqXHR, textStatus, errorThrown) {
-            alert('Erreur lors de la récupération des devises : ' + textStatus);
-        }
-    });
 
     // Écouteur d'événement pour la soumission du formulaire
     $('#exchangeForm').submit(function(event) {
@@ -22,9 +6,9 @@ $(document).ready(function() {
         event.preventDefault();
 
         // Récupération des valeurs du formulaire
-        var amount = $('#amount').val();
-        var sourceCurrency = $('#source-currency').val();
-        var targetCurrency = $('#target-currency').val();
+        var amount = $('#targetAmount').val();
+        var sourceCurrency = $('#baseCurrency').val();
+        var targetCurrency = $('#targetCurrency').val();
 
         // Vérification si la devise offerte est la même que la devise souhaitée
         if (sourceCurrency === targetCurrency) {

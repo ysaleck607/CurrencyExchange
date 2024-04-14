@@ -21,8 +21,7 @@ $(document).ready(function() {
                              ${offre.statutOffre != 'PAYER' && offre.statutOffre != 'TERMINER' ? '<button class="pay-button" data-id="' + offre.idOffre + '">Payer</button>' : ''}
                              ${offre.statutOffre == 'TERMINER' ? '<button class="leave-comment-button" data-user-id="' + offre.idDemandeur + '">Laisser un commentaire</button>' : ''}
                             <input type="hidden" id="id" value="${offre.idOffre}" />
-                            <input type="hidden" id="id2" value="${offre.idDemande}" />
-                            
+                            <input type="hidden" id="id2" value="${offre.idDemande}" /> 
                         </td>
                     </tr>
                 `);
@@ -48,21 +47,24 @@ $(document).ready(function() {
                         }
                     });
                 }
-                else
+                else{
+                    window.location.href = 'stripePay.html?amount=' + montant;
+
                     $.ajax({
                         url: "http://localhost:8099/api/v1/Offres/payerOffre/" + offerId,
                         type: "PUT",
                         success: function(response) {
                             console.log(response);
                             // Redirection vers la page pour le paiement
-                            window.location.href = 'stripePay.html?amount=' + montant;
+                            //window.location.href = 'stripePay.html?amount=' + montant;
+                            window.location.href = 'TableauBord.html';
                         },
                         error: function(error) {
                             console.error("Une erreur s'est produite :", error);
                             alert('Erreur lors du paiement ');
                         }
                     });
-
+                }
             });
 
             $('.leave-comment-button').click(function() {

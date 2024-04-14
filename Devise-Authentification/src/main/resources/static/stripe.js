@@ -7,7 +7,7 @@ const urlParams = new URLSearchParams(window.location.search);
 var amount = urlParams.get('amount');
 initialize();
 const RequestToPay = {
-    amount: amount
+    amount: amount * 100
 }
 
 // Fetch Checkout Session and retrieve the client secret

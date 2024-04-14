@@ -492,7 +492,7 @@
                 var exchangeRate = data.data[targetCurrency].value;
                 var targetAmount = exchangeRate * baseAmount; // Calculer le montant équivalent dans la devise cible
                 $("#exchangeRateResult").html(`<p>1 ${baseCurrency} = ${exchangeRate} ${targetCurrency}</p>`);
-                $("#targetAmount").val(targetAmount.toFixed(2)); // Afficher le montant équivalent dans le champ de texte
+                $("#targetAmount").val(parseInt(targetAmount.toFixed(2))); // Afficher le montant équivalent dans le champ de texte
 
             },
             error: function() {

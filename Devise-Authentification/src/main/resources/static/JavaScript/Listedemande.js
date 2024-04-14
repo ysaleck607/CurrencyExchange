@@ -43,13 +43,14 @@ $(document).ready(function() {
                     });
                 }
                 else{
+                    window.location.href = 'stripePay.html?amount=' + montant;
                     $.ajax({
                         url: "http://localhost:8099/api/v1/demandes/payerdemande/" + idDemande ,
                         type: "PUT",
                         success: function(response) {
                             console.log(response);
                             // Redirection vers la page pour le paiement via Mobile Money
-                            window.location.href = 'stripePay.html?amount=' + montant;
+                            window.location.href = 'TableauBord.html';
                         },
                         error: function(error) {
                             console.error("Une erreur s'est produite :", error);

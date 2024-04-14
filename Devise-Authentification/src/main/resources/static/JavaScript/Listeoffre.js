@@ -48,11 +48,20 @@ $(document).ready(function() {
                     });
                 }
                 else
-                {
-                    // Diriger vers stripe pour payer la demande
-                    window.location.href = 'stripePay.html?amount=' + montant;
+                    $.ajax({
+                        url: "http://localhost:8099/api/v1/Offres/payerOffre/" + offerId,
+                        type: "PUT",
+                        success: function(response) {
+                            console.log(response);
+                            // Redirection vers la page pour le paiement
+                            window.location.href = 'stripePay.html?amount=' + montant;
+                        },
+                        error: function(error) {
+                            console.error("Une erreur s'est produite :", error);
+                            alert('Erreur lors du paiement ');
+                        }
+                    });
 
-                }
             });
 
             $('.leave-comment-button').click(function() {

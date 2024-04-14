@@ -41,10 +41,21 @@ $(document).ready(function() {
                         }
                     });
                 }
-                else
-                {// Diriger vers stripe pour payer la demande
-                    window.location.href = 'EntrerMontant.html?id=' + idDemande;
-                }
+                else{
+                    $.ajax({
+                        url: "http://localhost:8099/api/v1/demandes/payerdemande/" + idDemande ,
+                        type: "PUT",
+                        success: function(response) {
+                            console.log(response);
+                            // Redirection vers la page pour le paiement via Mobile Money
+                            window.location.href = 'EntrerMontant.html?id=' + idDemande
+                        },
+                        error: function(error) {
+                            console.error("Une erreur s'est produite :", error);
+                            alert('Erreur lors du paiement ');
+                        }
+                    });
+               }
             });
 
             $('.cancel-button').click(function() {

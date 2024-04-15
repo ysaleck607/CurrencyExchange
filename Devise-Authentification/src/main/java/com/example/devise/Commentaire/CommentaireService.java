@@ -42,13 +42,13 @@ public class CommentaireService {
             String nom = (String) info[1];
             String prenom = (String) info[2];
 
-            Utilisateur utilisateurNote = utilisateurRepository.findById(commentaire.getIdUtilisateurNote())
+            Utilisateur utilisateurNoteur = utilisateurRepository.findById(commentaire.getIdUtilisateurNoteur())
                     .orElseThrow(() -> new IllegalStateException("Utilisateur not found"));
 
             CommentaireResponse commentaireResponse = CommentaireResponse.builder()
                     .idCommentaire(commentaire.getIdCommentaire())
                     .idUtilisateurNoteur(commentaire.getIdUtilisateurNoteur())
-                    .nomPrenomNoteur(nom + " " + prenom)
+                    .nomPrenomNoteur(utilisateurNoteur.getNom() + " " + utilisateurNoteur.getPrenom())
                     .idUtilisateurNote(commentaire.getIdUtilisateurNote())
                     .note(commentaire.getNote())
                     .idOffre(commentaire.getIdOffre())

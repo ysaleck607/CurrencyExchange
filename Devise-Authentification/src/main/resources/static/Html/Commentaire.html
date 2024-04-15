@@ -153,16 +153,15 @@
                 // Traiter et afficher les commentaires
                 var commentList = $('#comment-list');
                 commentList.empty();
-
                 if (comments.length === 0) {
                     commentList.append('<p class="text-center">Aucun commentaire pour cet utilisateur.</p>');
                 } else {
                     comments.forEach(function (comment) {
                         var commentDiv = $('<div class="comment-container">');
-                        commentDiv.append('<img src="profile-image.jpg" alt="Profile picture" class="profile-image">');
+                        //commentDiv.append('<img src="profile-image.jpg" alt="Profile picture" class="profile-image">');
                         var commentContent = $('<div class="comment-content">');
-                        commentContent.append('<h3>' + comment.auteur + '</h3>');
-                        commentContent.append('<p>' + comment.contenu + '</p>');
+                        commentContent.append('<h3>' + comment.nomPrenomNoteur + '</h3>');
+                        commentContent.append('<p>' + comment.commentaire + '</p>');
                         var ratingDiv = $('<div class="rating">');
                         for (var i = 0; i < 5; i++) {
                             if (i < comment.note) {
